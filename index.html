@@ -505,7 +505,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <div class="hss-l"><h3>订阅，不错过每一期新内容</h3><p>案例 · 工具 · 书单 · 长文，双周直达邮箱，免费</p></div>
     <div class="hss-r"><input type="email" class="hss-i" id="hssEmail" placeholder="your@email.com"><button class="btn btn-r" onclick="quickSub('hssEmail')">订阅</button></div>
   </div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练 · 营销知识平台</div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练 · 营销知识平台</div><div class="footer-r"><button onclick="nav('about')">关于Janet</button><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
 </div>
 
 <!-- ══ ABOUT ══ -->
@@ -571,12 +571,39 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       </div>
     </div>
   </div>
+  <div style="background:var(--paper);padding:48px 64px">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:24px;display:flex;align-items:center;gap:14px">探索更多版块<span style="flex:1;height:1px;background:var(--border)"></span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div onclick="nav('cases')" style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:22px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='rgba(24,19,14,.1)'">
+          <div style="font-size:20px;margin-bottom:10px">📚</div>
+          <div style="font-family:var(--serif);font-size:14px;font-weight:700;margin-bottom:6px">案例书库</div>
+          <div style="font-size:12px;color:var(--ink3);line-height:1.6">32个2025–2026年真实营销案例，含课堂讨论题与资料来源</div>
+        </div>
+        <div onclick="nav('tools')" style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:22px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='rgba(24,19,14,.1)'">
+          <div style="font-size:20px;margin-bottom:10px">🛠</div>
+          <div style="font-family:var(--serif);font-size:14px;font-weight:700;margin-bottom:6px">工具库</div>
+          <div style="font-size:12px;color:var(--ink3);line-height:1.6">营销框架、可下载模板、诊断工具与自测评估，直接可用</div>
+        </div>
+        <div onclick="nav('books')" style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:22px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--navy)'" onmouseout="this.style.borderColor='rgba(24,19,14,.1)'">
+          <div style="font-size:20px;margin-bottom:10px">📖</div>
+          <div style="font-family:var(--serif);font-size:14px;font-weight:700;margin-bottom:6px">营销书单</div>
+          <div style="font-size:12px;color:var(--ink3);line-height:1.6">40+本精选书籍，附Janet的阅读批注与课堂使用场景</div>
+        </div>
+        <div onclick="nav('articles')" style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:22px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#5a5070'" onmouseout="this.style.borderColor='rgba(24,19,14,.1)'">
+          <div style="font-size:20px;margin-bottom:10px">✍️</div>
+          <div style="font-family:var(--serif);font-size:14px;font-weight:700;margin-bottom:6px">深度长文</div>
+          <div style="font-size:12px;color:var(--ink3);line-height:1.6">行业趋势深度分析，每篇3000–8000字，月更原创专栏</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="about-cta">
     <h2>准备好了吗？<br><em>从一个案例开始。</em></h2>
     <p>不需要一次性读完所有内容。订阅后，我会每两周送一个案例到你的邮箱。</p>
     <div class="about-cta-b"><button class="btn btn-r" onclick="openSub()">免费订阅</button><button class="btn-ghost" onclick="nav('cases')">浏览案例书库</button></div>
   </div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练</div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button></div></div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练</div><div class="footer-r"><button onclick="nav('home')">首页</button><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
 </div>
 
 <!-- ══ CASES ══ -->
@@ -610,7 +637,18 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
   </div>
   <!-- Case Readers injected here by JS -->
   <div id="caseReaders"></div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('tools')">工具库</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
+  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">读完案例，还可以</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button onclick="nav('tools')" class="btn btn-o" style="font-size:13px">🛠 用工具库深化框架</button>
+      <button onclick="nav('books')" class="btn btn-o" style="font-size:13px">📖 去书单找延伸阅读</button>
+      <button onclick="nav('articles')" class="btn btn-o" style="font-size:13px">✍️ 读深度长文看趋势</button>
+      <button onclick="openSub()" class="btn btn-r" style="font-size:13px">📬 订阅，下期案例直达邮箱</button>
+    </div>
+  </div>
+</div>
+<div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('home')">首页</button><button onclick="nav('about')">关于Janet</button><button onclick="nav('tools')">工具库</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
 </div>
 
 <!-- ══ TOOLS ══ -->
@@ -640,7 +678,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <div class="tph"><button class="tpc" onclick="closeTool()">×</button><div class="tptyp" id="tpTyp"></div><div class="tptit" id="tpTit"></div></div>
     <div class="tpb" id="tpBody"></div>
   </div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('books')">书单</button></div></div>
+  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">工具配合使用效果更好</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button onclick="nav('cases')" class="btn btn-o" style="font-size:13px">📚 去案例书库看真实场景</button>
+      <button onclick="nav('books')" class="btn btn-o" style="font-size:13px">📖 书单里找对应理论支撑</button>
+      <button onclick="openSub()" class="btn btn-r" style="font-size:13px">📬 订阅获取新工具通知</button>
+    </div>
+  </div>
+</div>
+<div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('home')">首页</button><button onclick="nav('about')">关于Janet</button><button onclick="nav('cases')">案例</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
 </div>
 
 <!-- ══ BOOKS ══ -->
@@ -677,7 +725,18 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <div class="bph" id="bpHeader"></div>
     <div class="bpbody" id="bpBody"></div>
   </div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button></div></div>
+  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">书读完了，下一步</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button onclick="nav('cases')" class="btn btn-o" style="font-size:13px">📚 用案例验证书里的理论</button>
+      <button onclick="nav('tools')" class="btn btn-o" style="font-size:13px">🛠 把理论转化成可用工具</button>
+      <button onclick="nav('articles')" class="btn btn-o" style="font-size:13px">✍️ 读长文看最新行业动向</button>
+      <button onclick="openSub()" class="btn btn-r" style="font-size:13px">📬 订阅获取Janet新书推荐</button>
+    </div>
+  </div>
+</div>
+<div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('home')">首页</button><button onclick="nav('about')">关于Janet</button><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('articles')">长文</button></div></div>
 </div>
 
 <!-- ══ ARTICLES ══ -->
@@ -737,7 +796,18 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       </div>
     </div>
   </div>
-  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button></div></div>
+  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="max-width:1060px;margin:0 auto">
+    <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">长文读完，深入研究</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button onclick="nav('cases')" class="btn btn-o" style="font-size:13px">📚 看具体品牌案例拆解</button>
+      <button onclick="nav('tools')" class="btn btn-o" style="font-size:13px">🛠 下载对应营销框架模板</button>
+      <button onclick="nav('books')" class="btn btn-o" style="font-size:13px">📖 找延伸阅读书单</button>
+      <button onclick="openSub()" class="btn btn-r" style="font-size:13px">📬 订阅，下篇长文第一时间收到</button>
+    </div>
+  </div>
+</div>
+<div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('home')">首页</button><button onclick="nav('about')">关于Janet</button><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button></div></div>
 </div>
 
 </div><!-- /main -->
@@ -970,6 +1040,7 @@ function openTool(id){
     <div class="tpsec"><div class="tpst">如何使用</div><div class="tpsteps">${steps}</div></div>
     <div class="tpsec"><div class="tpst">Janet 的使用提示</div><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:8px;padding:17px 20px"><div style="font-size:10px;letter-spacing:.12em;color:var(--gold);margin-bottom:7px;font-weight:700">✦ JANET'S NOTE</div><div style="font-family:var(--serif);font-size:14px;color:#5a4810;line-height:1.8;font-style:italic">${t.note}</div></div></div>
     ${act}
+    <button style="margin-top:7px;width:100%;padding:11px;border-radius:5px;background:rgba(24,19,14,.07);border:1px solid var(--border);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--ink2);transition:all .2s" onclick="closeTool();nav('cases')">📚 去案例书库看工具应用场景</button>
     <button class="tpdl" style="margin-top:7px;background:var(--red)" onclick="openSub()">订阅后解锁全部工具</button>`;
   document.getElementById('toolPanel').classList.add('open');
   document.getElementById('toolOverlay').classList.add('show');
@@ -1009,7 +1080,8 @@ function openBook(id){
     <div class="bpsec"><div class="bpst">Janet 为什么推荐</div><div class="bptx"><p>${b.why}</p></div></div>
     <div class="bpsec"><div class="bpst">课堂使用场景</div><div class="bptx"><p>${b.use}</p></div></div>
     <div class="bpsec"><div class="bpst">Janet 的阅读批注</div><div class="jnote"><div class="jnlbl">✦ JANET'S NOTE</div><p>${b.note}</p></div></div>
-    <button class="buybtn" onclick="showToast('📚 订阅后获取推荐购买渠道')">获取这本书的购买渠道 →</button>`;
+    <button class="buybtn" onclick="showToast('📚 订阅后获取推荐购买渠道')">获取这本书的购买渠道 →</button>
+    <button style="margin-top:8px;width:100%;padding:11px;border-radius:5px;background:rgba(24,19,14,.07);border:1px solid var(--border);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--ink2);transition:all .2s" onclick="closeBook();nav('cases')">📚 去案例书库看相关真实案例</button>`;
   document.getElementById('bookPanel').classList.add('open');
   document.getElementById('bookOverlay').classList.add('show');
 }
