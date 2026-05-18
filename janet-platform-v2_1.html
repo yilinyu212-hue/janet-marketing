@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Janet · 营销观察室</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0ebe0;--bg2:#e8e0d0;--ink:#18130e;--ink2:#3a3028;--ink3:#8c7e6e;--ink4:#c0b4a0;
+  --paper:#faf6ee;--cream:#f5edda;--red:#a82808;--red2:#c83810;
+  --gold:#c49a18;--gold2:#e8be40;--teal:#0a5e46;--navy:#162d52;
+  --border:rgba(24,19,14,.1);--shadow:rgba(24,19,14,.12);
+  --serif:'Noto Serif SC',serif;--display:'Playfair Display',serif;
+  --sans:'Noto Sans SC',sans-serif;--mono:'DM Mono',monospace;
+  --ease:cubic-bezier(.25,.46,.45,.94);--spring:cubic-bezier(.34,1.56,.64,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg2)}::-webkit-scrollbar-thumb{background:var(--ink4);border-radius:3px}
+
+/* ══ TOPBAR ══ */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  height:54px;background:rgba(24,19,14,.97);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.tl{display:flex;align-items:center;gap:10px;cursor:pointer}
+.tm{width:28px;height:28px;background:var(--red);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.tm span{font-family:var(--display);font-size:14px;font-weight:700;font-style:italic;color:white}
+.tn{font-family:var(--serif);font-size:14px;color:rgba(250,246,238,.8);letter-spacing:.08em}
+.tnav{display:flex;align-items:center;gap:2px}
+.tnav button{
+  color:rgba(250,246,238,.42);font-size:12px;
+  background:none;border:none;cursor:pointer;
+  padding:7px 12px;border-radius:4px;
+  transition:all .18s;letter-spacing:.04em;font-family:var(--sans);
+}
+.tnav button:hover{color:rgba(250,246,238,.85);background:rgba(255,255,255,.07)}
+.tnav button.on{color:white;background:rgba(255,255,255,.11)}
+.tsub{background:var(--red);color:white;border:none;padding:7px 18px;border-radius:4px;font-family:var(--sans);font-size:12px;letter-spacing:.05em;cursor:pointer;transition:background .2s}
+.tsub:hover{background:var(--red2)}
+
+/* ══ MAIN AREA ══ */
+.main{display:block}
+.view{display:none;min-height:100vh;background:var(--bg)}
+.view.active{display:block}
+
+/* ══ SHARED ══ */
+.sh{background:var(--ink);padding:64px 64px 52px;position:relative;overflow:hidden}
+.sh::after{content:attr(data-bg);position:absolute;right:20px;bottom:-50px;font-family:var(--display);font-size:260px;font-weight:900;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--gold2)}
+.sh h1{font-family:var(--display);font-size:clamp(28px,4vw,46px);font-weight:700;color:#faf6ee;line-height:1.22;max-width:620px;margin-bottom:12px}
+.sh h1 em{font-style:italic;color:var(--gold2)}
+.sh p{color:rgba(250,246,238,.5);font-size:15px;line-height:1.85;max-width:580px}
+.pill{padding:7px 16px;border:1px solid var(--border);background:white;border-radius:20px;font-family:var(--sans);font-size:12px;color:var(--ink3);cursor:pointer;transition:all .18s;letter-spacing:.03em;white-space:nowrap}
+.pill:hover{border-color:var(--red);color:var(--red)}
+.pill.on{background:var(--red);border-color:var(--red);color:white}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-size:13px;letter-spacing:.04em;padding:10px 22px;border-radius:5px;border:none;cursor:pointer;transition:all .2s;font-weight:500}
+.btn-r{background:var(--red);color:white}.btn-r:hover{background:var(--red2);transform:translateY(-1px)}
+.btn-o{background:transparent;color:var(--ink2);border:1px solid var(--border)}.btn-o:hover{border-color:var(--red);color:var(--red)}
+.btn-dk{background:var(--ink);color:white}.btn-dk:hover{background:var(--ink2)}
+.tag{display:inline-block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;font-weight:700}
+.tag-r{background:rgba(168,40,8,.1);color:var(--red)}.tag-g{background:rgba(196,154,24,.12);color:#7a5a00}
+.tag-t{background:rgba(10,94,70,.1);color:var(--teal)}.tag-n{background:rgba(22,45,82,.1);color:var(--navy)}
+.tag-i{background:rgba(24,19,14,.07);color:var(--ink2)}
+
+/* ══ FOOTER ══ */
+.footer{background:var(--ink);padding:32px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-l{font-family:var(--serif);font-size:13px;color:rgba(250,246,238,.45)}
+.footer-l strong{color:rgba(250,246,238,.75)}
+.footer-r{display:flex;gap:20px}
+.footer-r button{font-size:12px;color:rgba(250,246,238,.3);background:none;border:none;cursor:pointer;transition:color .2s;font-family:var(--sans)}
+.footer-r button:hover{color:rgba(250,246,238,.65)}
+
+/* ══ TOAST ══ */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--teal);color:white;padding:12px 20px;border-radius:7px;font-size:13px;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ══ SUBSCRIBE MODAL ══ */
+.modal-bg{position:fixed;inset:0;background:rgba(24,19,14,.7);z-index:500;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-bg.open{display:flex}
+.modal-box{background:var(--paper);border-radius:14px;width:100%;max-width:460px;overflow:hidden;animation:mIn .28s var(--ease)}
+@keyframes mIn{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+.mhdr{background:var(--ink);padding:28px 32px;position:relative}
+.mhdr h2{font-family:var(--display);font-size:21px;color:#faf6ee;margin-bottom:7px}
+.mhdr p{font-size:13px;color:rgba(250,246,238,.42);line-height:1.65}
+.mx{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.55);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.mx:hover{background:rgba(255,255,255,.16);color:white}
+.mbody{padding:26px 32px}
+.fl{font-size:11px;letter-spacing:.07em;color:var(--ink3);display:block;margin-bottom:6px}
+.fi{width:100%;padding:10px 13px;border:1px solid var(--border);background:white;border-radius:4px;font-family:var(--sans);font-size:14px;margin-bottom:15px;outline:none;transition:border-color .2s}
+.fi:focus{border-color:var(--red)}
+.checks{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);cursor:pointer}
+.msub{width:100%;background:var(--red);color:white;border:none;padding:12px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:background .2s}
+.msub:hover{background:var(--red2)}
+.mfine{text-align:center;font-size:11px;color:var(--ink4);margin-top:9px}
+
+/* ══════════════════════════════
+   HOME
+══════════════════════════════ */
+#v-home .hero{
+  background:var(--ink);padding:72px 64px 56px;
+  display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center;
+  position:relative;overflow:hidden;
+}
+#v-home .hero::before{content:'';position:absolute;right:-180px;top:50%;transform:translateY(-50%);width:600px;height:600px;border-radius:50%;border:1px solid rgba(255,255,255,.03)}
+#v-home .hero::after{content:'';position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:400px;height:400px;border-radius:50%;border:1px solid rgba(255,255,255,.04)}
+.hero-ey{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.hero-ey::before{content:'';width:26px;height:1px;background:var(--gold2)}
+.hero-h1{font-family:var(--display);font-size:clamp(34px,5vw,58px);font-weight:700;color:#faf6ee;line-height:1.15;margin-bottom:18px;letter-spacing:-.01em}
+.hero-h1 em{font-style:italic;color:var(--gold2)}
+.hero-p{color:rgba(250,246,238,.5);font-size:15px;line-height:1.85;max-width:500px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+.hero-stats{display:flex;gap:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,.08)}
+.hs-num{font-family:var(--display);font-size:26px;font-weight:700;color:#faf6ee;display:block;line-height:1;margin-bottom:4px}
+.hs-lbl{font-size:10px;color:rgba(250,246,238,.35);letter-spacing:.1em}
+.author-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;position:relative;overflow:hidden}
+.author-card::before{content:'';position:absolute;top:-50px;right:-50px;width:150px;height:150px;background:radial-gradient(circle,rgba(196,154,24,.12),transparent 70%);pointer-events:none}
+.av{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--red));display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:700;color:white;margin-bottom:14px;box-shadow:0 5px 20px rgba(196,154,24,.28)}
+.an{font-family:var(--display);font-size:20px;color:#faf6ee;margin-bottom:3px}
+.at{font-size:10px;color:var(--gold2);letter-spacing:.1em;margin-bottom:12px}
+.ab{font-size:13px;color:rgba(250,246,238,.5);line-height:1.7;margin-bottom:16px}
+.atags{display:flex;flex-wrap:wrap;gap:6px}
+.atag{font-size:10px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.07);color:rgba(250,246,238,.5);border:1px solid rgba(255,255,255,.08)}
+.alink{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;color:var(--gold2);cursor:pointer;background:none;border:none;font-family:var(--sans);transition:gap .2s}
+.alink:hover{gap:10px}
+/* section nav cards */
+.sec-strip{background:var(--bg2);border-top:1px solid var(--border);padding:48px 64px}
+.sec-lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);opacity:.5}
+.sec-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sc{background:white;border:1px solid var(--border);border-radius:12px;padding:22px 18px;cursor:pointer;transition:all .22s var(--ease);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;border-bottom:3px solid transparent}
+.sc:hover{transform:translateY(-4px);box-shadow:0 12px 36px var(--shadow)}
+.sc-1:hover{border-bottom-color:var(--red)}.sc-2:hover{border-bottom-color:var(--gold)}.sc-3:hover{border-bottom-color:var(--teal)}.sc-4:hover{border-bottom-color:var(--navy)}.sc-5:hover{border-bottom-color:#5a5070}
+.sc-ico{font-size:22px}.sc h3{font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.3}
+.sc p{font-size:12px;color:var(--ink3);line-height:1.6;flex:1}.sc-ct{font-size:10px;color:var(--ink4)}
+/* testimonials */
+.testi{background:white;padding:48px 64px;border-top:1px solid var(--border)}
+.testi h2{font-family:var(--display);font-size:26px;font-weight:700;margin-bottom:28px}
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tc{background:var(--cream);border-radius:10px;padding:20px;border:1px solid var(--border);transition:transform .2s}
+.tc:hover{transform:translateY(-3px)}
+.tq{font-family:var(--serif);font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:14px;font-style:italic}
+.tq::before{content:'"';font-size:20px;color:var(--gold);line-height:0;vertical-align:-.3em;margin-right:2px}
+.tp{display:flex;align-items:center;gap:9px}
+.tav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
+.tn2{font-size:12px;font-weight:600;color:var(--ink)}.trl{font-size:10px;color:var(--ink3);margin-top:1px}
+/* home sub strip */
+.hss{background:var(--ink2);padding:32px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.hss-l h3{font-family:var(--display);font-size:20px;color:#faf6ee;margin-bottom:5px}
+.hss-l p{font-size:13px;color:rgba(250,246,238,.4)}
+.hss-r{display:flex;gap:9px}
+.hss-i{padding:9px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:white;border-radius:4px;font-family:var(--sans);font-size:13px;width:240px;outline:none;transition:border-color .2s}
+.hss-i::placeholder{color:rgba(255,255,255,.25)}.hss-i:focus{border-color:var(--red)}
+
+/* ══════════════════════════════
+   ABOUT
+══════════════════════════════ */
+#v-about .ahero{
+  background:var(--ink);padding:72px 64px;
+  display:grid;grid-template-columns:1fr 320px;gap:70px;align-items:center;
+  position:relative;overflow:hidden;
+}
+#v-about .ahero::after{content:'J';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:340px;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+.about-body{max-width:1100px;margin:0 auto}
+.asec{padding:52px 64px}
+.asec h2{font-family:var(--display);font-size:26px;font-weight:700;margin-bottom:8px}
+.asec .sub{color:var(--ink3);font-size:14px;margin-bottom:32px;line-height:1.6}
+.tline{position:relative;padding-left:28px}
+.tline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--border)}
+.tli{position:relative;margin-bottom:28px;padding-left:20px}
+.tli::before{content:'';position:absolute;left:-28px;top:5px;width:15px;height:15px;border-radius:50%;background:white;border:2px solid var(--red)}
+.tli::after{content:'';position:absolute;left:-22px;top:11px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.tyr{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.1em;margin-bottom:5px}
+.ttl{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:5px}
+.tbd{font-size:14px;color:var(--ink2);line-height:1.75}
+.phil-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.phil{background:white;border-radius:12px;padding:26px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+.phil:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--shadow)}
+.phil-ico{font-size:26px;margin-bottom:14px}
+.phil h3{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:9px}
+.phil p{font-size:13px;color:var(--ink2);line-height:1.75}
+.svc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.svc{background:var(--ink);border-radius:12px;padding:26px 26px 26px 30px;position:relative;overflow:hidden;transition:transform .2s}
+.svc:hover{transform:translateY(-2px)}
+.svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+.s1::before{background:var(--red)}.s2::before{background:var(--gold)}.s3::before{background:var(--teal)}.s4::before{background:var(--navy)}
+.sn{font-family:var(--mono);font-size:10px;color:rgba(250,246,238,.28);letter-spacing:.12em;margin-bottom:8px}
+.st{font-family:var(--serif);font-size:16px;font-weight:700;color:#faf6ee;margin-bottom:8px}
+.sb{font-size:13px;color:rgba(250,246,238,.48);line-height:1.75}
+.stags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.stag{font-size:10px;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,.08);color:rgba(250,246,238,.45)}
+.cl-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.cl{padding:7px 16px;background:white;border:1px solid var(--border);border-radius:5px;font-size:12px;color:var(--ink2);font-family:var(--serif);transition:all .18s}
+.cl:hover{border-color:var(--red);color:var(--red)}
+.about-cta{background:var(--ink);padding:70px 64px;text-align:center}
+.about-cta h2{font-family:var(--display);font-size:clamp(26px,4vw,40px);color:#faf6ee;margin-bottom:14px}
+.about-cta h2 em{font-style:italic;color:var(--gold2)}
+.about-cta p{color:rgba(250,246,238,.45);font-size:14px;max-width:440px;margin:0 auto 32px;line-height:1.8}
+.about-cta-b{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-ghost{background:transparent;color:rgba(250,246,238,.6);border:1px solid rgba(255,255,255,.18);padding:10px 22px;border-radius:4px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);color:#faf6ee}
+
+/* ══════════════════════════════
+   CASES
+══════════════════════════════ */
+#v-cases .shelf-area{padding:32px 60px 60px;max-width:1280px;margin:0 auto}
+#v-cases .search-row{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.sbox{position:relative;max-width:420px;flex:1}
+.sbox svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--ink4);pointer-events:none}
+.sinput{width:100%;padding:10px 14px 10px 40px;border:1px solid var(--border);background:white;border-radius:6px;font-family:var(--sans);font-size:14px;color:var(--ink);outline:none;transition:border-color .2s}
+.sinput:focus{border-color:var(--red)}.sinput::placeholder{color:var(--ink4)}
+.frow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.rcount{font-size:12px;color:var(--ink3);margin-bottom:20px;letter-spacing:.04em}
+/* bookshelf */
+.bookshelf{background:linear-gradient(to bottom,#cfc0a0,#c4b498 60%,#b4a488);border-radius:6px 6px 0 0;padding:28px 24px 0;position:relative;box-shadow:0 4px 0 #a8946c,0 8px 28px rgba(80,55,30,.28)}
+.bookshelf::before{content:'';position:absolute;inset:0;border-radius:6px 6px 0 0;background:repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(180,155,110,.14) 58px,rgba(180,155,110,.14) 59px);pointer-events:none}
+.books-row{display:flex;align-items:flex-end;gap:5px;min-height:196px;flex-wrap:wrap}
+.shelf-plank{height:15px;background:linear-gradient(to bottom,#a8946c,#9a8460);border-radius:0 0 4px 4px;margin-bottom:44px;box-shadow:0 6px 18px rgba(80,55,30,.28)}
+.book{position:relative;cursor:pointer;flex-shrink:0;transition:transform .28s cubic-bezier(.34,1.56,.64,1);transform-origin:bottom center}
+.book:hover{transform:translateY(-18px) scale(1.04)}.book:hover .bsh{opacity:.5}
+.bsh{position:absolute;bottom:-4px;left:5px;right:-5px;height:12px;background:radial-gradient(ellipse,rgba(0,0,0,.38),transparent 70%);filter:blur(4px);opacity:0;transition:opacity .28s;pointer-events:none}
+.bcov{border-radius:2px 5px 5px 2px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px 11px 13px}
+.bcov::before{content:'';position:absolute;left:0;top:0;bottom:0;width:10px;background:linear-gradient(to right,rgba(0,0,0,.36),rgba(0,0,0,.09),transparent);border-radius:2px 0 0 2px}
+.bcov::after{content:'';position:absolute;right:-3px;top:2px;bottom:2px;width:4px;background:linear-gradient(to right,#ddd4c0,#c8bfac);border-radius:0 2px 2px 0}
+.bsm .bcov{width:86px;height:185px}.bsm .btit{font-size:11px}
+.bmd .bcov{width:105px;height:206px}.bmd .btit{font-size:12px}
+.blg .bcov{width:124px;height:216px}.blg .btit{font-size:13px}
+.bxl .bcov{width:146px;height:212px}.bxl .btit{font-size:14px}
+.btag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;font-weight:700;align-self:flex-start;margin-bottom:5px}
+.btit{font-family:var(--serif);font-weight:700;line-height:1.3;flex:1}
+.bco{font-size:9px;letter-spacing:.1em;opacity:.6;text-transform:uppercase;margin-top:9px}.byr{font-size:9px;opacity:.45;margin-top:2px}
+.tc2 .bcov{background:linear-gradient(160deg,#6e1408,#a82808)}.tc2 .btag{background:rgba(255,255,255,.14);color:#ffdcc8}.tc2 .btit{color:#fff8f5}.tc2 .bco,.tc2 .byr{color:#ffc8a8}
+.tf2 .bcov{background:linear-gradient(160deg,#062e20,#0a5e46)}.tf2 .btag{background:rgba(255,255,255,.11);color:#90ffdc}.tf2 .btit{color:#f0fff8}.tf2 .bco,.tf2 .byr{color:#70eec0}
+.tn2 .bcov{background:linear-gradient(160deg,#0c1c34,#162d52)}.tn2 .btag{background:rgba(255,255,255,.1);color:#b0d0ff}.tn2 .btit{color:#eef5ff}.tn2 .bco,.tn2 .byr{color:#90b8e8}
+.ta2 .bcov{background:linear-gradient(160deg,#4a2e00,#c49a18)}.ta2 .btag{background:rgba(255,255,255,.12);color:#fff0a0}.ta2 .btit{color:#fffbf0}.ta2 .bco,.ta2 .byr{color:#ffe880}
+.ts2 .bcov{background:linear-gradient(160deg,#222030,#40385a)}.ts2 .btag{background:rgba(255,255,255,.1);color:#c8c0f0}.ts2 .btit{color:#f8f6ff}.ts2 .bco,.ts2 .byr{color:#b0a8d8}
+.tr2 .bcov{background:linear-gradient(160deg,#401808,#904018)}.tr2 .btag{background:rgba(255,255,255,.12);color:#ffd0a0}.tr2 .btit{color:#fff5ee}.tr2 .bco,.tr2 .byr{color:#ffc080}
+.tg2 .bcov{background:linear-gradient(160deg,#282828,#505050)}.tg2 .btag{background:rgba(255,255,255,.08);color:#ccc}.tg2 .btit{color:#f2f2f2}.tg2 .bco,.tg2 .byr{color:#aaa}
+.no-results{text-align:center;padding:60px 0;color:var(--ink3);font-size:14px;display:none}
+
+/* CASE READER */
+.reader{position:fixed;inset:0;top:54px;background:var(--paper);display:none;overflow-y:auto;z-index:200}
+.reader.open{display:block;animation:rdIn .3s var(--ease)}
+@keyframes rdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.rd-nav{position:sticky;top:0;z-index:10;background:rgba(250,246,238,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.rd-bar{display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:50px}
+.back{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink3);transition:color .2s;padding:0}
+.back:hover{color:var(--red)}.back svg{transition:transform .2s}.back:hover svg{transform:translateX(-3px)}
+.rd-prog{height:2px;background:var(--red);width:0%;transition:width .1s}
+.rd-cover{height:340px;display:flex;align-items:flex-end;padding:50px 56px;position:relative;overflow:hidden}
+.rd-cbg{position:absolute;inset:0;opacity:.93}
+.rd-cnoise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.5}
+.rd-clines{position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.02) 28px,rgba(255,255,255,.02) 29px)}
+.rd-cc{position:relative;z-index:2}
+.ctags{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.ctag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 11px;border-radius:2px;font-weight:600}
+.rd-title{font-family:var(--display);font-size:clamp(22px,3.5vw,38px);font-weight:700;color:white;line-height:1.25;max-width:680px;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+.pod{background:#141010;padding:17px 56px;display:flex;align-items:center;gap:16px}
+.pp{width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}.pp:hover{background:var(--red2);transform:scale(1.07)}
+.pi{flex:1;min-width:0}.pep{font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px}.pt{font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ppw{flex:1;min-width:60px;max-width:300px}.pb{height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;position:relative}.pf{height:100%;background:var(--red);border-radius:2px;transition:width .2s;pointer-events:none}.ptm{font-size:10px;color:rgba(255,255,255,.28);margin-top:5px}
+.pbdg{display:flex;gap:7px;flex-shrink:0}.pbg{font-size:11px;color:rgba(255,255,255,.38);background:rgba(255,255,255,.06);padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.08)}
+.rd-body{max-width:740px;margin:0 auto;padding:56px 32px 100px}
+.ch{margin-bottom:44px}
+.chn{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.chn::after{content:'';flex:1;height:1px;background:var(--border)}
+.chb{font-size:15px;line-height:1.92;color:var(--ink2)}.chb p+p{margin-top:13px}.chb strong{color:var(--ink);font-weight:600}
+.callout{margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0}
+.callout p{font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic}
+.drow{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:20px 0}
+.dc{background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)}
+.dc .n{font-family:var(--display);font-size:23px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1}
+.dc .l{font-size:10px;color:var(--ink3);line-height:1.4}
+.insight{background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0}
+.ilbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}.ilbl::before{content:'✦';font-size:10px}
+.insight p{font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8}
+.dqblock{background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0}
+.dqhdr{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px;display:flex;align-items:center;gap:10px}.dqhdr::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
+.dqlist{display:flex;flex-direction:column;gap:12px}
+.dqi{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px;transition:border-color .2s}.dqi:hover{border-color:rgba(255,255,255,.18)}
+.dqn{font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px}
+.dqt{font-size:13px;color:rgba(250,246,238,.68);line-height:1.7}
+.srcblock{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+.srctitle{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.srci{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start}.srci:last-child{border-bottom:none}
+.srcn{font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:1px}
+.srct{font-size:12px;color:var(--ink3);line-height:1.6}
+
+/* ══════════════════════════════
+   TOOLS
+══════════════════════════════ */
+#v-tools .tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;padding:36px 64px 70px;max-width:1280px;margin:0 auto}
+#v-tools .frow{padding:24px 64px 0;max-width:1280px;margin:0 auto}
+#v-tools .rcount{padding:6px 64px 0;max-width:1280px;margin:0 auto;font-size:12px;color:var(--ink3)}
+.tcard{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .22s var(--ease),box-shadow .22s;cursor:pointer}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 14px 44px var(--shadow)}
+.tc-h{padding:20px 20px 0;display:flex;align-items:flex-start;gap:12px}
+.tc-ico{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.tc-type{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.tc-title{font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.35;color:var(--ink)}
+.tc-body{padding:11px 20px 0;font-size:13px;color:var(--ink2);line-height:1.7}
+.tc-foot{padding:14px 20px 18px;display:flex;align-items:center;justify-content:space-between;margin-top:10px;border-top:1px solid var(--border)}
+.tc-cx{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink3)}
+.cxd{display:flex;gap:3px}.cd{width:8px;height:8px;border-radius:50%;background:var(--border)}.cd.on{background:var(--red)}
+.tc-act{font-size:12px;color:var(--red);font-weight:500;cursor:pointer;display:flex;align-items:center;gap:4px;transition:gap .2s;background:none;border:none;font-family:var(--sans)}.tc-act:hover{gap:8px}
+/* tool panel */
+.tpanel{position:fixed;right:0;top:54px;bottom:0;width:500px;background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
+.tpanel.open{transform:translateX(0)}
+.tph{background:var(--ink);padding:26px 30px;position:sticky;top:0;z-index:2}
+.tpc{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.09);border:none;color:rgba(255,255,255,.6);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}.tpc:hover{background:rgba(255,255,255,.18);color:white}
+.tptyp{font-size:10px;letter-spacing:.12em;color:var(--gold2);margin-bottom:7px}
+.tptit{font-family:var(--display);font-size:21px;color:#faf6ee;line-height:1.3}
+.tpb{padding:26px 30px}
+.tpsec{margin-bottom:24px}
+.tpst{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;display:flex;align-items:center;gap:8px}.tpst::after{content:'';flex:1;height:1px;background:var(--border)}
+.tptx{font-size:14px;color:var(--ink2);line-height:1.8}.tptx p+p{margin-top:9px}
+.tpsteps{display:flex;flex-direction:column;gap:11px}
+.tpstep{display:flex;gap:12px;align-items:flex-start}
+.stn{width:24px;height:24px;border-radius:50%;background:var(--red);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.stx{font-size:13px;color:var(--ink2);line-height:1.7;padding-top:2px}
+.tpdl{background:var(--teal);color:white;border:none;width:100%;padding:13px;border-radius:5px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:7px}.tpdl:hover{background:#0a7a5e}
+.tpdg{background:var(--navy);color:white;border:none;width:100%;padding:13px;border-radius:5px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:7px}.tpdg:hover{background:#1e3a6a}
+.overlay{position:fixed;inset:0;top:54px;background:rgba(24,19,14,.32);z-index:200;display:none}.overlay.show{display:block}
+
+/* ══════════════════════════════
+   BOOKS
+══════════════════════════════ */
+#v-books .bksec{padding:36px 64px 60px;max-width:1280px;margin:0 auto}
+.bkcat{margin-bottom:48px}
+.bkcath{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.bkcath h3{font-family:var(--serif);font-size:19px;font-weight:700}
+.bkct{font-size:11px;color:var(--ink3);background:var(--cream);padding:3px 10px;border-radius:20px;border:1px solid var(--border)}
+.bkrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.bk{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s;display:flex;flex-direction:column}
+.bk:hover{transform:translateY(-5px);box-shadow:0 14px 40px var(--shadow)}
+.bkspine{height:6px}
+.bkbody{padding:16px 14px 13px;flex:1;display:flex;flex-direction:column}
+.bktag{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-bottom:7px}
+.bktit{font-family:var(--serif);font-size:13px;font-weight:700;line-height:1.4;margin-bottom:5px;flex:1;color:var(--ink)}
+.bkau{font-size:11px;color:var(--ink3);margin-bottom:9px}
+.bknote{font-size:11px;color:var(--ink2);line-height:1.6;font-style:italic;border-top:1px solid var(--border);padding-top:9px;margin-top:auto}
+.bknote::before{content:'" ';color:var(--gold);font-size:13px}
+.bkrat{display:flex;gap:1px;margin-top:7px;font-size:10px}
+/* book panel */
+.bpanel{position:fixed;right:0;top:54px;bottom:0;width:500px;background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
+.bpanel.open{transform:translateX(0)}
+.bph{padding:32px 30px;position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--border);z-index:2}
+.bpc{position:absolute;top:16px;right:18px;background:rgba(0,0,0,.06);border:none;color:var(--ink3);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}.bpc:hover{background:rgba(0,0,0,.12)}
+.bpcat{font-size:10px;letter-spacing:.1em;color:var(--gold);margin-bottom:5px}
+.bptit{font-family:var(--display);font-size:21px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.bpau{font-size:13px;color:var(--ink3);margin-bottom:10px}
+.bprat{display:flex;gap:3px;font-size:13px}
+.bpbody{padding:24px 30px 40px}
+.bpsec{margin-bottom:22px}
+.bpst{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:9px;display:flex;align-items:center;gap:8px}.bpst::after{content:'';flex:1;height:1px;background:var(--border)}
+.bptx{font-size:14px;color:var(--ink2);line-height:1.8}
+.jnote{background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:8px;padding:18px 20px}
+.jnlbl{font-size:10px;letter-spacing:.12em;color:var(--gold);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}.jnlbl::before{content:'✦'}
+.jnote p{font-family:var(--serif);font-size:14px;color:#5a4810;line-height:1.8;font-style:italic}
+.buybtn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--ink);color:white;border:none;width:100%;padding:13px;border-radius:5px;font-family:var(--sans);font-size:14px;cursor:pointer;transition:background .2s;margin-top:6px}.buybtn:hover{background:var(--ink2)}
+
+/* ══════════════════════════════
+   ARTICLES
+══════════════════════════════ */
+#v-articles .awrap{max-width:1060px;margin:0 auto;padding:36px 64px 70px}
+.afrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.featured{background:var(--ink);border-radius:13px;overflow:hidden;margin-bottom:24px;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s;display:grid;grid-template-columns:1fr 280px}
+.featured:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(24,19,14,.2)}
+.feat-c{padding:36px 36px 32px}
+.feat-ey{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;display:flex;align-items:center;gap:7px}.feat-ey::before{content:'✦';font-size:9px}
+.feat-t{font-family:var(--display);font-size:24px;font-weight:700;color:#faf6ee;line-height:1.3;margin-bottom:12px}
+.feat-x{font-size:13px;color:rgba(250,246,238,.48);line-height:1.78;margin-bottom:20px}
+.feat-m{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.feat-d{font-size:11px;color:rgba(250,246,238,.28);font-family:var(--mono)}
+.feat-rt{font-size:11px;color:rgba(250,246,238,.28)}
+.feat-tg{font-size:10px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.1);color:rgba(250,246,238,.48)}
+.feat-v{background:linear-gradient(135deg,rgba(196,154,24,.14),rgba(168,40,8,.14));display:flex;align-items:center;justify-content:center;font-size:72px;border-left:1px solid rgba(255,255,255,.06)}
+.acard{background:white;border:1px solid var(--border);border-radius:11px;padding:26px;cursor:pointer;transition:transform .22s,box-shadow .22s,border-left .22s;margin-bottom:14px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;border-left:3px solid transparent}
+.acard:hover{transform:translateX(3px);border-left-color:var(--red);box-shadow:0 6px 28px var(--shadow)}
+.ac-tags{display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+.ac-t{font-family:var(--serif);font-size:17px;font-weight:700;line-height:1.4;margin-bottom:8px;color:var(--ink)}
+.ac-x{font-size:13px;color:var(--ink3);line-height:1.7;margin-bottom:12px}
+.ac-m{display:flex;align-items:center;gap:12px}
+.ac-d{font-size:11px;color:var(--ink4);font-family:var(--mono)}
+.ac-rt{font-size:11px;color:var(--ink4)}
+.ac-wc{font-size:11px;color:var(--ink4);background:var(--cream);padding:2px 7px;border-radius:3px}
+.ac-ar{font-size:18px;color:var(--ink4);align-self:center;transition:transform .2s,color .2s}.acard:hover .ac-ar{transform:translateX(4px);color:var(--red)}
+/* article reader */
+.areader{position:fixed;inset:0;top:54px;background:var(--paper);display:none;overflow-y:auto;z-index:200}
+.areader.open{display:block;animation:rdIn .3s var(--ease)}
+.ar-nav{position:sticky;top:0;z-index:10;background:rgba(250,246,238,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.ar-bar{display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:50px}
+.ar-back{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink3);transition:color .2s;padding:0}.ar-back:hover{color:var(--red)}
+.ar-prog{height:2px;background:var(--red);width:0%;transition:width .1s}
+.ar-cover{background:var(--ink);padding:72px 64px 56px;position:relative;overflow:hidden}
+.ar-cover::after{content:attr(data-n);position:absolute;right:30px;bottom:-50px;font-family:var(--display);font-size:280px;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+.ar-inner{max-width:760px;position:relative;z-index:2}
+.ar-ey{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;display:flex;align-items:center;gap:8px}.ar-ey::before{content:'✦'}
+.ar-t{font-family:var(--display);font-size:clamp(24px,4vw,40px);font-weight:700;color:#faf6ee;line-height:1.25;margin-bottom:14px}
+.ar-sub{font-family:var(--serif);font-size:16px;color:rgba(250,246,238,.5);line-height:1.8;max-width:620px;margin-bottom:22px}
+.ar-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ar-date{font-family:var(--mono);font-size:11px;color:rgba(250,246,238,.28)}
+.ar-time{font-size:11px;color:rgba(250,246,238,.28)}
+.ar-tg{font-size:10px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,.1);color:rgba(250,246,238,.45)}
+.ar-body{max-width:720px;margin:0 auto;padding:56px 32px 90px}
+.ar-lead{font-family:var(--serif);font-size:17px;color:var(--ink2);line-height:1.9;margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.ar-h2{font-family:var(--display);font-size:21px;font-weight:700;margin:36px 0 14px;color:var(--ink)}
+.ar-h3{font-family:var(--serif);font-size:16px;font-weight:700;margin:24px 0 11px;color:var(--ink)}
+.ar-p{font-size:15px;line-height:1.95;color:var(--ink2);margin-bottom:14px}.ar-p strong{color:var(--ink);font-weight:600}
+.ar-cq{margin:26px 0;padding:20px 24px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0}
+.ar-cq p{font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic}
+.ar-data{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.ar-dc{background:var(--cream);border-radius:8px;padding:16px 12px;text-align:center;border:1px solid var(--border)}
+.ar-dc .n{font-family:var(--display);font-size:24px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1}
+.ar-dc .l{font-size:10px;color:var(--ink3)}
+.ar-ins{background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:9px;padding:22px 26px;margin:26px 0}
+.ar-ilbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px}.ar-ilbl::before{content:'✦'}
+.ar-ins p{font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8}
+.ar-srcs{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+.ar-stitle{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.ar-si{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3);line-height:1.6}.ar-si:last-child{border-bottom:none}
+.ar-sn{font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:1px}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tl" onclick="nav('home')">
+    <div class="tm"><span>J</span></div>
+    <span class="tn">Janet · 营销观察室</span>
+  </div>
+  <div class="tnav">
+    <button id="nb-home" onclick="nav('home')" class="on">首页</button>
+    <button id="nb-about" onclick="nav('about')">关于 Janet</button>
+    <button id="nb-cases" onclick="nav('cases')">案例书库</button>
+    <button id="nb-tools" onclick="nav('tools')">工具库</button>
+    <button id="nb-books" onclick="nav('books')">书单</button>
+    <button id="nb-articles" onclick="nav('articles')">深度长文</button>
+  </div>
+  <button class="tsub" onclick="openSub()">免费订阅</button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ══ HOME ══ -->
+<div class="view active" id="v-home">
+  <div id="home-hero" class="hero">
+    <div>
+      <div class="hero-ey">营销知识平台 · 2025–2026</div>
+      <h1 class="hero-h1">真实案例，实用工具，<em>持续精进。</em></h1>
+      <p class="hero-p">30年+企业教练视角，精选行业案例、营销框架与深度洞察。服务企业中高层、培训师与有自我提升意识的营销人。</p>
+      <div class="hero-btns">
+        <button class="btn btn-r" onclick="openSub()">免费订阅，解锁全部内容</button>
+        <button class="btn btn-o" onclick="nav('about')">了解 Janet →</button>
+      </div>
+      <div class="hero-stats">
+        <div><span class="hs-num">32</span><span class="hs-lbl">深度案例</span></div>
+        <div><span class="hs-num">18</span><span class="hs-lbl">营销工具</span></div>
+        <div><span class="hs-num">40+</span><span class="hs-lbl">精选书单</span></div>
+        <div><span class="hs-num">2,400+</span><span class="hs-lbl">订阅读者</span></div>
+      </div>
+    </div>
+    <div class="author-card">
+      <div class="av">J</div>
+      <div class="an">Janet</div>
+      <div class="at">企业教练 · 营销培训师 · 30年+</div>
+      <div class="ab">服务过从初创团队到世界500强的各类营销决策者。课堂案例超过800个，专注帮助中高层建立可复用的营销决策框架。</div>
+      <div class="atags">
+        <span class="atag">品牌战略</span><span class="atag">大客户关系</span><span class="atag">数字营销</span><span class="atag">市场战略</span><span class="atag">沟通力</span>
+      </div>
+      <button class="alink" onclick="nav('about')">查看完整介绍 →</button>
+    </div>
+  </div>
+  <div class="sec-strip">
+    <div class="sec-lbl">平台版块</div>
+    <div class="sec-grid">
+      <div class="sc sc-1" onclick="nav('about')"><div class="sc-ico">👤</div><h3>关于 Janet</h3><p>30年+教练历程、方法论体系与服务方向</p><div class="sc-ct">个人介绍页</div></div>
+      <div class="sc sc-2" onclick="nav('cases')"><div class="sc-ico">📚</div><h3>案例书库</h3><p>2025–2026行业观察，含讨论题与来源</p><div class="sc-ct">32个案例 · 双周更新</div></div>
+      <div class="sc sc-3" onclick="nav('tools')"><div class="sc-ico">🛠</div><h3>工具库</h3><p>营销框架、可下载模板、诊断与测评</p><div class="sc-ct">18个工具 · 持续扩充</div></div>
+      <div class="sc sc-4" onclick="nav('books')"><div class="sc-ico">📖</div><h3>营销书单</h3><p>精选书籍，附 Janet 的阅读批注</p><div class="sc-ct">40+本 · 分主题整理</div></div>
+      <div class="sc sc-5" onclick="nav('articles')"><div class="sc-ico">✍️</div><h3>深度长文</h3><p>行业趋势深度分析，3000–8000字原创</p><div class="sc-ct">12篇 · 月更</div></div>
+    </div>
+  </div>
+  <div class="testi">
+    <div style="max-width:1200px;margin:0 auto">
+      <h2>读者在说什么</h2>
+      <div class="tg">
+        <div class="tc"><div class="tq">案例库里的讨论题太好用了，直接搬进培训课堂，学员反应是"最真实、最接地气的案例"。</div><div class="tp"><div class="tav" style="background:linear-gradient(135deg,#0a5e46,#0f8060)">王</div><div><div class="tn2">王老师</div><div class="trl">某商学院营销系讲师</div></div></div></div>
+        <div class="tc"><div class="tq">这个案例直接用在了给董事会的品牌出海提案里，客户当场说"比我们内部研究的深多了"。</div><div class="tp"><div class="tav" style="background:linear-gradient(135deg,#a82808,#c83810)">林</div><div><div class="tn2">林总监</div><div class="trl">某消费品集团 CMO</div></div></div></div>
+        <div class="tc"><div class="tq">有资料来源这点太重要了。我可以直接拿去核实、延伸阅读，而不只是读一篇没出处的分析文章。</div><div class="tp"><div class="tav" style="background:linear-gradient(135deg,#4a2e00,#c49a18)">陈</div><div><div class="tn2">陈研究员</div><div class="trl">某咨询公司战略顾问</div></div></div></div>
+        <div class="tc"><div class="tq">帮我建立了完整的营销决策框架，不再靠感觉拍板了。每次遇到难题先查工具库。</div><div class="tp"><div class="tav" style="background:linear-gradient(135deg,#162d52,#1e4080)">张</div><div><div class="tn2">张经理</div><div class="trl">互联网公司 营销总监</div></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hss">
+    <div class="hss-l"><h3>订阅，不错过每一期新内容</h3><p>案例 · 工具 · 书单 · 长文，双周直达邮箱，免费</p></div>
+    <div class="hss-r"><input type="email" class="hss-i" id="hssEmail" placeholder="your@email.com"><button class="btn btn-r" onclick="quickSub('hssEmail')">订阅</button></div>
+  </div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练 · 营销知识平台</div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div class="view" id="v-about">
+  <div class="ahero">
+    <div style="position:relative;z-index:2">
+      <div class="hero-ey">企业教练 · 营销培训师</div>
+      <h1 class="hero-h1" style="font-size:clamp(32px,5vw,52px)">Janet<br><em style="color:var(--gold2)">用30年经验<br>帮你少走弯路</em></h1>
+      <p class="hero-p">我不教理论，我教的是<strong style="color:#faf6ee">可以立刻用在下一个决策里</strong>的东西。每一个框架都经过真实场景的检验，每一个案例都指向可以行动的洞察。</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-r" onclick="openSub()">订阅知识库</button>
+        <button class="btn btn-o" onclick="nav('cases')">进入案例书库</button>
+      </div>
+    </div>
+    <div style="position:relative;z-index:2">
+      <div class="author-card">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><div class="av" style="margin-bottom:0">J</div><div><div class="an">Janet</div><div class="at">企业教练 · 营销培训师</div></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:16px">
+          <div style="background:rgba(255,255,255,.04);padding:13px 10px;text-align:center"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:#faf6ee;display:block">30+</span><span style="font-size:10px;color:rgba(250,246,238,.32);letter-spacing:.06em">年从业经验</span></div>
+          <div style="background:rgba(255,255,255,.04);padding:13px 10px;text-align:center"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:#faf6ee;display:block">800+</span><span style="font-size:10px;color:rgba(250,246,238,.32);letter-spacing:.06em">课堂案例</span></div>
+          <div style="background:rgba(255,255,255,.04);padding:13px 10px;text-align:center"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:#faf6ee;display:block">500+</span><span style="font-size:10px;color:rgba(250,246,238,.32);letter-spacing:.06em">服务企业</span></div>
+          <div style="background:rgba(255,255,255,.04);padding:13px 10px;text-align:center"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:#faf6ee;display:block">双周</span><span style="font-size:10px;color:rgba(250,246,238,.32);letter-spacing:.06em">内容更新</span></div>
+        </div>
+        <div class="atags"><span class="atag">品牌战略</span><span class="atag">大客户关系</span><span class="atag">数字营销</span><span class="atag">市场战略</span><span class="atag">沟通力</span><span class="atag">私域运营</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="about-body">
+    <div class="asec" style="background:var(--paper)">
+      <h2>30年教练历程</h2>
+      <div class="sub">从一线营销人到企业教练，每一阶段都留下了真实的方法论沉淀</div>
+      <div class="tline">
+        <div class="tli"><div class="tyr">1990s · 起点</div><div class="ttl">从营销一线开始</div><div class="tbd">在消费品行业从品牌助理做起，经历产品上市、渠道拓展到大客户维护的完整周期。亲历了从"做广告"到"做品牌"的行业思维转变。</div></div>
+        <div class="tli"><div class="tyr">2000s · 转型</div><div class="ttl">进入咨询与培训领域</div><div class="tbd">开始系统化整理营销实战经验，为中小企业提供品牌定位与渠道战略咨询。这一阶段积累了第一批"失败案例"——那些比成功更值得讲的故事。</div></div>
+        <div class="tli"><div class="tyr">2010s · 深耕</div><div class="ttl">服务500强与高速成长企业</div><div class="tbd">开始服务大型企业营销团队，深度参与品牌出海、数字化转型、大客户体系建设等复杂议题。课堂从小班走向百人，方法论经过真实压力测试。</div></div>
+        <div class="tli"><div class="tyr">2020s · 当下</div><div class="ttl">建立营销知识平台</div><div class="tbd">AI重塑营销的时代，开始系统化输出：案例库、工具框架、书单与深度长文。相信好的知识不应该只留在课堂里，应该被更多人用到更多决策里。</div></div>
+      </div>
+    </div>
+    <div class="asec" style="background:var(--bg2)">
+      <h2>教练理念</h2>
+      <div class="sub">三件事是我做所有内容的底层逻辑</div>
+      <div class="phil-g">
+        <div class="phil"><div class="phil-ico">🎯</div><h3>真实胜过完美</h3><p>我不追求让案例听起来漂亮，我追求让案例让人看完之后说"对，就是这样"。失败案例比成功案例更有价值，因为决策者最需要的是"我不该怎么做"。</p></div>
+        <div class="phil"><div class="phil-ico">🔧</div><h3>工具胜过观点</h3><p>每一个观点都应该能被转化成可操作的工具或框架。"你应该重视品牌建设"是观点，"用这个矩阵诊断你的品牌健康度"才是工具。我只做后者。</p></div>
+        <div class="phil"><div class="phil-ico">🔄</div><h3>迁移胜过记忆</h3><p>培训的目的不是让你记住案例，而是让你在面对下一个从未遇过的问题时，能调用从这个案例里提炼出的原则。可迁移的原则，是我做所有内容的最终产出。</p></div>
+      </div>
+    </div>
+    <div class="asec" style="background:var(--paper)">
+      <h2>服务方向</h2>
+      <div class="sub">四个核心方向，覆盖中高层营销人的主要成长需求</div>
+      <div class="svc-g">
+        <div class="svc s1"><div class="sn">01 · 企业内训</div><div class="st">定制化营销培训项目</div><div class="sb">为企业营销团队设计定制化培训方案，结合企业实际案例与行业观察，让培训内容直接服务于当下的业务挑战。</div><div class="stags"><span class="stag">半天/全天工作坊</span><span class="stag">系列课程</span><span class="stag">高管专场</span></div></div>
+        <div class="svc s2"><div class="sn">02 · 公开课</div><div class="st">营销决策者成长课堂</div><div class="sb">面向有自我提升意识的中高层营销人，以行业观察案例为核心，建立可复用的营销决策框架与思维工具箱。</div><div class="stags"><span class="stag">品牌战略</span><span class="stag">大客户关系</span><span class="stag">数字营销</span></div></div>
+        <div class="svc s3"><div class="sn">03 · 一对一教练</div><div class="st">营销高管深度陪跑</div><div class="sb">为营销总监及以上级别的决策者提供一对一教练服务，针对具体挑战进行深度陪伴与方法论支持。</div><div class="stags"><span class="stag">月度持续服务</span><span class="stag">项目制</span></div></div>
+        <div class="svc s4"><div class="sn">04 · 知识内容</div><div class="st">订阅制知识产品</div><div class="sb">通过营销观察室，持续输出案例、工具、书单与深度长文，让无法参与线下课程的营销人也能建立系统化知识框架。</div><div class="stags"><span class="stag">免费订阅</span><span class="stag">双周更新</span></div></div>
+      </div>
+    </div>
+    <div class="asec" style="background:var(--bg2)">
+      <h2>服务过的行业</h2>
+      <div class="sub">覆盖从初创团队到世界500强</div>
+      <div class="cl-row">
+        <div class="cl">快消品 / FMCG</div><div class="cl">互联网科技</div><div class="cl">金融服务</div><div class="cl">医药健康</div><div class="cl">零售与电商</div><div class="cl">汽车与出行</div><div class="cl">教育培训</div><div class="cl">B2B工业品</div><div class="cl">广告与传播</div><div class="cl">咨询与专业服务</div><div class="cl">消费品品牌出海</div><div class="cl">初创公司</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-cta">
+    <h2>准备好了吗？<br><em>从一个案例开始。</em></h2>
+    <p>不需要一次性读完所有内容。订阅后，我会每两周送一个案例到你的邮箱。</p>
+    <div class="about-cta-b"><button class="btn btn-r" onclick="openSub()">免费订阅</button><button class="btn-ghost" onclick="nav('cases')">浏览案例书库</button></div>
+  </div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong> · 30年+企业教练</div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button><button onclick="nav('books')">书单</button></div></div>
+</div>
+
+<!-- ══ CASES ══ -->
+<div class="view" id="v-cases">
+  <div class="sh" data-bg="案"><div class="eyebrow">案例书库</div><h1>每个营销决策背后<br>都有一个<em>值得细读的故事</em></h1><p>精选2025–2026年真实品牌案例，用30年教练视角深度拆解。每篇附课堂讨论题与资料来源。</p></div>
+  <div class="shelf-area">
+    <div class="search-row">
+      <div class="sbox"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input class="sinput" type="text" id="caseSearch" placeholder="搜索案例、品牌、关键词…" oninput="filterCases()"></div>
+    </div>
+    <div class="frow" id="casePills">
+      <button class="pill on" onclick="setCaseCat('all',this)">全部</button>
+      <button class="pill" onclick="setCaseCat('brand',this)">品牌营销</button>
+      <button class="pill" onclick="setCaseCat('digital',this)">数字营销</button>
+      <button class="pill" onclick="setCaseCat('key',this)">大客户关系</button>
+      <button class="pill" onclick="setCaseCat('strategy',this)">市场战略</button>
+    </div>
+    <div class="rcount" id="caseCount">共 7 个案例</div>
+    <div class="bookshelf">
+      <div class="books-row" id="booksRow">
+        <div class="book bxl tc2" data-cat="brand" data-kw="蜜雪冰城 出海 东南亚 品牌 本地化" onclick="openCase('mx')"><div class="bsh"></div><div class="bcov"><div><div class="btag">品牌营销</div><div class="btit">蜜雪冰城出海东南亚：品牌统一性与本地化的生死抉择</div></div><div><div class="bco">蜜雪冰城</div><div class="byr">2025 Q1</div></div></div></div>
+        <div class="book blg tf2" data-cat="digital" data-kw="DeepSeek AI GEO SEO 推荐 数字营销" onclick="openCase('ds')"><div class="bsh"></div><div class="bcov"><div><div class="btag">数字营销</div><div class="btit">DeepSeek爆红后，谁先进入AI推荐体系谁就赢了</div></div><div><div class="bco">行业趋势</div><div class="byr">2026 Q1</div></div></div></div>
+        <div class="book bmd ta2" data-cat="key" data-kw="宏盟 IPG 并购 大客户 广告 关系" onclick="openCase('ipg')"><div class="bsh"></div><div class="bcov"><div><div class="btag">大客户</div><div class="btit">宏盟并购IPG：当你最大的客户成了竞争对手</div></div><div><div class="bco">宏盟集团</div><div class="byr">2025 Q4</div></div></div></div>
+        <div class="book bsm ts2" data-cat="brand" data-kw="雪王 蜜雪冰城 IP 内容 抽象 社死" onclick="openCase('xw')"><div class="bsh"></div><div class="bcov"><div><div class="btag">品牌营销</div><div class="btit">雪王下江南：失控内容如何成为最强品牌资产</div></div><div><div class="bco">蜜雪冰城</div><div class="byr">2025 Q2</div></div></div></div>
+        <div class="book blg tn2" data-cat="strategy" data-kw="AI 广告主 焦虑 战略 数字营销 2026" onclick="openCase('ai')"><div class="bsh"></div><div class="bcov"><div><div class="btag">市场战略</div><div class="btit">85%广告主喊AI紧迫，却无从下手：集体焦虑背后的战略机会</div></div><div><div class="bco">行业观察</div><div class="byr">2026 Q1</div></div></div></div>
+        <div class="book bmd tr2" data-cat="digital" data-kw="飞鹤 奶粉 定位 品牌 增长 营收" onclick="openCase('fh')"><div class="bsh"></div><div class="bcov"><div><div class="btag">数字营销</div><div class="btit">飞鹤奶粉：一句定位语撑起五年220亿营收的增长逻辑</div></div><div><div class="bco">飞鹤奶粉</div><div class="byr">2025 Q3</div></div></div></div>
+        <div class="book bxl tg2" data-cat="key" data-kw="星巴克 五月天 联名 情感 大客户 品牌" onclick="openCase('sb')"><div class="bsh"></div><div class="bcov"><div><div class="btag">大客户</div><div class="btit">星巴克×五月天：从品牌联名到大客户情感绑定的底层逻辑</div></div><div><div class="bco">星巴克中国</div><div class="byr">2025 Q2</div></div></div></div>
+      </div>
+      <div class="no-results" id="caseNoResults">没有找到匹配的案例</div>
+      <div class="shelf-plank"></div>
+    </div>
+  </div>
+  <!-- Case Readers injected here by JS -->
+  <div id="caseReaders"></div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('tools')">工具库</button><button onclick="nav('books')">书单</button><button onclick="nav('articles')">长文</button></div></div>
+</div>
+
+<!-- ══ TOOLS ══ -->
+<div class="view" id="v-tools">
+  <div class="sh" data-bg="工"><div class="eyebrow">营销工具库</div><h1>框架、模板与<em>诊断工具</em></h1><p>经过真实场景验证的营销框架与可用工具。每个工具附使用指南，模板可下载，诊断工具可在线完成。</p></div>
+  <div class="frow" style="padding:24px 64px 0;max-width:1280px;margin:0 auto">
+    <button class="pill on" onclick="filterTools('all',this)">全部</button>
+    <button class="pill" onclick="filterTools('framework',this)">📐 营销框架</button>
+    <button class="pill" onclick="filterTools('template',this)">📄 可下载模板</button>
+    <button class="pill" onclick="filterTools('diagnostic',this)">🔍 诊断工具</button>
+    <button class="pill" onclick="filterTools('assessment',this)">📊 自测评估</button>
+  </div>
+  <div class="rcount" style="padding:8px 64px 0;max-width:1280px;margin:0 auto" id="toolCount">共 9 个工具</div>
+  <div class="tg" id="toolsGrid">
+    <div class="tcard" data-type="framework" onclick="openTool('brandhealth')"><div class="tc-h"><div class="tc-ico" style="background:rgba(168,40,8,.08)">🏥</div><div><div class="tc-type" style="color:var(--red)">营销框架</div><div class="tc-title">品牌健康度诊断矩阵</div></div></div><div class="tc-body">从知名度、认知度、偏好度、忠诚度四维度评估品牌现状，找出真正的短板。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd on"></div><div class="cd"></div></div></div><button class="tc-act">查看详情 →</button></div></div>
+    <div class="tcard" data-type="framework" onclick="openTool('aarrr')"><div class="tc-h"><div class="tc-ico" style="background:rgba(10,94,70,.08)">📈</div><div><div class="tc-type" style="color:var(--teal)">营销框架</div><div class="tc-title">增长漏斗 AARRR 拆解框架</div></div></div><div class="tc-body">系统拆解获客、激活、留存、变现、推荐五环节，找到最值得优化的那个。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd on"></div><div class="cd"></div></div></div><button class="tc-act">查看详情 →</button></div></div>
+    <div class="tcard" data-type="framework" onclick="openTool('keyaccount')"><div class="tc-h"><div class="tc-ico" style="background:rgba(196,154,24,.1)">🤝</div><div><div class="tc-type" style="color:var(--gold)">营销框架</div><div class="tc-title">大客户关系健康度框架</div></div></div><div class="tc-body">从关系广度、深度、决策影响力、替代风险四维度评估大客户关系真实健康状况。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd on"></div><div class="cd on"></div></div></div><button class="tc-act">查看详情 →</button></div></div>
+    <div class="tcard" data-type="template" onclick="openTool('case-tpl')"><div class="tc-h"><div class="tc-ico" style="background:rgba(22,45,82,.08)">📝</div><div><div class="tc-type" style="color:var(--navy)">可下载模板</div><div class="tc-title">案例分析八字段模板</div></div></div><div class="tc-body">Janet 案例库的标准分析结构，可用于整理行业观察或内部复盘案例。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd"></div><div class="cd"></div></div></div><button class="tc-act">下载模板 ↓</button></div></div>
+    <div class="tcard" data-type="template" onclick="openTool('brief')"><div class="tc-h"><div class="tc-ico" style="background:rgba(90,80,112,.08)">📋</div><div><div class="tc-type" style="color:#5a5070">可下载模板</div><div class="tc-title">营销战役 Brief 标准模板</div></div></div><div class="tc-body">覆盖战役目标、目标用户、核心信息、渠道选择、预算分配与效果衡量标准。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd on"></div><div class="cd"></div></div></div><button class="tc-act">下载模板 ↓</button></div></div>
+    <div class="tcard" data-type="template" onclick="openTool('annual')"><div class="tc-h"><div class="tc-ico" style="background:rgba(168,40,8,.08)">📅</div><div><div class="tc-type" style="color:var(--red)">可下载模板</div><div class="tc-title">年度营销规划表</div></div></div><div class="tc-body">从战略目标到季度执行计划，含预算矩阵、渠道节奏规划与里程碑。Excel格式。</div><div class="tc-foot"><div class="tc-cx">复杂度<div class="cxd"><div class="cd on"></div><div class="cd on"></div><div class="cd on"></div></div></div><button class="tc-act">下载模板 ↓</button></div></div>
+    <div class="tcard" data-type="diagnostic" onclick="openTool('brand-diag')"><div class="tc-h"><div class="tc-ico" style="background:rgba(196,154,24,.1)">🔍</div><div><div class="tc-type" style="color:var(--gold)">诊断工具</div><div class="tc-title">品牌定位清晰度自诊断</div></div></div><div class="tc-body">12道判断题，5分钟完成，生成品牌定位清晰度评分与改进建议报告。</div><div class="tc-foot"><div class="tc-cx">用时约<span style="font-size:12px;color:var(--ink3);margin-left:4px">5 分钟</span></div><button class="tc-act">开始诊断 →</button></div></div>
+    <div class="tcard" data-type="assessment" onclick="openTool('ai-ready')"><div class="tc-h"><div class="tc-ico" style="background:rgba(10,94,70,.08)">🤖</div><div><div class="tc-type" style="color:var(--teal)">自测评估</div><div class="tc-title">AI 营销准备度自测</div></div></div><div class="tc-body">从数据、人才、流程、管理四维度评估团队AI营销准备度，生成优先行动建议。</div><div class="tc-foot"><div class="tc-cx">用时约<span style="font-size:12px;color:var(--ink3);margin-left:4px">8 分钟</span></div><button class="tc-act">开始测评 →</button></div></div>
+    <div class="tcard" data-type="assessment" onclick="openTool('ka-assess')"><div class="tc-h"><div class="tc-ico" style="background:rgba(22,45,82,.08)">🎯</div><div><div class="tc-type" style="color:var(--navy)">自测评估</div><div class="tc-title">大客户关系成熟度测评</div></div></div><div class="tc-body">针对某一具体客户，评估关系质量、广度、深度与抗风险能力，生成雷达图。</div><div class="tc-foot"><div class="tc-cx">用时约<span style="font-size:12px;color:var(--ink3);margin-left:4px">10 分钟</span></div><button class="tc-act">开始测评 →</button></div></div>
+  </div>
+  <div class="overlay" id="toolOverlay" onclick="closeTool()"></div>
+  <div class="tpanel" id="toolPanel">
+    <div class="tph"><button class="tpc" onclick="closeTool()">×</button><div class="tptyp" id="tpTyp"></div><div class="tptit" id="tpTit"></div></div>
+    <div class="tpb" id="tpBody"></div>
+  </div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('books')">书单</button></div></div>
+</div>
+
+<!-- ══ BOOKS ══ -->
+<div class="view" id="v-books">
+  <div class="sh" data-bg="书"><div class="eyebrow">营销精选书单</div><h1>每一本都经过<em>真实检验</em></h1><p>这里没有"畅销榜"，只有 Janet 认为真正值得营销人精读的书。每本附阅读批注与课堂使用场景。</p></div>
+  <div class="bksec">
+    <div class="bkcat"><div class="bkcath"><h3>品牌战略</h3><div class="bkct">4 本</div></div>
+    <div class="bkrow">
+      <div class="bk" onclick="openBook('positioning')"><div class="bkspine" style="background:var(--red)"></div><div class="bkbody"><div class="bktag" style="color:var(--red)">品牌战略</div><div class="bktit">Positioning: The Battle for Your Mind</div><div class="bkau">Al Ries & Jack Trout</div><div class="bknote">定位理论的源头，读完之后你再也无法忍受一句模糊的品牌定位语。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('aaker')"><div class="bkspine" style="background:#8040a0"></div><div class="bkbody"><div class="bktag" style="color:#8040a0">品牌战略</div><div class="bktit">Building Strong Brands</div><div class="bkau">David A. Aaker</div><div class="bknote">品牌资产的系统性建构，Aaker 模型至今仍是品牌规划最实用的框架之一。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('obvious')"><div class="bkspine" style="background:var(--teal)"></div><div class="bkbody"><div class="bktag" style="color:var(--teal)">品牌战略</div><div class="bktit">Obviously Awesome</div><div class="bkau">April Dunford</div><div class="bknote">最实用的产品定位操作手册，特别适合 B2B 品牌与初创公司。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('brandsense')"><div class="bkspine" style="background:#c04820"></div><div class="bkbody"><div class="bktag" style="color:#c04820">品牌战略</div><div class="bktit">Brand Sense</div><div class="bkau">Martin Lindstrom</div><div class="bknote">感官营销的启蒙读物，教你用五感而非仅仅视觉来建立品牌差异化。</div><div class="bkrat">⭐⭐⭐⭐</div></div></div>
+    </div></div>
+    <div class="bkcat"><div class="bkcath"><h3>数字营销与增长</h3><div class="bkct">3 本</div></div>
+    <div class="bkrow">
+      <div class="bk" onclick="openBook('traction')"><div class="bkspine" style="background:var(--navy)"></div><div class="bkbody"><div class="bktag" style="color:var(--navy)">增长</div><div class="bktit">Traction</div><div class="bkau">Gabriel Weinberg & Justin Mares</div><div class="bknote">19个获客渠道的系统梳理，帮你找到最适合自己的牵引力渠道。</div><div class="bkrat">⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('hooked')"><div class="bkspine" style="background:#206060"></div><div class="bkbody"><div class="bktag" style="color:#206060">用户行为</div><div class="bktit">Hooked</div><div class="bkau">Nir Eyal</div><div class="bknote">理解用户为何"上瘾"，是做用户运营和私域的必读底层逻辑。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('contagious')"><div class="bkspine" style="background:#a84000"></div><div class="bkbody"><div class="bktag" style="color:#a84000">内容传播</div><div class="bktit">Contagious</div><div class="bkau">Jonah Berger</div><div class="bknote">STEPPS 框架解释了为什么有些内容会疯传，为什么大多数不会。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+    </div></div>
+    <div class="bkcat"><div class="bkcath"><h3>大客户关系与销售</h3><div class="bkct">3 本</div></div>
+    <div class="bkrow">
+      <div class="bk" onclick="openBook('challenger')"><div class="bkspine" style="background:var(--gold)"></div><div class="bkbody"><div class="bktag" style="color:#7a5a00">大客户销售</div><div class="bktit">The Challenger Sale</div><div class="bkau">Dixon & Adamson</div><div class="bknote">颠覆"关系型销售"神话，最会"挑战"客户认知的销售才是最顶级的。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('spin')"><div class="bkspine" style="background:#184080"></div><div class="bkbody"><div class="bktag" style="color:#184080">大客户销售</div><div class="bktit">SPIN Selling</div><div class="bkau">Neil Rackham</div><div class="bknote">大客户销售的经典圣经，SPIN提问法至今仍是最有效的需求挖掘工具。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('neverspilt')"><div class="bkspine" style="background:#3a3030"></div><div class="bkbody"><div class="bktag" style="color:#6a5050">谈判</div><div class="bktit">Never Split the Difference</div><div class="bkau">Chris Voss</div><div class="bknote">FBI谈判专家的实战技巧，对大客户谈判与内部沟通都极有价值。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+    </div></div>
+    <div class="bkcat"><div class="bkcath"><h3>营销战略与思维</h3><div class="bkct">2 本</div></div>
+    <div class="bkrow">
+      <div class="bk" onclick="openBook('goodstrategy')"><div class="bkspine" style="background:#304830"></div><div class="bkbody"><div class="bktag" style="color:#304830">战略思维</div><div class="bktit">Good Strategy Bad Strategy</div><div class="bkau">Richard Rumelt</div><div class="bknote">读完你才知道大多数"战略"其实是愿景+目标的混合物，不是真正的战略。</div><div class="bkrat">⭐⭐⭐⭐⭐</div></div></div>
+      <div class="bk" onclick="openBook('hbr')"><div class="bkspine" style="background:var(--red)"></div><div class="bkbody"><div class="bktag" style="color:var(--red)">营销战略</div><div class="bktit">HBR's 10 Must Reads on Marketing</div><div class="bkau">Harvard Business Review</div><div class="bknote">10篇精选文章覆盖营销战略核心议题，每篇都可以直接用来培训。</div><div class="bkrat">⭐⭐⭐⭐</div></div></div>
+    </div></div>
+  </div>
+  <div class="overlay" id="bookOverlay" onclick="closeBook()"></div>
+  <div class="bpanel" id="bookPanel">
+    <div class="bph" id="bpHeader"></div>
+    <div class="bpbody" id="bpBody"></div>
+  </div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button></div></div>
+</div>
+
+<!-- ══ ARTICLES ══ -->
+<div class="view" id="v-articles">
+  <div class="sh" data-bg="文"><div class="eyebrow">行业深度长文</div><h1>不追热点，<em>只讲真相</em></h1><p>每篇 3,000–8,000 字，月更。不写蹭热点的快文章，只写值得花30分钟精读的深度分析。</p></div>
+  <div class="awrap">
+    <div class="afrow">
+      <button class="pill on" onclick="filterArt('all',this)">全部</button>
+      <button class="pill" onclick="filterArt('trend',this)">行业趋势</button>
+      <button class="pill" onclick="filterArt('brand',this)">品牌战略</button>
+      <button class="pill" onclick="filterArt('digital',this)">数字营销</button>
+      <button class="pill" onclick="filterArt('leadership',this)">营销领导力</button>
+    </div>
+    <div class="featured" data-cat="trend" onclick="openArticle('geo')">
+      <div class="feat-c"><div class="feat-ey">最新发布 · 深度专栏</div><div class="feat-t">GEO 时代的营销重构：当 AI 替代搜索引擎，品牌该怎么办？</div><div class="feat-x">2026年最重要的营销命题不是"要不要用AI"，而是"如何让AI记住你的品牌"。本文系统梳理了GEO的底层逻辑、操作框架与先行者的真实经验。</div><div class="feat-m"><span class="feat-d">2026.03.15</span><span class="feat-rt">⏱ 约35分钟</span><span class="feat-tg">行业趋势</span><span class="feat-tg">数字营销</span></div></div>
+      <div class="feat-v">🤖</div>
+    </div>
+    <div class="acard" data-cat="brand" onclick="openArticle('brand2026')"><div><div class="ac-tags"><span class="tag tag-r">品牌战略</span><span class="tag tag-i">2025.12</span></div><div class="ac-t">2026年，哪些品牌定位逻辑已经失效了？</div><div class="ac-x">消费市场结构性变化之下，过去十年的品牌定位方法论正在失效。本文系统梳理了五个已经不再适用的品牌定位假设，以及替代它们的新逻辑。</div><div class="ac-m"><span class="ac-d">2025.12.08</span><span class="ac-rt">⏱ 约28分钟</span><span class="ac-wc">约5,600字</span></div></div><div class="ac-ar">→</div></div>
+    <div class="acard" data-cat="digital" onclick="openArticle('private')"><div><div class="ac-tags"><span class="tag tag-t">数字营销</span><span class="tag tag-i">2025.10</span></div><div class="ac-t">私域运营的三个死亡模式：为什么大多数企业的私域越做越难？</div><div class="ac-x">做私域的企业越来越多，但真正从私域里持续获得可观回报的却越来越少。三年观察下来，Janet 总结了私域失败最常见的三种模式，以及走出困局的路径。</div><div class="ac-m"><span class="ac-d">2025.10.22</span><span class="ac-rt">⏱ 约32分钟</span><span class="ac-wc">约6,200字</span></div></div><div class="ac-ar">→</div></div>
+    <div class="acard" data-cat="leadership" onclick="openArticle('cmo')"><div><div class="ac-tags"><span class="tag tag-n">营销领导力</span><span class="tag tag-i">2025.09</span></div><div class="ac-t">2026年的 CMO 必须会什么：从"营销负责人"到"增长架构师"</div><div class="ac-x">CMO的角色正在经历自互联网以来最大的一次重新定义。AI、数据、组织变革——哪些是真正需要CMO亲自掌握的能力，哪些只是需要理解的方向？</div><div class="ac-m"><span class="ac-d">2025.09.15</span><span class="ac-rt">⏱ 约30分钟</span><span class="ac-wc">约5,800字</span></div></div><div class="ac-ar">→</div></div>
+    <div class="acard" data-cat="trend" onclick="openArticle('china')"><div><div class="ac-tags"><span class="tag tag-g">行业趋势</span><span class="tag tag-i">2025.07</span></div><div class="ac-t">中国品牌出海2025：不是每个品牌都应该出海，也不是每个出海都叫"全球化"</div><div class="ac-x">从蜜雪冰城到名创优品，中国品牌出海迎来前所未有的热度。但热度背后，有些问题没有被认真讨论过：什么样的品牌适合出海？出海的真实成本和风险在哪里？</div><div class="ac-m"><span class="ac-d">2025.07.03</span><span class="ac-rt">⏱ 约38分钟</span><span class="ac-wc">约7,500字</span></div></div><div class="ac-ar">→</div></div>
+    <div class="acard" data-cat="brand" onclick="openArticle('ip')"><div><div class="ac-tags"><span class="tag tag-r">品牌战略</span><span class="tag tag-i">2025.05</span></div><div class="ac-t">为什么 IP 化是中国品牌接下来十年最重要的战略方向？</div><div class="ac-x">从雪王到泡泡玛特，品牌IP化正在成为消费品领域最显著的战略趋势。什么是真正的品牌IP？IP化的本质是什么？哪些企业真的在做，哪些只是在跟风？</div><div class="ac-m"><span class="ac-d">2025.05.20</span><span class="ac-rt">⏱ 约33分钟</span><span class="ac-wc">约6,400字</span></div></div><div class="ac-ar">→</div></div>
+  </div>
+  <!-- Article Reader: GEO -->
+  <div class="areader" id="art-geo">
+    <div class="ar-nav"><div class="ar-bar"><button class="ar-back" onclick="closeArticle('geo')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 返回长文列表</button><div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2026.03.15 · 约35分钟</div></div><div class="ar-prog" id="arp-geo"></div></div>
+    <div class="ar-cover" data-n="01"><div class="ar-inner"><div class="ar-ey">行业趋势 · 深度专栏 · No.12</div><div class="ar-t">GEO 时代的营销重构</div><div class="ar-sub">当 AI 替代搜索引擎，品牌该怎么办？</div><div class="ar-meta"><span class="ar-date">2026.03.15</span><span class="ar-time">⏱ 约35分钟 · 约6,800字</span><span class="ar-tg">行业趋势</span><span class="ar-tg">数字营销</span></div></div></div>
+    <div class="ar-body" id="arb-geo">
+      <div class="ar-lead">2026年初，我在一次营销总监闭门会上做了一个实验：让在座的15位营销负责人，打开自己手机上的AI工具，用自然语言搜索"帮我推荐三个 [他们自己所在行业] 的头部品牌"。<br><br>结果让所有人沉默了：15家公司里，只有4家出现在了AI的推荐列表里。其余11家，AI"不知道"他们存在。</div>
+      <h2 class="ar-h2">一、搜索行为的根本性变化</h2>
+      <p class="ar-p">过去20年，品牌在数字营销上的最大投入是SEO——让自己在百度、Google的搜索结果中排名靠前。这套逻辑建立在一个基本假设上：用户有需求，会去搜索，搜索引擎返回结果，用户选择点击。</p>
+      <p class="ar-p">这个假设在2025年发生了根本性的动摇。当DeepSeek在中国企业用户中的渗透率突破40%，当越来越多的人开始把AI工具当成"第一信息入口"——搜索行为的底层逻辑正在被重写。</p>
+      <div class="ar-cq"><p>用户不再"搜索关键词"，而是"问AI问题"。这两件事看起来相似，但对品牌的影响是本质性的不同。</p></div>
+      <p class="ar-p">搜索引擎返回的是链接列表，用户自己判断和选择。AI返回的是一个整合后的答案，AI已经帮用户做了筛选和判断。这意味着：<strong>如果AI不推荐你，用户根本不会看到你。</strong></p>
+      <h2 class="ar-h2">二、GEO 是什么，不是什么</h2>
+      <p class="ar-p">GEO（Generative Engine Optimization，生成式引擎优化）是近两年从学术界和营销实践中同步涌现出来的概念。普林斯顿大学和佐治亚理工的联合研究团队在2024年发表了第一篇系统性的GEO研究论文。</p>
+      <div class="ar-data"><div class="ar-dc"><span class="n">40%</span><span class="l">DeepSeek中国企业用户渗透率</span></div><div class="ar-dc"><span class="n">3–8×</span><span class="l">早期GEO布局品牌的AI推荐率优势</span></div><div class="ar-dc"><span class="n">85%</span><span class="l">广告主认为AI营销应用极其紧迫</span></div></div>
+      <p class="ar-p"><strong>SEO的核心是"信号"：</strong>通过关键词密度、外链数量等信号告诉搜索引擎"这个页面与这个关键词高度相关"。</p>
+      <p class="ar-p"><strong>GEO的核心是"权威性"：</strong>通过在AI训练数据中建立真实的领域权威形象，让AI模型在相关话题上将你的品牌作为可信来源引用。这是两种本质不同的游戏规则。</p>
+      <h2 class="ar-h2">三、先行者在做什么：三种实证路径</h2>
+      <h3 class="ar-h3">路径 A：内容结构化</h3>
+      <p class="ar-p">系统性重构网站内容，增加结构化数据标注（Schema Markup），产出语义明确、易于大模型理解的内容。这要求内容团队学会"为AI写作"而非仅仅"为人类写作"。</p>
+      <h3 class="ar-h3">路径 B：第三方权威背书</h3>
+      <p class="ar-p">AI模型在引用来源时，优先引用独立第三方来源而非品牌自述。在维基百科、行业白皮书、权威媒体报道中出现，比在官网上写再多内容都更有效。</p>
+      <h3 class="ar-h3">路径 C：对话场景优化</h3>
+      <p class="ar-p">分析用户最常向AI提的问题（而非关键词），定向产出能回答这些问题的高质量内容，让AI在回答时自然引用你的品牌。</p>
+      <div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>GEO的本质不是一种新的技术技巧，而是回归了品牌建设最基本的逻辑：真实的权威是无法被捷径替代的。SEO时代有买链接的捷径，GEO时代没有。这对真正在做内容、做品牌的企业来说，是一个好消息。</p></div>
+      <h2 class="ar-h2">四、接下来要做的三件事</h2>
+      <p class="ar-p"><strong>第一件事：做一次AI可见度自检。</strong>打开DeepSeek、Kimi、ChatGPT，用你的目标用户最可能问的问题搜索一遍，看看你的品牌出现了没有，出现在什么语境里。</p>
+      <p class="ar-p"><strong>第二件事：评估你的内容资产。</strong>你现在有没有真正高质量的、能代表你在某个领域专业度的内容？如果没有，这是第一优先级。</p>
+      <p class="ar-p"><strong>第三件事：开始建立第三方引用。</strong>联系行业媒体、在维基百科词条中被正确描述、发布可被引用的原创研究数据。这是一件慢功夫，但越早开始越好。</p>
+      <div class="ar-srcs"><div class="ar-stitle">参考资料</div>
+        <div class="ar-si"><span class="ar-sn">01</span>Aggarwal et al., "GEO: Generative Engine Optimization" · Princeton/Georgia Tech · arXiv:2311.09735, 2024</div>
+        <div class="ar-si"><span class="ar-sn">02</span>《2026中国数字营销趋势报告》· 秒针营销科学院 × CTR媒介智讯，2025年12月</div>
+        <div class="ar-si"><span class="ar-sn">03</span>艾瑞咨询《2025年中国AI应用市场研究报告》，2025年9月</div>
+        <div class="ar-si"><span class="ar-sn">04</span>OpenAI ChatGPT月活数据：The Verge，2025年11月报道</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div class="footer-l"><strong>Janet · 营销观察室</strong></div><div class="footer-r"><button onclick="nav('cases')">案例</button><button onclick="nav('tools')">工具</button></div></div>
+</div>
+
+</div><!-- /main -->
+
+<!-- SUBSCRIBE MODAL -->
+<div class="modal-bg" id="subModal">
+  <div class="modal-box">
+    <div class="mhdr"><button class="mx" onclick="closeSub()">×</button><h2>订阅「营销观察室」</h2><p>每两周一个深度案例 · 附课堂讨论题与资料来源<br>免费订阅，随时退订</p></div>
+    <div class="mbody">
+      <label class="fl">您的邮箱</label>
+      <input type="email" class="fi" id="subEmail" placeholder="your@email.com">
+      <label class="fl">最关注的方向（可多选）</label>
+      <div class="checks"><label class="chk"><input type="checkbox" checked> 品牌营销</label><label class="chk"><input type="checkbox" checked> 数字营销</label><label class="chk"><input type="checkbox"> 大客户关系</label><label class="chk"><input type="checkbox"> 市场战略</label><label class="chk"><input type="checkbox"> 工具与框架</label></div>
+      <button class="msub" onclick="confirmSub()">立即订阅，免费获取全部内容</button>
+      <p class="mfine">不发广告 · 不售卖数据 · 随时一键退订</p>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ══ NAVIGATION ══
+function nav(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.tnav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('v-'+id).classList.add('active');
+  document.getElementById('nb-'+id).classList.add('on');
+  // scroll view to top
+  const v = document.getElementById('v-'+id);
+  if(v) window.scrollTo({top:0,behavior:'instant'});
+  // close any open readers/panels
+  document.querySelectorAll('.reader.open,.areader.open').forEach(r=>r.classList.remove('open'));
+  closeTool(); closeBook();
+}
+
+// ══ SUBSCRIBE ══
+function openSub(){document.getElementById('subModal').classList.add('open')}
+function closeSub(){document.getElementById('subModal').classList.remove('open')}
+document.getElementById('subModal').addEventListener('click',e=>{if(e.target===document.getElementById('subModal'))closeSub()});
+function confirmSub(){const e=document.getElementById('subEmail').value.trim();if(!e||!e.includes('@')){document.getElementById('subEmail').style.borderColor='#a82808';return}closeSub();showToast('✓ 订阅成功！欢迎加入营销观察室')}
+function quickSub(id){const el=document.getElementById(id);if(!el)return;const e=el.value.trim();if(!e||!e.includes('@')){el.style.borderColor='#a82808';return}el.value='';showToast('✓ 订阅成功！欢迎加入营销观察室')}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
+
+// ══ CASES ══
+let caseCat='all';
+function setCaseCat(cat,btn){
+  caseCat=cat;
+  document.querySelectorAll('#casePills .pill').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  filterCases();
+}
+function filterCases(){
+  const q=document.getElementById('caseSearch').value.toLowerCase();
+  let n=0;
+  document.querySelectorAll('#booksRow .book').forEach(b=>{
+    const kw=(b.dataset.kw||'').toLowerCase();
+    const tit=b.querySelector('.btit')?.textContent.toLowerCase()||'';
+    const show=(caseCat==='all'||b.dataset.cat===caseCat)&&(!q||kw.includes(q)||tit.includes(q));
+    b.style.display=show?'':'none';
+    if(show)n++;
+  });
+  document.getElementById('caseCount').textContent=`共 ${n} 个案例`;
+  document.getElementById('caseNoResults').style.display=n===0?'block':'none';
+}
+
+// Case data
+const CASES={
+  mx:{color:'linear-gradient(150deg,#6e1408,#a82808,#c83810)',ep:'EP.07 · 独讲',pod:'雪王出海：当品牌基因遇上文化壁垒，那条线究竟在哪里？',dur:1104,tags:[{t:'品牌营销',s:'rgba(255,255,255,.15)',c:'#ffdcc8'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'蜜雪冰城出海东南亚<br>品牌统一性与本地化的生死抉择',meta:'案例 #07 · 品牌营销',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年初，蜜雪冰城在东南亚门店数突破4,000家，越南、印尼、泰国成为主力市场。问题随之而来：泰国加盟商坚持把招牌红白色改成金色，越南团队要求将雪王IP改造成温和本地风格，印尼市场希望增加清真认证标识。每个诉求单独看都合理，合在一起却构成结构性危机——若每个市场都能改，品牌还剩什么？</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在品牌统一性与本地化适配之间，出海品牌如何找到那条既不稀释品牌资产、又能真正融入当地的边界线？这条线一旦画错，要么失去品牌，要么失去市场。</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>总部执行<strong>"骨骼出海，皮肤本地"</strong>策略：<br><strong>零妥协项：</strong>红白配色、雪王IP形象、LOGO字体，任何市场一律不得改动。<br><strong>完全开放项：</strong>产品研发、促销活动、社媒内容完全放权。越南推出榴莲系列，泰国开发香茅口味，甚至允许各市场用本地语言改编主题曲。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">62%</span><span class="l">东南亚Q1营收同比增长</span></div><div class="dc"><span class="n">1.3×</span><span class="l">越南单店日均销量超国内均值</span></div><div class="dc"><span class="n">No.1</span><span class="l">TikTok东南亚UGC量超星巴克喜茶</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>印尼市场在2025年Q2出现严重加盟商管理危机——部分加盟商私自采购原材料，品质不一致导致口碑短暂下滑。根本原因：<strong>供应链管控体系没有同步出海</strong>。核心失误在于把品牌管理等同于视觉管理。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>品牌出海的本质不是"统一 vs 本地化"的二选一，而是识别品牌资产中哪些是不可妥协的<strong>身份锚点</strong>，哪些只是习惯性的执行惯例。真正强大的品牌，能清晰说出那条线在哪里，而且每个人都知道越过这条线的代价。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你的品牌如果要进入一个新市场，哪三个元素是绝对不可以改的？背后的理由是品牌战略，还是执行习惯？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">蜜雪冰城的失败在于供应链没有跟上。在你的业务场景里，有没有类似"视觉层到位了、底层没跟上"的情况？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">如果你是印尼加盟商，你会怎么看待总部的"零妥协项"？这种管控方式对长期信任关系有什么影响？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">蜜雪冰城2025年Q1东南亚业务进展报告（路透社、界面新闻二次报道）</div></div><div class="srci"><span class="srcn">02</span><div class="srct">TikTok for Business APAC 东南亚品牌UGC追踪报告，2025 Q1</div></div><div class="srci"><span class="srcn">03</span><div class="srct">印尼加盟商事件报道 · Tempo.co（印尼媒体）2025年5月；36氪出海版跟进报道</div></div></div>`
+  },
+  ds:{color:'linear-gradient(150deg,#042e1e,#0a5e46,#148060)',ep:'EP.12 · 对谈',pod:'GEO时代：让AI记住你的品牌，这不是玄学，是系统工程',dur:1330,tags:[{t:'数字营销',s:'rgba(255,255,255,.15)',c:'#90ffd8'},{t:'全行业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2026 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'DeepSeek爆红后<br>谁先进入AI推荐体系，谁就赢了',meta:'案例 #12 · 数字营销',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年9月，OpenAI上线"Instant Checkout"，用户可在ChatGPT对话中直接完成购买。同月，DeepSeek在中国企业用户渗透率突破40%。消费者开始"问AI推荐"而非"搜索关键词"——过去品牌花巨资优化的SEO体系，开始失效。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当用户不再去搜索引擎，而是直接问AI——品牌如何进入AI的"认知体系"？GEO（生成式引擎优化）是2026年最紧迫、最无人知道标准答案的营销命题。</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p><strong>路径A — 内容结构化：</strong>系统重构官网内容，增加Schema Markup，产出易于大模型理解的"Model-friendly Content"。<br><strong>路径B — 权威背书：</strong>在AI训练数据集中高频出现的权威媒体大量发布品牌相关内容，建立知识图谱。<br><strong>路径C — 对话优化：</strong>分析用户最常问AI的问题，定向产出能回答这些问题的内容，让AI在回答时自然引用。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">3–8×</span><span class="l">早期GEO布局品牌的AI推荐率优势</span></div><div class="dc"><span class="n">7000亿</span><span class="l">2025年中国数字广告市场规模</span></div><div class="dc"><span class="n">85%</span><span class="l">广告主认为AI应用"极其紧迫"</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>最大陷阱：<strong>用SEO逻辑做GEO</strong>。堆砌低质内容不仅没让AI更多引用，反而因信噪比下降，模型学会了"忽略"这个品牌。2026年初，部分ALL-IN内容农场打法的品牌出现推荐率不升反降。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>GEO的本质是把"让搜索引擎爬虫认可你"换成"让AI模型信任你"。信任的建立逻辑是一样的：长期、权威、深度、真实。平台变了，但品牌建设的底层逻辑从未改变。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">现在打开DeepSeek，问"你们行业最值得信赖的品牌是什么"——你的公司出现了吗？如果没有，你认为原因是什么？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">AI推荐的核心逻辑是"权威性"而非"曝光频次"——这对你目前的内容营销策略意味着什么调整？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">如果SEO团队和GEO策略之间存在资源竞争，你会如何分配预算和人力？依据是什么？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">Aggarwal et al., "GEO: Generative Engine Optimization" · Princeton/Georgia Tech · arXiv:2311.09735, 2024</div></div><div class="srci"><span class="srcn">02</span><div class="srct">艾瑞咨询《2025年中国AI应用市场研究报告》，2025年9月</div></div><div class="srci"><span class="srcn">03</span><div class="srct">《2026中国数字营销趋势报告》· 秒针营销科学院，2025年12月</div></div></div>`
+  },
+  ipg:{color:'linear-gradient(150deg,#3a2800,#c49a18,#d8b430)',ep:'EP.18 · 对谈',pod:'250亿美元的并购震荡：大客户关系的终极压力测试',dur:1600,tags:[{t:'大客户关系',s:'rgba(255,255,255,.15)',c:'#fff4a0'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q4',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'宏盟并购IPG<br>当你最大的客户，突然成了竞争对手',meta:'案例 #18 · 大客户关系',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年，宏盟集团（Omnicom）宣布并购IPG（Interpublic Group），合并后年营收接近250亿美元，成为全球最大广告传播集团。底层逻辑只有四个字：<strong>降本增效</strong>。对双方甲方客户而言，这是重新评估关系的时刻——原本分别服务两家集团的品牌，突然发现自己的营销伙伴和竞争对手的营销伙伴，变成了同一家公司。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当代理商整合压缩了市场竞争，甲方的"核心供应商"可能同时服务你和你的竞争对手。这时候，大客户关系的本质是什么？信任还能建立在哪里？</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>并购背后三条驱动力：<strong>减少内耗</strong>（将外部竞标转为内部协作）、<strong>极致降本</strong>（合并后台与数据中台）、<strong>规模换AI未来</strong>（超级集团整合全域数据的AI平台才可能成为行业基础设施）。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">250亿</span><span class="l">合并后集团年营收（美元）</span></div><div class="dc"><span class="n">双重</span><span class="l">内部化浪潮＋AI替代双重冲击</span></div><div class="dc"><span class="n">+60%</span><span class="l">主动沟通者的客户留存率优势</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>很多大客户经理的第一反应是"等并购尘埃落定再说"——这是最危险的被动策略。更深层的教训：<strong>把关系建立在"集团层面"而非"个人信任层面"的大客户经理，在这次整合中损失最惨重</strong>。当组织变了，人走了，关系就消失了。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>大客户关系的终极护城河不是合同，不是KPI，而是<strong>对方离不开你这个人的理由</strong>。组织可以被并购，品牌可以换代理商，但真正的信任关系是个人层面的，它能穿越组织变动存活下来。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你最重要的三个大客户关系，分别建立在"个人信任"还是"公司合约"上？如果你明天离职，这些关系会怎样？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">在并购整合期，你会选择主动出击（主动联系客户澄清）还是等待观望？这两种策略背后的逻辑和风险各是什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">扎克伯格说"AI可以替代广告代理商"——你认为哪些大客户服务环节是AI无法替代的？你的竞争力在哪里？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">Omnicom-IPG并购公告：Omnicom官方新闻稿，2024年12月9日；《华尔街日报》跟进报道</div></div><div class="srci"><span class="srcn">02</span><div class="srct">扎克伯格AI广告声明：Meta Q3 2025财报电话会议记录，2025年10月</div></div><div class="srci"><span class="srcn">03</span><div class="srct">麦肯锡《2025 Global Marketing Report》，2025年6月</div></div></div>`
+  },
+  xw:{color:'linear-gradient(150deg,#1e1c28,#40385a,#5a5080)',ep:'EP.09 · 独讲',pod:'抽象营销的边界：为什么雪王能"社死"，你的品牌不行？',dur:1215,tags:[{t:'品牌营销',s:'rgba(255,255,255,.15)',c:'#c8c0f0'},{t:'中小企业参考',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q2',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'雪王下江南<br>失控的内容，如何成为最强的品牌资产',meta:'案例 #09 · 品牌营销',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年3月，蜜雪冰城以"江南采风"为主题推广龙井系列，将雪王IP融入水墨、油纸伞等元素在杭州绍兴开快闪店。最火的一条视频：雪王人偶坐在溪上秋千，"硬要拗松弛感的紧绷感"让网友笑疯。该视频超过26万点赞，并引发全网"集体下江南整活"的二创浪潮。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当品牌内容"失控"——被网友接管、被二次创作、被恶搞——品牌应该焦虑还是庆幸？这种失控，是风险还是资产？</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>蜜雪冰城选择<strong>顺势而为，绝不干预</strong>——没有删帖，没有澄清，任由抽象解读自由发酵。背后的品牌逻辑：雪王IP经多年积累，已形成被高度认同的人格——"爱玩、笨拙、执拗、有活人感"。这种人格的核心价值正是<strong>不完美的真实</strong>，而干预会摧毁这种真实。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">26万+</span><span class="l">单条视频点赞量</span></div><div class="dc"><span class="n">登顶</span><span class="l">微博热搜 #雪王下江南#</span></div><div class="dc"><span class="n">自发</span><span class="l">二创UGC远超官方内容传播力</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>这套打法的可复制性极低。很多中小品牌看到雪王成功后开始模仿"抽象营销"——要么用力过猛，要么缺乏IP积累。核心教训：<strong>抽象营销不是一种技巧，而是长期IP建设的结果</strong>。没有人格积累，任何失态都只是失态。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>最强的品牌内容，是用户愿意帮你"续写"的内容。IP人格建立的终极指标不是知名度，而是用户是否有强烈的欲望去二次创作它——因为他们已经把这个角色当成自己的一部分。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用三个形容词描述你的品牌人格。这三个词是经过深思熟虑设定的，还是自然形成的？你的团队和用户的认知一致吗？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你的品牌出现了一条让人哭笑不得的"社死"视频，你的第一反应是删除还是转发？这个本能反应背后说明了什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">回想一个你真正喜欢并愿意主动转发的品牌内容——它满足了你哪种心理需求？你的品牌能提供同样的满足感吗？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">雪王下江南视频原帖 · 抖音@蜜雪冰城官方账号，2025年3月；微博热搜记录</div></div><div class="srci"><span class="srcn">02</span><div class="srct">《第一财经》"雪王为什么这么能整"，2025年4月</div></div></div>`
+  },
+  ai:{color:'linear-gradient(150deg,#0c1c34,#162d52,#203c6a)',ep:'EP.21 · 独讲',pod:'迫切但迷茫：2026年营销人的AI焦虑诊断书',dur:1190,tags:[{t:'市场战略',s:'rgba(255,255,255,.15)',c:'#b0d0ff'},{t:'全行业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2026 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'85%广告主喊AI紧迫<br>却无从下手：集体焦虑背后的战略机会',meta:'案例 #21 · 市场战略',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>《2026中国数字营销趋势报告》发布了一组刺眼的数据：<strong>85%广告主认为"营销中应用AI极其紧迫"</strong>，但同时，"不知道如何应用AI"从最末位挑战跃升为第七大挑战。两个数字同时出现，意味着整个行业陷入集体"紧迫性焦虑"——知道必须做，但不知道怎么做。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当整个行业都在焦虑同一件事，谁能率先跨越"迫切但迷茫"的状态，谁就获得了结构性先发优势。这个跨越，靠什么完成？</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>先行者的共同特征：<strong>不试图"全面AI化"，而是先找一个高频、痛苦、可量化的场景切入</strong>——比如内容生产自动化、客户分层运营、广告素材A/B测试。小胜积累信心，信心驱动扩张。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">85%</span><span class="l">认为AI应用极其紧迫</span></div><div class="dc"><span class="n">7000亿</span><span class="l">2025年中国数字广告市场规模</span></div><div class="dc"><span class="n">+10%</span><span class="l">广告主2026年营销投资预期增长</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>最常见失败模式：<strong>把AI焦虑变成AI采购</strong>。大量企业购置各类AI营销工具，但使用率极低，工具与业务流程存在巨大断层。问题不在工具，在于组织没有为AI准备好"数据底座"和"能用AI的人"。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>AI营销的本质门槛不是技术，而是<strong>组织准备度</strong>：数据是否干净可用，团队是否具备AI思维，跨部门协作机制是否建立。工具只是最后一公里，前面的路才是真正的挑战。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你的公司目前AI营销的最大瓶颈是什么：技术？数据？人才？预算？还是组织协作？如何验证你的判断？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你只能选择一个AI营销应用场景先试点，你会选哪个？评估标准是什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的竞争对手在AI营销上的进展比你快还是慢？这对你的战略窗口意味着什么？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">《2026中国数字营销趋势报告》· 秒针营销科学院 × CTR媒介智讯，2025年12月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">麦肯锡《The AI-Ready Organization》，2025年3月</div></div></div>`
+  },
+  fh:{color:'linear-gradient(150deg,#401808,#904018,#b05020)',ep:'EP.14 · 独讲',pod:'定位战略的复利：当所有品牌在追热点，飞鹤选择了反向操作',dur:1050,tags:[{t:'数字营销',s:'rgba(255,255,255,.15)',c:'#ffd0a0'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q3',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'飞鹤奶粉<br>一句定位语，撑起五年220亿的增长逻辑',meta:'案例 #14 · 数字营销',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2020年，飞鹤奶粉提出"更适合中国宝宝体质"的定位，在外资品牌长期主导的市场里打出差异化牌。五年后的2024年，飞鹤营收突破220亿元，连续五年稳居中国婴幼儿奶粉市场市占率第一，年复合增长率18.7%。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在存量竞争时代，"坚持一句话不变"到底是战略定力，还是创新惰性？飞鹤的答案是什么？</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>飞鹤的核心决策：<strong>把定位当护城河，而不是当广告语</strong>。"更适合中国宝宝体质"贯穿了研发（专门针对中国母婴营养需求的配方体系）、渠道（深度下沉三四线城市）、服务（线下母婴顾问体系）的全部策略。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">220亿</span><span class="l">2024年营收（人民币）</span></div><div class="dc"><span class="n">18.7%</span><span class="l">五年年复合增长率</span></div><div class="dc"><span class="n">5连冠</span><span class="l">中国婴幼儿奶粉市占率第一</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>2025年随出生率持续下降，整个婴幼儿奶粉市场规模收缩，飞鹤也面临增长天花板。"更适合中国宝宝体质"的定位在市场萎缩时，反而成为限制——无法向成人奶粉、老年营养品等相邻赛道自然延伸。这是品牌定位的双刃剑：<strong>越精准越有力量，但也越难跨越边界</strong>。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>定位的价值不在于那句话有多好听，而在于你愿不愿意用五年时间、在每一个产品决策、渠道决策、服务决策里都去兑现它。大多数品牌的定位失败，不是因为定位错了，而是因为坚持了三个月就动摇了。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用一句话写出你的品牌定位。然后回顾过去六个月的决策——有多少次真正兑现了这句话？有多少次背离了它？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">飞鹤的定位越精准，扩张越受限——你认为品牌应该在什么时机、以什么方式"进化"定位？如何判断是战略调整还是动摇？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的品牌最大的竞争对手，他们的定位是什么？和你相比，谁的定位更清晰、更可信、更有防御性？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">飞鹤奶粉2024年年报 · 中国飞鹤有限公司港交所披露文件，2025年3月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">欧睿国际（Euromonitor）《2025年中国婴幼儿食品市场报告》</div></div></div>`
+  },
+  sb:{color:'linear-gradient(150deg,#202020,#404040,#585858)',ep:'EP.11 · 对谈',pod:'真心换真诚：联名背后的情感账本与关系资产',dur:1460,tags:[{t:'大客户关系',s:'rgba(255,255,255,.15)',c:'#ddd'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q2',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'星巴克 × 五月天<br>从品牌联名到大客户情感绑定的底层逻辑',meta:'案例 #11 · 大客户关系',
+  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年，星巴克中国与五月天深度联名：将经典歌词印在咖啡杯套上，邀请五月天成员拍摄广告短片，并在演唱会现场设置快闪店实现流量现场转化。联名周边上线即售罄，相关话题多次登上微博热搜，门店客流量显著提升。</p></div></div>
+  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在联名合作泛滥的时代，什么样的联名能跨越"流量收割"，真正成为品牌关系资产？星巴克×五月天成功了，而大多数联名消失在48小时后——差距在哪里？</p></div></div>
+  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>这次联名成功的核心在于<strong>三层情感匹配</strong>：<br><strong>受众匹配：</strong>星巴克都市白领用户与五月天核心歌迷群体高度重叠，共同情感：青春记忆与仪式感消费。<br><strong>内容匹配：</strong>歌词而非歌手形象，触发的是情感记忆而非明星效应。<br><strong>场景匹配：</strong>演唱会快闪店，在情感浓度最高的场景中完成转化。三层缺一不可。</p></div></div>
+  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">即售罄</span><span class="l">联名周边上线表现</span></div><div class="dc"><span class="n">多次</span><span class="l">相关话题登上微博热搜</span></div><div class="dc"><span class="n">显著↑</span><span class="l">演唱会城市门店客流提升</span></div></div></div>
+  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>很多品牌看到联名成功后开始模仿，却只停留在"logo＋形象"的表面组合，缺乏真正的情感联结。对大多数品牌而言，联名最大的失败是<strong>把联名当促销而非当关系建设</strong>。促销思维追求短期GMV；关系思维追求长期情感账户增值。</p></div></div>
+  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>品牌联名的本质是两个情感账户之间的互相转账。前提是：双方都要有账户余额。一个情感账户透支的品牌，和另一个品牌联名只会加速自己的透支——因为用户不会因为联名就原谅一个让他们失望的品牌。</p></div></div>
+  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用"情感账户"比喻评估你的品牌：过去一年，你做了哪些动作是在"存入"？哪些是在"提取"？现在账户余额是正还是负？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你要为你的品牌寻找一个联名合作对象，你的三层匹配标准是什么？受众、内容、场景，你最容易忽略的是哪一层？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的大客户关系和品牌联名逻辑有没有相通之处？在B2B关系中，"情感账户"体现在哪里？</div></div></div></div>
+  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">星巴克×五月天联名活动报道：《营销新说》，2025年5月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">星巴克中国2025年Q2经营数据：星巴克Q2财报，2025年7月</div></div></div>`
+  }
+};
+
+const pods={};
+function openCase(id){
+  const c=CASES[id];if(!c)return;
+  const rid='rd-'+id;
+  let rd=document.getElementById(rid);
+  if(!rd){
+    rd=document.createElement('div');
+    rd.className='reader';rd.id=rid;
+    const tagsHtml=c.tags.map(t=>`<span class="ctag" style="background:${t.s};color:${t.c}">${t.t}</span>`).join('');
+    rd.innerHTML=`
+    <div class="rd-nav">
+      <div class="rd-bar">
+        <button class="back" onclick="closeCase('${id}')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 返回书库</button>
+        <div style="font-size:11px;color:var(--ink4);letter-spacing:.07em">${c.meta}</div>
+      </div>
+      <div class="rd-prog" id="rp-${id}"></div>
+    </div>
+    <div class="rd-cover"><div class="rd-cbg" style="background:${c.color}"></div><div class="rd-cnoise"></div><div class="rd-clines"></div>
+      <div class="rd-cc"><div class="ctags">${tagsHtml}</div><div class="rd-title">${c.title}</div></div>
+    </div>
+    <div class="pod">
+      <button class="pp" id="pp-${id}" onclick="podPlay('${id}')"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg></button>
+      <div class="pi"><div class="pep">营销观察室 · ${c.ep}</div><div class="pt">${c.pod}</div></div>
+      <div class="ppw"><div class="pb" onclick="podSeek(event,'${id}')"><div class="pf" id="pf-${id}"></div></div><div class="ptm" id="pt-${id}">0:00 / ${Math.floor(c.dur/60)}:${(c.dur%60).toString().padStart(2,'0')}</div></div>
+      <div class="pbdg"><span class="pbg">${c.ep.split(' · ')[1]}</span></div>
+    </div>
+    <div class="rd-body">${c.body}</div>`;
+    document.getElementById('caseReaders').appendChild(rd);
+    rd.addEventListener('scroll',()=>{
+      const pct=rd.scrollTop/(rd.scrollHeight-rd.clientHeight)*100;
+      const bar=document.getElementById('rp-'+id);
+      if(bar)bar.style.width=Math.min(pct,100)+'%';
+    },{passive:true});
+  }
+  rd.classList.add('open');
+  rd.scrollTop=0;
+}
+function closeCase(id){document.getElementById('rd-'+id)?.classList.remove('open');podStop(id)}
+function podPlay(id){
+  if(!pods[id])pods[id]={on:false,pct:0,iv:null};
+  const s=pods[id];
+  if(s.on){podStop(id);return}
+  s.on=true;
+  const btn=document.getElementById('pp-'+id);
+  if(btn)btn.style.background='#8a2008';
+  const dur=CASES[id]?.dur||1200;
+  s.iv=setInterval(()=>{
+    s.pct=Math.min(s.pct+0.08,100);
+    const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=s.pct+'%';
+    const e=Math.floor((s.pct/100)*dur);
+    const pt=document.getElementById('pt-'+id);
+    if(pt)pt.textContent=`${Math.floor(e/60)}:${(e%60).toString().padStart(2,'0')} / ${Math.floor(dur/60)}:${(dur%60).toString().padStart(2,'0')}`;
+    if(s.pct>=100)podStop(id);
+  },200);
+}
+function podStop(id){
+  if(!pods[id])return;
+  pods[id].on=false;clearInterval(pods[id].iv);
+  const b=document.getElementById('pp-'+id);if(b)b.style.background='var(--red)';
+}
+function podSeek(e,id){
+  const r=e.currentTarget.getBoundingClientRect();
+  const pct=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));
+  if(!pods[id])pods[id]={on:false,pct:0,iv:null};
+  pods[id].pct=pct;
+  const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=pct+'%';
+}
+
+// ══ TOOLS ══
+const TOOLS={
+  brandhealth:{type:'📐 营销框架',title:'品牌健康度诊断矩阵',what:'四象限框架，从知名度、认知度、偏好度、忠诚度系统评估品牌在目标消费者心智中的真实状态，而不是依赖直觉判断。',when:'适合：品牌年度复盘、品牌重塑项目启动前、新任CMO上任后的现状诊断。',steps:['确定评估维度：知名度、认知度、偏好度、忠诚度，为每个维度设计3–5个可量化指标','收集用户调研数据，将数据填入矩阵','识别哪个维度最弱、差距最大','针对最弱环节制定优先改进策略'],note:'90%的品牌团队在复盘时只看销售数据，却不知道是哪个品牌健康指标出了问题。这个矩阵强迫你把问题精确化。',action:'framework'},
+  aarrr:{type:'📐 营销框架',title:'增长漏斗 AARRR 拆解框架',what:'将用户旅程拆解为获客（Acquisition）、激活（Activation）、留存（Retention）、变现（Revenue）、推荐（Referral）五个阶段，帮助团队找到增长漏斗中最大的漏洞。',when:'适合：数字营销团队、增长团队的定期复盘，以及新产品上市后的用户行为分析。',steps:['为五个阶段分别定义核心指标（如：激活=注册后7天内完成首单）','收集各阶段的真实转化率数据，画出漏斗','找出转化率最低、与行业基准差距最大的那个阶段','聚焦资源优先修复那个最大的漏洞'],note:'大多数团队在AARRR上最常犯的错误是：明明留存率极低，却还在不断加大获客投入。修复漏洞之前加水，只是在加快漏水的速度。',action:'framework'},
+  keyaccount:{type:'📐 营销框架',title:'大客户关系健康度评估框架',what:'从四个维度客观评估大客户关系的真实健康状况，帮助大客户经理识别关系风险，而不是等到客户流失后才知道出了问题。',when:'适合：大客户经理的季度关系复盘，以及客户续约前的关系风险评估。',steps:['关系广度：你在客户组织内有几个真正的联系人？覆盖了哪些决策层级？','关系深度：你最核心的联系人，对你的评价是"供应商"还是"伙伴"？','决策影响力：在客户的关键决策中，你能被咨询到吗？','替代风险：如果竞争对手以更低价格进入，你有几成把握客户不会转换？'],note:'我见过太多大客户经理"感觉关系很好"，结果客户突然不续约。感觉不是数据。这个框架让你每季度用同一把尺子量一次。',action:'framework'},
+  'case-tpl':{type:'📄 可下载模板',title:'案例分析八字段模板',what:'Janet案例库的底层分析结构，可用于整理行业观察案例或自己公司的内部复盘案例。八个字段环环相扣，确保分析不浮于表面。',when:'适合：培训师整理教学案例、企业营销团队的内部复盘、个人知识库建设。',steps:['① 案例标题：一句话点出核心冲突或决策','② 情境速写：行业背景、企业规模、竞争阶段（100字内）','③ 核心问题：企业面临的真实营销挑战','④ 关键决策：做了什么，有哪些选项被放弃了','⑤ 结果与数据：可量化的结果、转折或意外','⑥ 失败与教训：哪里出错了（最有价值的字段）','⑦ 可迁移原则：这个案例的底层洞察是什么','⑧ 课堂用法：适合哪类课程的哪个模块'],note:'大多数人整理案例只到第⑤步就停了。⑥和⑦才是真正的价值所在。没有教训和可迁移原则的案例，只是新闻报道，不是学习材料。',action:'template'},
+  brief:{type:'📄 可下载模板',title:'营销战役 Brief 标准模板',what:'一份标准化的营销Brief模板，帮助营销总监与执行团队对齐目标、减少反复修改。填完这份Brief，你和团队对这次战役的分歧会减少70%。',when:'适合：每次重要营销战役启动前，以及向代理商、创意团队传达需求时使用。',steps:['战役目标：具体、可量化，区分"品牌目标"和"业务目标"','目标受众：精确到"谁，在什么场景下，有什么心理状态"','核心信息：一句话——这次战役最想让消费者记住的是什么','渠道与节奏：主渠道、辅助渠道、时间节点','效果衡量：上线后用什么数据判断成功还是失败'],note:'我见过无数次战役做完了，团队却不知道算不算成功——因为启动时没有对齐"成功的定义"。这份Brief最重要的字段是"效果衡量标准"，不是"创意方向"。',action:'template'},
+  annual:{type:'📄 可下载模板',title:'年度营销规划表',what:'从战略目标到季度执行计划的完整年度营销规划框架，Excel格式，包含预算分配矩阵、渠道节奏规划与关键里程碑设置。',when:'适合：每年Q4的来年营销规划、新任营销负责人接手时的现状梳理，以及向管理层汇报营销策略时使用。',steps:['第一步：明确年度北极星指标（1–2个，不超过3个）','第二步：将北极星指标拆解到四个季度，设定季度目标','第三步：为每个季度选定核心战役，不超过2个','第四步：填写预算分配矩阵，按渠道和战役分配资源','第五步：设定每月检查点指标，用于过程管理'],note:'年度计划最大的问题不是做不好，而是做了不看。这个模板设计了月度检查点，强迫你每月对照一次，把"计划"变成真正的"管理工具"。',action:'template'},
+  'brand-diag':{type:'🔍 诊断工具',title:'品牌定位清晰度自诊断',what:'12道判断题，覆盖你的品牌定位在内部（团队层面）和外部（用户层面）的清晰度，生成0–100分的诊断报告与改进建议。',when:'适合：品牌负责人的自我检查、团队对齐讨论前的现状基线、培训课堂的开场诊断环节。',steps:['回答12道判断题（是/否/不确定），约5分钟','系统自动计算内部清晰度分、外部清晰度分和综合分','查看每道题的分析解读，找到得分最低的维度','按优先级排序的改进建议，直接对应具体行动'],note:'这个诊断最有意思的不是最终分数，而是当你把同一份问卷发给团队里5个人各自填写，答案往往大相径庭——这本身就说明了品牌定位的问题。',action:'diagnostic'},
+  'ai-ready':{type:'📊 自测评估',title:'AI 营销准备度自测',what:'从数据基础、人才能力、流程配套、管理支持四个维度，20道题评估你的团队在AI营销转型上的真实准备状态，并生成针对性优先行动清单。',when:'适合：营销总监在决定AI工具投入前的自评、企业AI营销培训前的现状摸底、战略规划时的差距分析。',steps:['四个维度各5道题，约8分钟完成','每个维度独立评分，识别最弱的"短板维度"','生成"短板优先"的行动建议，而非泛泛的AI战略建议','可打印报告，用于团队讨论或向管理层汇报'],note:'85%的广告主说AI很紧迫，但大多数人不知道自己的准备度到底在哪里。做这个测评之前，你的AI焦虑是情绪；做完之后，你知道先做哪一步了。',action:'diagnostic'},
+  'ka-assess':{type:'📊 自测评估',title:'大客户关系成熟度测评',what:'专为B2B销售和大客户经理设计，针对某一具体客户的关系质量进行深度评估，识别关系风险与增长机会。',when:'适合：季度大客户关系复盘、续约前的关系风险评估、新晋大客户经理的能力基线摸底。',steps:['选择一个你负责的重要客户，针对该客户回答所有问题','从关系广度、深度、影响力、抗风险性四个维度各5题','生成该客户的"关系成熟度雷达图"','找出最弱的一个象限，制定专项关系提升计划'],note:'大客户关系最大的风险是"自我感觉良好"。这个测评是让你用一把外部视角的尺子量一次自己。在一次测评里发现问题，比在客户流失后再复盘要好得多。',action:'assessment'}
+};
+function openTool(id){
+  const t=TOOLS[id];if(!t)return;
+  document.getElementById('tpTyp').textContent=t.type;
+  document.getElementById('tpTit').textContent=t.title;
+  const steps=t.steps.map((s,i)=>`<div class="tpstep"><div class="stn">${i+1}</div><div class="stx">${s}</div></div>`).join('');
+  const act=t.action==='template'
+    ?`<button class="tpdl" onclick="showToast('📥 模板下载准备中，订阅后即可获取')">📥 下载模板（订阅后获取）</button>`
+    :`<button class="tpdg" onclick="showToast('🚀 诊断工具即将上线，订阅后第一时间通知您')">🚀 ${t.action==='framework'?'使用框架':'开始测评'}（即将上线）</button>`;
+  document.getElementById('tpBody').innerHTML=`
+    <div class="tpsec"><div class="tpst">这个工具是什么</div><div class="tptx"><p>${t.what}</p><p style="color:var(--ink3);margin-top:8px">${t.when}</p></div></div>
+    <div class="tpsec"><div class="tpst">如何使用</div><div class="tpsteps">${steps}</div></div>
+    <div class="tpsec"><div class="tpst">Janet 的使用提示</div><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:8px;padding:17px 20px"><div style="font-size:10px;letter-spacing:.12em;color:var(--gold);margin-bottom:7px;font-weight:700">✦ JANET'S NOTE</div><div style="font-family:var(--serif);font-size:14px;color:#5a4810;line-height:1.8;font-style:italic">${t.note}</div></div></div>
+    ${act}
+    <button class="tpdl" style="margin-top:7px;background:var(--red)" onclick="openSub()">订阅后解锁全部工具</button>`;
+  document.getElementById('toolPanel').classList.add('open');
+  document.getElementById('toolOverlay').classList.add('show');
+}
+function closeTool(){document.getElementById('toolPanel')?.classList.remove('open');document.getElementById('toolOverlay')?.classList.remove('show')}
+function filterTools(type,btn){
+  document.querySelectorAll('#v-tools .pill').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+  let n=0;
+  document.querySelectorAll('.tcard').forEach(c=>{const s=type==='all'||c.dataset.type===type;c.style.display=s?'':'none';if(s)n++});
+  document.getElementById('toolCount').textContent=`共 ${n} 个工具`;
+}
+
+// ══ BOOKS ══
+const BOOKS={
+  positioning:{cat:'品牌战略',color:'#a82808',title:'Positioning: The Battle for Your Mind',author:'Al Ries & Jack Trout · 1981',rating:5,summary:'定位理论认为，营销的战场不在市场，而在消费者的心智。这本书提出的核心观点至今未被超越：你不需要成为最好的，你只需要在某个特定的心智位置上成为第一。',why:'定位理论是品牌战略的底层逻辑。在讲品牌定位课之前，我会要求所有学员必读这本书。读完之后，你再也无法接受一句模糊的品牌定位语——"我们做高质量的产品"不是定位，"更适合中国宝宝体质"才是。',use:'品牌定位模块的必读前置材料。课堂中用"你的品牌在消费者心智中占据了什么位置"作为开场讨论，往往会让所有人沉默。',note:'这本书很薄，可以在一个下午读完。但真正理解它需要反复在实际案例中印证。建议读完后立刻对自己的品牌做一次定位梳理练习。'},
+  aaker:{cat:'品牌战略',color:'#8040a0',title:'Building Strong Brands',author:'David A. Aaker · 1996',rating:5,summary:'Aaker品牌资产模型的系统性阐述，从品牌知名度、品质感知、品牌联想到品牌忠诚度，提供了一套完整的品牌资产评估与建设框架。',why:'Aaker模型是品牌规划最广泛使用的工具之一，理解这个框架让你在做品牌决策时有了一把量尺。',use:'品牌战略课程的核心框架读物，配合学员对自己品牌进行Aaker模型评估练习。',note:'建议把第2章和第3章当成重点精读，其余章节可以根据需要选择性阅读。'},
+  obvious:{cat:'品牌战略',color:'#0a5e46',title:'Obviously Awesome',author:'April Dunford · 2019',rating:5,summary:'一本专门讲产品定位的实操手册。Dunford提出了一套10步定位方法论，从竞争替代分析到关键价值主张，每一步都有具体操作指引和案例示范。',why:'市面上讲定位的书很多，但能给出可操作步骤的极少。这本书特别适合B2B品牌和科技产品，帮你把抽象的"定位"变成一个可以执行的工作流程。',use:'产品上市前的定位研讨工作坊，以及品牌重新定位项目的操作指南。',note:'这本书比Ries & Trout的"定位"更现代、更具操作性，两本配合阅读效果最佳。'},
+  brandsense:{cat:'品牌战略',color:'#c04820',title:'Brand Sense',author:'Martin Lindstrom · 2005',rating:4,summary:'基于全球最大规模的品牌感官研究，揭示了人类的五感如何影响品牌认知和购买决策，以及如何有意识地设计多感官品牌体验。',why:'在一个视觉营销泛滥的时代，这本书提醒你还有四种感官被大多数品牌忽视了。读完这本书，你进超市的方式会永远改变。',use:'品牌体验和感官营销模块，或作为品牌差异化讨论的引发材料。',note:'书里有大量有趣的感官营销案例，可以直接用来作为课堂开场的讨论素材。'},
+  traction:{cat:'增长',color:'#162d52',title:'Traction',author:'Gabriel Weinberg & Justin Mares · 2015',rating:4,summary:'梳理了19个获客渠道，并提出了"牵引力测试"方法：如何系统性找到最适合你当前阶段的核心增长渠道，而不是跟风追热点。',why:'很多营销团队的问题不是不努力，而是在错误的渠道上努力。这本书帮你建立渠道选择的系统思维。',use:'数字营销和增长战略模块，配合"你现在的核心获客渠道是哪个？你测试过其他渠道吗？"讨论。',note:'书里的19个渠道有些已经有点过时（书写于2015年），但系统性测试渠道的方法论依然有效。'},
+  hooked:{cat:'用户行为',color:'#206060',title:'Hooked',author:'Nir Eyal · 2014',rating:5,summary:'通过"触发—行动—奖励—投入"四步钩子模型，解释了为什么某些产品和内容会让用户形成使用习惯，以及如何在产品和营销中应用这个机制。',why:'做用户运营和私域的人必读。理解了钩子模型，你才会明白为什么有些活动能带来复购，有些只能带来一次性参与。',use:'用户运营和私域营销模块的前置阅读，配合"你的产品里有没有完整的钩子循环"讨论。',note:'这本书在帮你理解用户行为的同时，也在提醒你设计中的伦理边界。建议搭配作者后来写的《Indistractable》一起读。'},
+  contagious:{cat:'内容传播',color:'#a84000',title:'Contagious',author:'Jonah Berger · 2013',rating:5,summary:'基于大量研究提炼出的STEPPS框架：社交货币、触发器、情绪、公共性、实用价值、故事。这六个因素决定了一个内容是否会被传播。',why:'内容营销时代，"做出好内容"不够，还需要理解传播的底层机制。这本书用科学研究替代了玄学直觉，告诉你疯传内容背后的可复制规律。',use:'内容营销和品牌传播模块，配合让学员分析一个最近的爆款内容，找出其中有哪几个STEPPS元素。',note:'读完这本书，你会开始分析自己朋友圈里每一条被分享的内容背后的传播机制。这是一种停不下来的职业病。'},
+  challenger:{cat:'大客户销售',color:'#c49a18',title:'The Challenger Sale',author:'Dixon & Adamson · 2011',rating:5,summary:'基于对6000名销售人员的研究，发现业绩最好的销售不是"关系型"的，而是"挑战型"的——他们敢于挑战客户的认知，教给客户新的视角。',why:'这本书颠覆了很多企业的销售培训体系。很多大客户经理努力"维系关系"，却没有意识到关系的本质不是熟悉，而是价值。',use:'大客户关系管理与销售能力提升模块的核心读物。配合课堂讨论："你上次'挑战'客户的认知是什么时候？"',note:'重点不是记住"Challenger"这个概念，而是反思自己在客户面前扮演的是哪种角色——问题解决者、关系维护者，还是挑战者。'},
+  spin:{cat:'大客户销售',color:'#184080',title:'SPIN Selling',author:'Neil Rackham · 1988',rating:5,summary:'基于35,000个销售拜访的研究，发现大客户销售成功的关键不是"产品展示"，而是通过SPIN提问深入挖掘客户真实需求。',why:'这是我在大客户销售培训中最常引用的书。SPIN提问框架帮助销售人员从"推销产品"转变为"帮助客户发现需求"。',use:'大客户销售技能模块的核心框架，配合SPIN提问角色扮演练习。',note:'这本书1988年出版，但里面的研究方法论和核心洞察至今有效。有些东西不会因为时间而过时。'},
+  neverspilt:{cat:'谈判',color:'#3a3030',title:'Never Split the Difference',author:'Chris Voss · 2016',rating:5,summary:'前FBI人质谈判专家分享的谈判技巧，核心观点是：谈判不是理性的讨价还价，而是情绪管理和共情的艺术。',why:'大客户谈判和内部沟通都需要这本书里的技巧。"战术性同理心"和"校准式提问"是我在培训中经常用到的两个工具。',use:'大客户关系管理和沟通力模块，配合角色扮演练习：用"校准式提问"处理一个模拟的客户拒绝场景。',note:'读完这本书你会意识到日常对话里有很多谈判机会被你白白浪费了。从下次开始，试着在任何"对话"里都用一下书中的"镜像技巧"。'},
+  goodstrategy:{cat:'战略思维',color:'#304830',title:'Good Strategy Bad Strategy',author:'Richard Rumelt · 2011',rating:5,summary:'这本书的核心主张是：大多数"战略"其实不是战略，而是愿景、口号和目标的混合体。好战略有三个内核：诊断、指导方针、协调一致的行动。',why:'每次我讲市场战略课，都会以这本书开头。因为学员需要先明白什么不是战略，才能开始讨论什么是好战略。',use:'市场战略模块必读前置书目，开场讨论："你们公司的营销战略是什么？"——绝大多数人的回答其实只是目标，不是战略。',note:'这本书读起来不快，但值得慢慢读。Rumelt用了大量真实案例来区分好战略和坏战略，每一个案例都很有嚼劲。'},
+  hbr:{cat:'营销战略',color:'#a82808',title:"HBR's 10 Must Reads on Marketing",author:'Harvard Business Review · 2011',rating:4,summary:'精选10篇HBR经典营销文章，覆盖品牌管理、客户价值、细分市场、营销测量等核心议题，每篇都有清晰的框架和案例。',why:'这是一本可以反复使用的参考书。每篇文章都可以独立作为一堂课的阅读材料，文章本身就是很好的案例素材。',use:'多个营销模块的阅读材料，特别适合需要学员提前阅读的培训项目。',note:'如果只能向营销总监推荐一本书，我会推荐这本——因为10篇文章覆盖面广，每篇都直接可用于实际决策。'}
+};
+function openBook(id){
+  const b=BOOKS[id];if(!b)return;
+  const stars='⭐'.repeat(b.rating)+(b.rating<5?'☆'.repeat(5-b.rating):'');
+  document.getElementById('bpHeader').innerHTML=`
+    <div style="height:5px;background:${b.color};position:absolute;top:0;left:0;right:0"></div>
+    <button class="bpc" onclick="closeBook()">×</button>
+    <div style="padding-top:8px"><div class="bpcat">${b.cat}</div><div class="bptit">${b.title}</div><div class="bpau">${b.author}</div><div class="bprat">${stars}</div></div>`;
+  document.getElementById('bpBody').innerHTML=`
+    <div class="bpsec"><div class="bpst">这本书讲什么</div><div class="bptx"><p>${b.summary}</p></div></div>
+    <div class="bpsec"><div class="bpst">Janet 为什么推荐</div><div class="bptx"><p>${b.why}</p></div></div>
+    <div class="bpsec"><div class="bpst">课堂使用场景</div><div class="bptx"><p>${b.use}</p></div></div>
+    <div class="bpsec"><div class="bpst">Janet 的阅读批注</div><div class="jnote"><div class="jnlbl">✦ JANET'S NOTE</div><p>${b.note}</p></div></div>
+    <button class="buybtn" onclick="showToast('📚 订阅后获取推荐购买渠道')">获取这本书的购买渠道 →</button>`;
+  document.getElementById('bookPanel').classList.add('open');
+  document.getElementById('bookOverlay').classList.add('show');
+}
+function closeBook(){document.getElementById('bookPanel')?.classList.remove('open');document.getElementById('bookOverlay')?.classList.remove('show')}
+
+// ══ ARTICLES ══
+function filterArt(cat,btn){
+  document.querySelectorAll('#v-articles .pill').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+  document.querySelectorAll('.acard,.featured').forEach(c=>{c.style.display=cat==='all'||c.dataset.cat===cat?'':'none'});
+}
+function openArticle(id){
+  const el=document.getElementById('art-'+id);if(!el)return;
+  el.classList.add('open');el.scrollTop=0;
+  el.addEventListener('scroll',()=>{
+    const pct=el.scrollTop/(el.scrollHeight-el.clientHeight)*100;
+    const bar=document.getElementById('arp-'+id);if(bar)bar.style.width=Math.min(pct,100)+'%';
+  },{passive:true});
+}
+function closeArticle(id){document.getElementById('art-'+id)?.classList.remove('open')}
+</script>
+</body>
+</html>
