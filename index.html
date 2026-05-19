@@ -26,10 +26,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
   height:54px;background:rgba(24,19,14,.97);
   backdrop-filter:blur(12px);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;border-bottom:1px solid rgba(255,255,255,.06);
+  padding:0 clamp(12px,4vw,48px);border-bottom:1px solid rgba(255,255,255,.06);
 }
 .tl{display:flex;align-items:center;gap:10px;cursor:pointer}
-.tm{width:28px;height:28px;background:var(--red);border-radius:5px;display:flex;align-items:center;justify-content:center}
+.tm{width:28px;height:28px;background:var(--red);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .tm span{font-family:var(--display);font-size:14px;font-weight:700;font-style:italic;color:white}
 .tn{font-family:var(--serif);font-size:14px;color:rgba(250,246,238,.8);letter-spacing:.08em}
 .tnav{display:flex;align-items:center;gap:2px}
@@ -43,6 +43,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .tnav button.on{color:white;background:rgba(255,255,255,.11)}
 .tsub{background:var(--red);color:white;border:none;padding:7px 18px;border-radius:4px;font-family:var(--sans);font-size:12px;letter-spacing:.05em;cursor:pointer;transition:background .2s}
 .tsub:hover{background:var(--red2)}
+/* Mobile menu */
+.mob-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;color:rgba(250,246,238,.7);flex-direction:column;gap:5px}
+.mob-menu-btn span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:all .2s}
+.mob-nav{display:none;position:fixed;top:54px;left:0;right:0;bottom:0;background:rgba(24,19,14,.97);z-index:99;flex-direction:column;padding:24px 20px;gap:4px;overflow-y:auto}
+.mob-nav.open{display:flex}
+.mob-nav button{background:none;border:none;color:rgba(250,246,238,.7);font-family:var(--sans);font-size:16px;padding:14px 16px;border-radius:8px;cursor:pointer;text-align:left;transition:all .2s;letter-spacing:.04em}
+.mob-nav button:hover,.mob-nav button.on{color:white;background:rgba(255,255,255,.08)}
+.mob-sub{margin-top:12px;background:var(--red);color:white;border:none;padding:14px 16px;border-radius:8px;font-family:var(--sans);font-size:15px;font-weight:500;cursor:pointer;text-align:center}
 
 /* ══ MAIN AREA ══ */
 .main{display:block}
@@ -50,7 +58,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .view.active{display:block}
 
 /* ══ SHARED ══ */
-.sh{background:var(--ink);padding:64px 64px 52px;position:relative;overflow:hidden}
+.sh{background:var(--ink);padding:64px clamp(16px,5vw,64px) 52px;position:relative;overflow:hidden}
 .sh::after{content:attr(data-bg);position:absolute;right:20px;bottom:-50px;font-family:var(--display);font-size:260px;font-weight:900;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
 .eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;display:flex;align-items:center;gap:10px}
 .eyebrow::before{content:'';width:22px;height:1px;background:var(--gold2)}
@@ -70,7 +78,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .tag-i{background:rgba(24,19,14,.07);color:var(--ink2)}
 
 /* ══ FOOTER ══ */
-.footer{background:var(--ink);padding:32px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer{background:var(--ink);padding:32px clamp(16px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 .footer-l{font-family:var(--serif);font-size:13px;color:rgba(250,246,238,.45)}
 .footer-l strong{color:rgba(250,246,238,.75)}
 .footer-r{display:flex;gap:20px}
@@ -105,7 +113,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
    HOME
 ══════════════════════════════ */
 #v-home .hero{
-  background:var(--ink);padding:72px 64px 56px;
+  background:var(--ink);padding:72px clamp(16px,5vw,64px) 56px;
   display:grid;grid-template-columns:1fr 320px;gap:60px;align-items:center;
   position:relative;overflow:hidden;
 }
@@ -117,7 +125,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .hero-h1 em{font-style:italic;color:var(--gold2)}
 .hero-p{color:rgba(250,246,238,.5);font-size:15px;line-height:1.85;max-width:500px;margin-bottom:36px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
-.hero-stats{display:flex;gap:36px;padding-top:36px;border-top:1px solid rgba(255,255,255,.08)}
+.hero-stats{display:flex;gap:24px 36px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(255,255,255,.08)}
 .hs-num{font-family:var(--display);font-size:26px;font-weight:700;color:#faf6ee;display:block;line-height:1;margin-bottom:4px}
 .hs-lbl{font-size:10px;color:rgba(250,246,238,.35);letter-spacing:.1em}
 .author-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;position:relative;overflow:hidden}
@@ -131,19 +139,19 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .alink{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;color:var(--gold2);cursor:pointer;background:none;border:none;font-family:var(--sans);transition:gap .2s}
 .alink:hover{gap:10px}
 /* section nav cards */
-.sec-strip{background:var(--bg2);border-top:1px solid var(--border);padding:48px 64px}
+.sec-strip{background:var(--bg2);border-top:1px solid var(--border);padding:48px clamp(16px,5vw,64px)}
 .sec-lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:28px;display:flex;align-items:center;gap:14px}
 .sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);opacity:.5}
-.sec-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.sc{background:white;border:1px solid var(--border);border-radius:12px;padding:22px 18px;cursor:pointer;transition:all .22s var(--ease);display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;border-bottom:3px solid transparent}
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(180px,calc(50% - 7px)),1fr));gap:12px}
+.sc{background:white;border:1px solid var(--border);border-radius:12px;padding:22px 18px;cursor:pointer;transition:all .22s var(--ease);display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;border-bottom:3px solid transparent;min-width:0;word-break:keep-all}
 .sc:hover{transform:translateY(-4px);box-shadow:0 12px 36px var(--shadow)}
 .sc-1:hover{border-bottom-color:var(--red)}.sc-2:hover{border-bottom-color:var(--gold)}.sc-3:hover{border-bottom-color:var(--teal)}.sc-4:hover{border-bottom-color:var(--navy)}.sc-5:hover{border-bottom-color:#5a5070}
 .sc-ico{font-size:22px}.sc h3{font-family:var(--serif);font-size:14px;font-weight:700;line-height:1.3}
 .sc p{font-size:12px;color:var(--ink3);line-height:1.6;flex:1}.sc-ct{font-size:10px;color:var(--ink4)}
 /* testimonials */
-.testi{background:white;padding:48px 64px;border-top:1px solid var(--border)}
+.testi{background:white;padding:48px clamp(16px,5vw,64px);border-top:1px solid var(--border)}
 .testi h2{font-family:var(--display);font-size:26px;font-weight:700;margin-bottom:28px}
-.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:16px}
 .tc{background:var(--cream);border-radius:10px;padding:20px;border:1px solid var(--border);transition:transform .2s}
 .tc:hover{transform:translateY(-3px)}
 .tq{font-family:var(--serif);font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:14px;font-style:italic}
@@ -152,7 +160,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .tav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
 .tn2{font-size:12px;font-weight:600;color:var(--ink)}.trl{font-size:10px;color:var(--ink3);margin-top:1px}
 /* home sub strip */
-.hss{background:var(--ink2);padding:32px 64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.hss{background:var(--ink2);padding:32px clamp(16px,5vw,64px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .hss-l h3{font-family:var(--display);font-size:20px;color:#faf6ee;margin-bottom:5px}
 .hss-l p{font-size:13px;color:rgba(250,246,238,.4)}
 .hss-r{display:flex;gap:9px}
@@ -163,13 +171,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
    ABOUT
 ══════════════════════════════ */
 #v-about .ahero{
-  background:var(--ink);padding:72px 64px;
-  display:grid;grid-template-columns:1fr 320px;gap:70px;align-items:center;
+  background:var(--ink);padding:clamp(40px,6vw,72px) clamp(16px,5vw,64px);
+  display:grid;grid-template-columns:1fr min(320px,35%);
+  gap:clamp(24px,4vw,70px);align-items:center;
   position:relative;overflow:hidden;
 }
 #v-about .ahero::after{content:'J';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:340px;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
 .about-body{max-width:1100px;margin:0 auto}
-.asec{padding:52px 64px}
+.asec{padding:52px clamp(16px,5vw,64px)}
 .asec h2{font-family:var(--display);font-size:26px;font-weight:700;margin-bottom:8px}
 .asec .sub{color:var(--ink3);font-size:14px;margin-bottom:32px;line-height:1.6}
 .tline{position:relative;padding-left:28px}
@@ -180,13 +189,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .tyr{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.1em;margin-bottom:5px}
 .ttl{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:5px}
 .tbd{font-size:14px;color:var(--ink2);line-height:1.75}
-.phil-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.phil-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:20px;margin-top:28px}
 .phil{background:white;border-radius:12px;padding:26px;border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
 .phil:hover{transform:translateY(-4px);box-shadow:0 12px 32px var(--shadow)}
 .phil-ico{font-size:26px;margin-bottom:14px}
 .phil h3{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:9px}
 .phil p{font-size:13px;color:var(--ink2);line-height:1.75}
-.svc-g{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.svc-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px;margin-top:28px}
 .svc{background:var(--ink);border-radius:12px;padding:26px 26px 26px 30px;position:relative;overflow:hidden;transition:transform .2s}
 .svc:hover{transform:translateY(-2px)}
 .svc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
@@ -199,7 +208,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .cl-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .cl{padding:7px 16px;background:white;border:1px solid var(--border);border-radius:5px;font-size:12px;color:var(--ink2);font-family:var(--serif);transition:all .18s}
 .cl:hover{border-color:var(--red);color:var(--red)}
-.about-cta{background:var(--ink);padding:70px 64px;text-align:center}
+.about-cta{background:var(--ink);padding:70px clamp(16px,5vw,64px);text-align:center}
 .about-cta h2{font-family:var(--display);font-size:clamp(26px,4vw,40px);color:#faf6ee;margin-bottom:14px}
 .about-cta h2 em{font-style:italic;color:var(--gold2)}
 .about-cta p{color:rgba(250,246,238,.45);font-size:14px;max-width:440px;margin:0 auto 32px;line-height:1.8}
@@ -250,7 +259,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .reader.open{display:block;animation:rdIn .3s var(--ease)}
 @keyframes rdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .rd-nav{position:sticky;top:0;z-index:10;background:rgba(250,246,238,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.rd-bar{display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:50px}
+.rd-bar{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);height:50px}
 .back{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink3);transition:color .2s;padding:0}
 .back:hover{color:var(--red)}.back svg{transition:transform .2s}.back:hover svg{transform:translateX(-3px)}
 .rd-prog{height:2px;background:var(--red);width:0%;transition:width .1s}
@@ -296,9 +305,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 /* ══════════════════════════════
    TOOLS
 ══════════════════════════════ */
-#v-tools .tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;padding:36px 64px 70px;max-width:1280px;margin:0 auto}
-#v-tools .frow{padding:24px 64px 0;max-width:1280px;margin:0 auto}
-#v-tools .rcount{padding:6px 64px 0;max-width:1280px;margin:0 auto;font-size:12px;color:var(--ink3)}
+#v-tools .tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;padding:36px clamp(16px,5vw,64px) 70px;max-width:1280px;margin:0 auto}
+#v-tools .frow{padding:24px clamp(16px,5vw,64px) 0;max-width:1280px;margin:0 auto}
+#v-tools .rcount{padding:6px clamp(16px,5vw,64px) 0;max-width:1280px;margin:0 auto;font-size:12px;color:var(--ink3)}
 .tcard{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .22s var(--ease),box-shadow .22s;cursor:pointer}
 .tcard:hover{transform:translateY(-4px);box-shadow:0 14px 44px var(--shadow)}
 .tc-h{padding:20px 20px 0;display:flex;align-items:flex-start;gap:12px}
@@ -311,7 +320,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .cxd{display:flex;gap:3px}.cd{width:8px;height:8px;border-radius:50%;background:var(--border)}.cd.on{background:var(--red)}
 .tc-act{font-size:12px;color:var(--red);font-weight:500;cursor:pointer;display:flex;align-items:center;gap:4px;transition:gap .2s;background:none;border:none;font-family:var(--sans)}.tc-act:hover{gap:8px}
 /* tool panel */
-.tpanel{position:fixed;right:0;top:54px;bottom:0;width:500px;background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
+.tpanel{position:fixed;right:0;top:54px;bottom:0;width:min(500px,100vw);background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
 .tpanel.open{transform:translateX(0)}
 .tph{background:var(--ink);padding:26px 30px;position:sticky;top:0;z-index:2}
 .tpc{position:absolute;top:16px;right:18px;background:rgba(255,255,255,.09);border:none;color:rgba(255,255,255,.6);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}.tpc:hover{background:rgba(255,255,255,.18);color:white}
@@ -332,12 +341,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 /* ══════════════════════════════
    BOOKS
 ══════════════════════════════ */
-#v-books .bksec{padding:36px 64px 60px;max-width:1280px;margin:0 auto}
+#v-books .bksec{padding:36px clamp(16px,5vw,64px) 60px;max-width:1280px;margin:0 auto}
 .bkcat{margin-bottom:48px}
 .bkcath{display:flex;align-items:center;gap:14px;margin-bottom:20px}
 .bkcath h3{font-family:var(--serif);font-size:19px;font-weight:700}
 .bkct{font-size:11px;color:var(--ink3);background:var(--cream);padding:3px 10px;border-radius:20px;border:1px solid var(--border)}
-.bkrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.bkrow{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
 .bk{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s;display:flex;flex-direction:column}
 .bk:hover{transform:translateY(-5px);box-shadow:0 14px 40px var(--shadow)}
 .bkspine{height:6px}
@@ -349,7 +358,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .bknote::before{content:'" ';color:var(--gold);font-size:13px}
 .bkrat{display:flex;gap:1px;margin-top:7px;font-size:10px}
 /* book panel */
-.bpanel{position:fixed;right:0;top:54px;bottom:0;width:500px;background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
+.bpanel{position:fixed;right:0;top:54px;bottom:0;width:min(500px,100vw);background:var(--paper);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s var(--ease);overflow-y:auto;box-shadow:-4px 0 30px rgba(24,19,14,.14)}
 .bpanel.open{transform:translateX(0)}
 .bph{padding:32px 30px;position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--border);z-index:2}
 .bpc{position:absolute;top:16px;right:18px;background:rgba(0,0,0,.06);border:none;color:var(--ink3);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}.bpc:hover{background:rgba(0,0,0,.12)}
@@ -369,9 +378,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 /* ══════════════════════════════
    ARTICLES
 ══════════════════════════════ */
-#v-articles .awrap{max-width:1060px;margin:0 auto;padding:36px 64px 70px}
+#v-articles .awrap{max-width:1060px;margin:0 auto;padding:36px clamp(16px,5vw,64px) 70px}
 .afrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-.featured{background:var(--ink);border-radius:13px;overflow:hidden;margin-bottom:24px;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s;display:grid;grid-template-columns:1fr 280px}
+.featured{background:var(--ink);border-radius:13px;overflow:hidden;margin-bottom:24px;cursor:pointer;transition:transform .22s var(--ease),box-shadow .22s;display:grid;grid-template-columns:1fr min(280px,30%)}
 .featured:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(24,19,14,.2)}
 .feat-c{padding:36px 36px 32px}
 .feat-ey{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:12px;display:flex;align-items:center;gap:7px}.feat-ey::before{content:'✦';font-size:9px}
@@ -396,10 +405,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .areader{position:fixed;inset:0;top:54px;background:var(--paper);display:none;overflow-y:auto;z-index:200}
 .areader.open{display:block;animation:rdIn .3s var(--ease)}
 .ar-nav{position:sticky;top:0;z-index:10;background:rgba(250,246,238,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.ar-bar{display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:50px}
+.ar-bar{display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px);height:50px}
 .ar-back{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;color:var(--ink3);transition:color .2s;padding:0}.ar-back:hover{color:var(--red)}
 .ar-prog{height:2px;background:var(--red);width:0%;transition:width .1s}
-.ar-cover{background:var(--ink);padding:72px 64px 56px;position:relative;overflow:hidden}
+.ar-cover{background:var(--ink);padding:72px clamp(16px,5vw,64px) 56px;position:relative;overflow:hidden}
 .ar-cover::after{content:attr(data-n);position:absolute;right:30px;bottom:-50px;font-family:var(--display);font-size:280px;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
 .ar-inner{max-width:760px;position:relative;z-index:2}
 .ar-ey{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;display:flex;align-items:center;gap:8px}.ar-ey::before{content:'✦'}
@@ -427,13 +436,191 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 .ar-stitle{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
 .ar-si{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--ink3);line-height:1.6}.ar-si:last-child{border-bottom:none}
 .ar-sn{font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:1px}
+
+/* ═══════════════════════════════
+   RESPONSIVE DESIGN — MOBILE FIRST
+═══════════════════════════════ */
+
+/* Tablet: ≤ 900px */
+@media(max-width:900px){
+  /* Hero */
+  #v-home .hero{
+    grid-template-columns:1fr;
+    padding:48px 32px 40px;
+    gap:32px;
+  }
+  .author-card{display:none}
+  .hero-h1{font-size:clamp(28px,6vw,40px)}
+  
+  /* About hero */
+  #v-about .ahero{grid-template-columns:1fr;padding:48px 32px;gap:32px}
+  #v-about .ahero > div:last-child{display:none}
+  
+  /* Grids */
+  .phil-g{grid-template-columns:1fr 1fr}
+  .svc-g{grid-template-columns:1fr}
+  .tg{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Mobile: ≤ 640px */
+@media(max-width:640px){
+  /* Topbar */
+  .topbar{padding:0 16px}
+  .tn{font-size:13px}
+  .tnav,.tsub{display:none}
+  .mob-menu-btn{display:flex}
+  
+  /* Hero section */
+  #v-home .hero{padding:32px 16px 28px}
+  .hero-h1{font-size:clamp(26px,8vw,36px);margin-bottom:14px}
+  .hero-p{font-size:14px;margin-bottom:24px}
+  .hero-btns{flex-direction:column;gap:10px}
+  .hero-btns .btn{width:100%;justify-content:center}
+  .hero-stats{gap:20px;flex-wrap:wrap}
+  .hero-stats > div{min-width:calc(50% - 10px)}
+  
+  /* Section strip */
+  .sec-strip{padding:32px 16px}
+  .sec-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .sc{padding:16px 14px;gap:8px}
+  .sc-ico{font-size:18px}
+  .sc h3{font-size:13px}
+  .sc p{font-size:11px}
+  .sc-ct{font-size:10px}
+  
+  /* Testimonials */
+  .testi{padding:32px 16px}
+  .tg{grid-template-columns:1fr}
+  
+  /* Home sub strip */
+  .hss{padding:24px 16px;flex-direction:column;align-items:flex-start}
+  .hss-r{width:100%}
+  .hss-i{width:100%}
+  
+  /* Section hero */
+  .sh{padding:40px 16px 32px}
+  .sh h1{font-size:clamp(22px,7vw,32px)}
+  .sh p{font-size:14px}
+  
+  /* Footer */
+  .footer{padding:24px 16px;flex-direction:column;gap:12px}
+  .footer-r{flex-wrap:wrap;gap:12px}
+  
+  /* About */
+  #v-about .ahero{padding:32px 16px}
+  .asec{padding:32px 16px}
+  .asec h2{font-size:22px}
+  .phil-g{grid-template-columns:1fr}
+  .svc-g{grid-template-columns:1fr}
+  
+  .about-cta{padding:48px 16px}
+  .about-cta h2{font-size:clamp(22px,7vw,32px)}
+  .about-cta-b{flex-direction:column;align-items:stretch}
+  .about-cta-b .btn,.about-cta-b .btn-ghost{text-align:center;justify-content:center}
+  
+  /* Cases shelf */
+  #v-cases .shelf-area{padding:24px 16px 48px}
+  .search-row{flex-wrap:wrap}
+  .sbox{max-width:100%}
+  .frow{gap:6px}
+  .pill{padding:5px 12px;font-size:11px}
+  .bookshelf{padding:18px 12px 0}
+  .books-row{gap:4px;min-height:160px}
+  .bxl .bcov{width:110px;height:170px}
+  .blg .bcov{width:96px;height:165px}
+  .bmd .bcov{width:84px;height:158px}
+  .bsm .bcov{width:72px;height:152px}
+  .bxl .btit{font-size:11px}
+  .blg .btit{font-size:10px}
+  .bmd .btit,.bsm .btit{font-size:9px}
+  
+  /* Case/Article readers */
+  .areader .ar-nav .ar-bar{padding:0 16px}
+  .areader .ar-cover,.rd-cover{padding:32px 16px}
+  .areader .ar-body{padding:32px 16px 80px}
+  .rd-body-inner{padding:32px 16px 80px}
+  .pod{padding:14px 16px;gap:10px}
+  .pod-prog-area{display:none}
+  
+  /* Tools */
+  #v-tools .frow{padding:20px 16px 0}
+  #v-tools .rcount{padding:6px 16px 0}
+  #v-tools .tg{padding:20px 16px 56px;grid-template-columns:1fr}
+  .tpanel{width:100%;top:54px}
+  
+  /* Books */
+  #v-books .bksec{padding:24px 16px 56px}
+  .bkrow{grid-template-columns:repeat(2,1fr);gap:10px}
+  .bpanel{width:100%;top:54px}
+  .bkcath h3{font-size:16px}
+  
+  /* Articles */
+  #v-articles .awrap{padding:24px 16px 56px}
+  .featured{grid-template-columns:1fr}
+  .feat-v{display:none}
+  .feat-c{padding:24px 20px}
+  .feat-t{font-size:18px}
+  .acard{padding:18px 16px}
+  .ac-t{font-size:15px}
+  
+  /* Article reader */
+  .ar-cover{padding:36px 16px 28px}
+  .ar-t{font-size:clamp(20px,6vw,28px)}
+  .ar-body{padding:32px 16px 80px}
+  .ar-data{grid-template-columns:1fr}
+  .ar-bar{padding:0 16px}
+  
+  /* Subscribe modal */
+  .modal-box{margin:16px}
+  .mhdr{padding:22px 20px}
+  .mbody{padding:20px}
+  
+  /* Cross-link strips */
+  .xlink-strip{padding:28px 16px}
+  .xlink-strip .btn{font-size:12px;padding:8px 14px}
+  
+  /* Shared inline style sections */
+}
+
+/* Large mobile: 641-768px */
+@media(min-width:641px) and (max-width:768px){
+  .topbar{padding:0 24px}
+  .tnav button{padding:6px 8px;font-size:11px}
+  .tsub{padding:6px 12px;font-size:11px}
+  .sec-grid{grid-template-columns:repeat(3,1fr)}
+  #v-home .hero{padding:48px 24px;grid-template-columns:1fr;gap:28px}
+  .sh{padding:48px 24px 36px}
+  .asec{padding:40px 24px}
+  .tg{grid-template-columns:1fr}
+  .bkrow{grid-template-columns:repeat(3,1fr)}
+  .featured{grid-template-columns:1fr}
+  .feat-v{display:none}
+  .footer{padding:24px 24px}
+  .hss{padding:24px}
+  .testi{padding:36px 24px}
+  #v-tools .tg{padding:24px 24px 56px}
+  #v-books .bksec{padding:28px 24px 56px}
+  #v-articles .awrap{padding:28px 24px 56px}
+}
+
+
+/* ── Mobile bottom nav ── */
+@media(max-width:640px){
+  #mobBottomNav{display:flex!important}
+  body{padding-bottom:60px}
+  .areader,.ar-body{padding-bottom:80px}
+}
+#mobBottomNav button.mbn-on{color:var(--gold2)!important}
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <div class="tl" onclick="nav('home')">
+  <div class="tl" onclick="nav('home');closeMobNav()">
     <div class="tm"><span>J</span></div>
     <span class="tn">Janet · 营销观察室</span>
   </div>
@@ -445,7 +632,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <button id="nb-books" onclick="nav('books')">书单</button>
     <button id="nb-articles" onclick="nav('articles')">深度长文</button>
   </div>
-  <button class="tsub" onclick="openSub()">免费订阅</button>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="tsub" onclick="openSub()">免费订阅</button>
+    <button class="mob-menu-btn" id="mobMenuBtn" onclick="toggleMobNav()" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+<!-- Mobile Nav -->
+<div class="mob-nav" id="mobNav">
+  <button onclick="nav('home');closeMobNav()">🏠 首页</button>
+  <button id="mnb-about" onclick="nav('about');closeMobNav()">👤 关于 Janet</button>
+  <button id="mnb-cases" onclick="nav('cases');closeMobNav()">📚 案例书库</button>
+  <button id="mnb-tools" onclick="nav('tools');closeMobNav()">🛠 工具库</button>
+  <button id="mnb-books" onclick="nav('books');closeMobNav()">📖 营销书单</button>
+  <button id="mnb-articles" onclick="nav('articles');closeMobNav()">✍️ 深度长文</button>
+  <button class="mob-sub" onclick="openSub();closeMobNav()">免费订阅，解锁全部内容</button>
 </div>
 
 <!-- MAIN -->
@@ -571,10 +773,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       </div>
     </div>
   </div>
-  <div style="background:var(--paper);padding:48px 64px">
+  <div style="background:var(--paper);padding:48px clamp(16px,5vw,64px)">
     <div style="max-width:1100px;margin:0 auto">
       <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:24px;display:flex;align-items:center;gap:14px">探索更多版块<span style="flex:1;height:1px;background:var(--border)"></span></div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(200px,45%),1fr));gap:12px">
         <div onclick="nav('cases')" style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:22px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--red)'" onmouseout="this.style.borderColor='rgba(24,19,14,.1)'">
           <div style="font-size:20px;margin-bottom:10px">📚</div>
           <div style="font-family:var(--serif);font-size:14px;font-weight:700;margin-bottom:6px">案例书库</div>
@@ -635,9 +837,232 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       <div class="shelf-plank"></div>
     </div>
   </div>
-  <!-- Case Readers injected here by JS -->
-  <div id="caseReaders"></div>
-  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+
+  <div class="areader" id="rd-mx">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('mx')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #07 · 品牌营销</div>
+    </div><div class="ar-prog" id="rp-mx"></div></div>
+    <div style="background:linear-gradient(150deg,#6e1408,#a82808,#c83810);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">品牌营销</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大型企业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2025 Q1</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">蜜雪冰城出海东南亚<br>品牌统一性与本地化的生死抉择</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-mx" onclick="podPlay2('mx')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.07 · 独讲</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">雪王出海：当品牌基因遇上文化壁垒，那条线究竟在哪里？</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'mx')">
+          <div id="pf-mx" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-mx" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 18:24</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年初，蜜雪冰城在东南亚门店数突破4,000家。泰国加盟商要把招牌改成金色，越南团队要求改造雪王IP形象，印尼市场要增加清真标识——每个诉求单独看合理，合在一起却构成结构性危机：若每个市场都能改，品牌还剩什么？</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">在品牌统一性与本地化适配之间，出海品牌如何找到那条既不稀释品牌资产、又能真正融入当地的边界线？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">总部执行<strong>「骨骼出海，皮肤本地」</strong>策略：红白配色、雪王IP、LOGO字体一律不得改动；产品研发、促销活动、社媒内容完全放权。越南推出榴莲系列，泰国开发香茅口味，允许各市场用本地语言改编主题曲。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">62%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">东南亚Q1营收同比增长</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">1.3×</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">越南单店日均销量超国内均值</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">No.1</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">TikTok东南亚UGC量超星巴克喜茶</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">印尼市场2025年Q2出现严重危机——加盟商私自采购原材料，品质不一致导致口碑下滑。根本原因：<strong>供应链管控体系没有同步出海</strong>。品牌手册出海了，原材料标准、品控流程、加盟商培训体系都还停在国内。这个教训被内部称为「皮肤出海，骨头没到」。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">品牌出海的本质不是「统一 vs 本地化」的二选一，而是识别品牌资产中哪些是不可妥协的身份锚点，哪些只是习惯性的执行惯例。真正强大的品牌，能清晰说出那条线在哪里。</p></div><p style="margin-bottom:14px"><strong>课堂用法：</strong>给出三个本地化诉求，让学员投票哪些该批准、哪些该拒绝，再对照真实决策复盘。大企业延伸讨论麦当劳本地化边界；中小企业课简化为「你品牌最不能动的三件事」。</p></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你的品牌如果要进入一个新市场，哪三个元素绝对不可以改？背后的理由是品牌战略，还是执行习惯？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">蜜雪冰城的失败在于供应链没有跟上。在你的业务场景里，有没有类似「视觉层到位了、底层没跟上」的情况？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">如果你是印尼加盟商，你会怎么看待总部的零妥协项？这种管控方式对长期信任关系有什么影响？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">蜜雪冰城2025年Q1东南亚业务进展报告（路透社、界面新闻二次报道）</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">TikTok for Business APAC 东南亚品牌UGC追踪报告，2025 Q1</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">印尼加盟商事件报道 · Tempo.co 2025年5月；36氪出海版跟进</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">04</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">Quelch &amp; Hoff, 'The Global Brand' · Harvard Business Review</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-ds">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('ds')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #12 · 数字营销</div>
+    </div><div class="ar-prog" id="rp-ds"></div></div>
+    <div style="background:linear-gradient(150deg,#042e1e,#0a5e46,#148060);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">数字营销</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">全行业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2026 Q1</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">DeepSeek爆红后<br>谁先进入AI推荐体系，谁就赢了</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-ds" onclick="podPlay2('ds')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.12 · 对谈</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">GEO时代：让AI记住你的品牌，这不是玄学，是系统工程</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'ds')">
+          <div id="pf-ds" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-ds" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 22:10</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年9月，OpenAI上线Instant Checkout，用户可在ChatGPT对话中直接完成购买。同月DeepSeek在中国企业用户渗透率突破40%。消费者开始「问AI推荐」而非「搜索关键词」——SEO体系开始失效。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">当用户不再去搜索引擎，而是直接问AI——品牌如何进入AI的认知体系？GEO（生成式引擎优化）是2026年最紧迫的营销命题。</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px"><strong>路径A — 内容结构化：</strong>增加Schema Markup，产出易于大模型理解的内容。<br><strong>路径B — 权威背书：</strong>在维基百科、行业白皮书、权威媒体中大量出现，建立知识图谱。<br><strong>路径C — 对话优化：</strong>分析用户最常问AI的问题，定向产出能被自然引用的内容。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">3-8x</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">早期GEO布局品牌的AI推荐率优势</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">7000亿</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">2025年中国数字广告市场规模</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">85%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">广告主认为AI应用极其紧迫</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">最大陷阱：<strong>用SEO逻辑做GEO</strong>。堆砌低质内容反而因信噪比下降让模型学会忽略这个品牌。2026年初，部分ALL-IN内容农场打法的品牌出现推荐率不升反降。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">GEO的本质是把「让搜索引擎爬虫认可你」换成「让AI模型信任你」。信任的建立逻辑是一样的：长期、权威、深度、真实。平台变了，但品牌建设的底层逻辑从未改变。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">现在打开DeepSeek，问「你们行业最值得信赖的品牌是什么」——你的公司出现了吗？如果没有，原因是什么？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">AI推荐的核心逻辑是权威性而非曝光频次——这对你目前的内容营销策略意味着什么调整？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">如果SEO团队和GEO策略之间存在资源竞争，你会如何分配预算和人力？依据是什么？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">Aggarwal et al., "GEO: Generative Engine Optimization" · Princeton/Georgia Tech · arXiv:2311.09735, 2024</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">艾瑞咨询《2025年中国AI应用市场研究报告》，2025年9月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">《2026中国数字营销趋势报告》· 秒针营销科学院，2025年12月</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-ipg">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('ipg')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #18 · 大客户关系</div>
+    </div><div class="ar-prog" id="rp-ipg"></div></div>
+    <div style="background:linear-gradient(150deg,#3a2800,#c49a18,#d8b430);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大客户关系</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大型企业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2025 Q4</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">宏盟并购IPG<br>当你最大的客户，突然成了竞争对手</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-ipg" onclick="podPlay2('ipg')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.18 · 对谈</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">250亿美元的并购震荡：大客户关系的终极压力测试</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'ipg')">
+          <div id="pf-ipg" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-ipg" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 26:40</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年，宏盟集团（Omnicom）宣布并购IPG（Interpublic Group），合并后年营收接近250亿美元，成为全球最大广告传播集团。底层逻辑只有四个字：<strong>降本增效</strong>。</p><p style="margin-bottom:14px">对双方甲方客户而言，这是重新评估关系的时刻——原本分别服务两家集团的品牌，突然发现自己的营销伙伴和竞争对手的营销伙伴，变成了同一家公司。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">当代理商整合压缩了市场竞争，甲方的核心供应商可能同时服务你和你的竞争对手。这时候，大客户关系的本质是什么？信任还能建立在哪里？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">并购背后三条驱动力：<strong>减少内耗</strong>（将外部竞标转为内部协作）、<strong>极致降本</strong>（合并后台与数据中台）、<strong>规模换AI未来</strong>（超级集团整合全域数据的AI平台才可能成为行业基础设施）。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">250亿</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">合并后集团年营收（美元）</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">双重</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">内部化浪潮+AI替代双重冲击</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">+60%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">主动沟通者的客户留存率优势</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">许多大客户经理的第一反应是「等并购尘埃落定再说」——这是最危险的被动策略。并购整合期恰恰是客户关系最脆弱、也最容易被竞争对手渗透的窗口期。</p><p style="margin-bottom:14px"><strong>更深层的教训：把关系建立在集团层面而非个人信任层面的大客户经理，在这次整合中损失最惨重。</strong>当组织变了，人走了，关系就消失了。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">大客户关系的终极护城河不是合同，不是KPI，而是对方离不开你这个人的理由。组织可以被并购，品牌可以换代理商，但真正的信任关系是个人层面的，它能穿越组织变动存活下来。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你最重要的三个大客户关系，分别建立在个人信任还是公司合约上？如果你明天离职，这些关系会怎样？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">在并购整合期，你会选择主动出击（主动联系客户澄清）还是等待观望？两种策略的逻辑和风险各是什么？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">扎克伯格说AI可以替代广告代理商——你认为哪些大客户服务环节是AI无法替代的？你的竞争力在哪里？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">Omnicom-IPG并购公告：Omnicom官方新闻稿，2024年12月9日；华尔街日报跟进报道</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">扎克伯格AI广告声明：Meta Q3 2025财报电话会议记录，2025年10月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">麦肯锡《2025 Global Marketing Report》，2025年6月</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-xw">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('xw')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #09 · 品牌营销</div>
+    </div><div class="ar-prog" id="rp-xw"></div></div>
+    <div style="background:linear-gradient(150deg,#1e1c28,#40385a,#5a5080);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">品牌营销</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">中小企业参考</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2025 Q2</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">雪王下江南<br>失控的内容，如何成为最强的品牌资产</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-xw" onclick="podPlay2('xw')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.09 · 独讲</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">抽象营销的边界：为什么雪王能社死，你的品牌不行？</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'xw')">
+          <div id="pf-xw" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-xw" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 20:15</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年3月，蜜雪冰城以江南采风为主题推广龙井系列，雪王IP融入水墨、油纸伞等元素在杭州绍兴开快闪店。最火的一条视频：雪王人偶坐在溪上秋千，「硬要拗松弛感的紧绷感」让网友笑疯——「第一次感受到雪王的窘迫无助」。</p><p style="margin-bottom:14px">该视频超过26万点赞，并引发全网品牌公仔「集体下江南整活」的二创浪潮。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">当品牌内容失控——被网友接管、被二次创作、被恶搞——品牌应该焦虑还是庆幸？这种失控，是风险还是资产？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">蜜雪冰城选择<strong>顺势而为，绝不干预</strong>——没有删帖，没有澄清，任由抽象解读自由发酵。背后的品牌逻辑：雪王IP经多年积累，已形成被高度认同的人格——「爱玩、笨拙、执拗、有活人感」。这种人格的核心价值正是<strong>不完美的真实</strong>，而干预会摧毁这种真实。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">26万+</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">单条视频点赞量</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">登顶</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">微博热搜 #雪王下江南#</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">自发</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">二创UGC远超官方内容传播力</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">这套打法的可复制性极低。很多中小品牌看到雪王成功后开始模仿「抽象营销」——要么用力过猛，要么缺乏IP积累。</p><p style="margin-bottom:14px"><strong>核心教训：抽象营销不是一种技巧，而是长期IP建设的结果。</strong>雪王能社死，是因为它用数年建立了那个「爱玩但笨拙」的人格。没有这个前提，任何失态都只是失态。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">最强的品牌内容，是用户愿意帮你续写的内容。IP人格建立的终极指标不是知名度，而是用户是否有强烈的欲望去二次创作它——因为他们已经把这个角色当成自己的一部分。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">用三个形容词描述你的品牌人格。这三个词是经过深思熟虑设定的，还是自然形成的？你的团队和用户的认知一致吗？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">如果你的品牌出现了一条让人哭笑不得的社死视频，你的第一反应是删除还是转发？这个本能反应背后说明了什么？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">回想一个你真正喜欢并愿意主动转发的品牌内容——它满足了你哪种心理需求？你的品牌能提供同样的满足感吗？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">雪王下江南视频原帖 · 抖音@蜜雪冰城官方账号，2025年3月；微博热搜记录</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">《第一财经》「雪王为什么这么能整」，2025年4月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">Aaker, J., 'Dimensions of Brand Personality' · Journal of Marketing Research, 1997</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-ai">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('ai')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #21 · 市场战略</div>
+    </div><div class="ar-prog" id="rp-ai"></div></div>
+    <div style="background:linear-gradient(150deg,#0c1c34,#162d52,#203c6a);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">市场战略</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">全行业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2026 Q1</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">85%广告主喊AI紧迫<br>却无从下手：集体焦虑背后的战略机会</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-ai" onclick="podPlay2('ai')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.21 · 独讲</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">迫切但迷茫：2026年营销人的AI焦虑诊断书</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'ai')">
+          <div id="pf-ai" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-ai" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 19:50</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">《2026中国数字营销趋势报告》基于198位广告主调研发布了一组数据：<strong>85%广告主认为营销中应用AI极其紧迫</strong>，但同时，「不知道如何应用AI」从最末位挑战跃升为第七大挑战。</p><p style="margin-bottom:14px">两个数字同时出现，意味着整个行业陷入集体「紧迫性焦虑」——知道必须做，但不知道怎么做。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">当整个行业都在焦虑同一件事，谁能率先跨越「迫切但迷茫」的状态，谁就获得了结构性先发优势。这个跨越，靠什么完成？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">先行者的共同特征：<strong>不试图全面AI化，而是先找一个高频、痛苦、可量化的场景切入</strong>——比如内容生产自动化、客户分层运营、广告素材A/B测试。小胜积累信心，信心驱动扩张。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">85%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">认为AI应用极其紧迫</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">7000亿</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">2025年中国数字广告市场规模</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">+10%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">广告主2026年营销投资预期增长</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px"><strong>最常见失败模式：把AI焦虑变成AI采购。</strong>大量企业购置各类AI营销工具，但使用率极低，工具与业务流程存在巨大断层。问题不在工具，在于组织没有为AI准备好「数据底座」和「能用AI的人」。</p><p style="margin-bottom:14px"><strong>另一个失败：CMO单兵作战。</strong>AI营销落地需要CMO与CIO、CTO、CDO协同，但大多数项目止步于市场部门内部，因无法获得数据权限和技术支持而搁浅。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">AI营销的本质门槛不是技术，而是组织准备度：数据是否干净可用，团队是否具备AI思维，跨部门协作机制是否建立。工具只是最后一公里，前面的路才是真正的挑战。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你的公司目前AI营销的最大瓶颈是什么：技术？数据？人才？预算？还是组织协作？如何验证你的判断？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">如果你只能选择一个AI营销应用场景先试点，你会选哪个？评估标准是什么？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你的竞争对手在AI营销上的进展比你快还是慢？这对你的战略窗口意味着什么？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">《2026中国数字营销趋势报告》· 秒针营销科学院 × CTR媒介智讯，2025年12月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">麦肯锡《The AI-Ready Organization》，2025年3月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">艾瑞咨询《2025年中国互联网广告市场研究报告》</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-fh">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('fh')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #14 · 数字营销</div>
+    </div><div class="ar-prog" id="rp-fh"></div></div>
+    <div style="background:linear-gradient(150deg,#401808,#904018,#b05020);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">数字营销</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大型企业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2025 Q3</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">飞鹤奶粉<br>一句定位语，撑起五年220亿的增长逻辑</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-fh" onclick="podPlay2('fh')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.14 · 独讲</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">定位战略的复利：当所有品牌在追热点，飞鹤选择了反向操作</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'fh')">
+          <div id="pf-fh" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-fh" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 17:30</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2020年，飞鹤奶粉提出「更适合中国宝宝体质」的定位，在外资品牌长期主导的市场里打出差异化牌。五年后的2024年，飞鹤营收突破220亿元，连续五年稳居中国婴幼儿奶粉市场市占率第一，年复合增长率18.7%。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">在存量竞争时代，「坚持一句话不变」到底是战略定力，还是创新惰性？飞鹤的答案是什么？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">飞鹤的核心决策：<strong>把定位当护城河，而不是当广告语。</strong>「更适合中国宝宝体质」贯穿了研发（专门针对中国母婴营养需求的配方体系）、渠道（深度下沉三四线城市）、服务（线下母婴顾问体系）的全部策略。</p><p style="margin-bottom:14px">当竞争对手在社媒热点、明星代言、联名活动上反复变换战术，飞鹤选择用五年时间在「中国宝宝专属」这个认知空间里不断加深。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">220亿</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">2024年营收（人民币）</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">18.7%</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">五年年复合增长率</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">5连冠</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">中国婴幼儿奶粉市占率第一</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年随出生率持续下降，整个婴幼儿奶粉市场规模收缩，飞鹤也面临增长天花板。「更适合中国宝宝体质」的定位在市场萎缩时，反而成为限制——无法向成人奶粉、老年营养品等相邻赛道自然延伸。</p><p style="margin-bottom:14px"><strong>这是品牌定位的双刃剑：越精准越有力量，但也越难跨越边界。</strong></p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">定位的价值不在于那句话有多好听，而在于你愿不愿意用五年时间、在每一个产品决策、渠道决策、服务决策里都去兑现它。大多数品牌的定位失败，不是因为定位错了，而是因为坚持了三个月就动摇了。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">用一句话写出你的品牌定位。然后回顾过去六个月的决策——有多少次真正兑现了这句话？有多少次背离了它？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">飞鹤的定位越精准，扩张越受限——你认为品牌应该在什么时机进化定位？如何判断是战略调整还是动摇？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你的品牌最大的竞争对手，他们的定位是什么？和你相比，谁的定位更清晰、更可信、更有防御性？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">飞鹤奶粉2024年年报 · 中国飞鹤有限公司港交所披露文件，2025年3月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">欧睿国际（Euromonitor）《2025年中国婴幼儿食品市场报告》</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">哈佛商学院案例库收录通知，2025年</div></div></div></div>
+  </div>
+  <div class="areader" id="rd-sb">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeCase('sb')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        &#36820;&#22238;&#20070;&#24211;
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">案例 #11 · 大客户关系</div>
+    </div><div class="ar-prog" id="rp-sb"></div></div>
+    <div style="background:linear-gradient(150deg,#202020,#404040,#585858);padding:clamp(28px,5vw,52px) clamp(16px,4vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 28px,rgba(255,255,255,.018) 28px,rgba(255,255,255,.018) 29px)"></div>
+      <div style="position:relative;z-index:2">
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap"><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大客户关系</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">大型企业</span><span style="font-size:10px;padding:4px 11px;border-radius:2px;font-weight:600;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">2025 Q2</span></div>
+        <div style="font-family:var(--display);font-size:clamp(22px,3.5vw,36px);font-weight:700;color:white;line-height:1.25;text-shadow:0 2px 20px rgba(0,0,0,.25)">星巴克 x 五月天<br>从品牌联名到大客户情感绑定的底层逻辑</div>
+      </div>
+    </div>
+    <div style="background:#141010;padding:16px clamp(12px,4vw,40px);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="pp-sb" onclick="podPlay2('sb')" style="width:40px;height:40px;border-radius:50%;background:var(--red);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg>
+      </button>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:10px;letter-spacing:.1em;color:rgba(255,255,255,.32);margin-bottom:3px">&#32425;&#38144;&#35266;&#23519;&#23460; &middot; EP.11 · 对谈</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.78);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">真心换真诚：联名背后的情感账本与关系资产</div>
+      </div>
+      <div style="flex:1;min-width:60px;max-width:300px">
+        <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer" onclick="podSeek2(event,'sb')">
+          <div id="pf-sb" style="height:100%;background:var(--red);border-radius:2px;width:0%"></div>
+        </div>
+        <div id="pt-sb" style="font-size:10px;color:rgba(255,255,255,.28);margin-top:5px">0:00 / 24:20</div>
+      </div>
+    </div>
+    <div style="max-width:740px;margin:0 auto;padding:56px clamp(16px,4vw,32px) 100px"><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">① 情境速写<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">2025年，星巴克中国与五月天深度联名：将经典歌词印在咖啡杯套上，邀请五月天成员拍摄广告短片，并在演唱会现场设置快闪店实现流量现场转化。</p><p style="margin-bottom:14px">联名周边上线即售罄，相关话题多次登上微博热搜，门店客流量显著提升。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">② 核心问题<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="margin:22px 0;padding:19px 22px;border-left:3px solid var(--red);background:rgba(168,40,8,.05);border-radius:0 8px 8px 0"><p style="font-family:var(--serif);font-size:15px;color:var(--red);line-height:1.75;font-style:italic">在联名合作泛滥的时代，什么样的联名能跨越流量收割，真正成为品牌关系资产？星巴克和五月天成功了，而大多数联名消失在48小时后——差距在哪里？</p></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">③ 关键决策<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">这次联名成功的核心在于<strong>三层情感匹配</strong>：</p><p style="margin-bottom:14px"><strong>第一层·受众匹配：</strong>星巴克都市白领用户与五月天核心歌迷群体高度重叠，共同情感：青春记忆与仪式感消费。</p><p style="margin-bottom:14px"><strong>第二层·内容匹配：</strong>歌词而非歌手形象，触发的是情感记忆而非明星效应——用户买的是自己的青春，不是五月天的脸。</p><p style="margin-bottom:14px"><strong>第三层·场景匹配：</strong>演唱会快闪店，在情感浓度最高的场景中完成转化。三层缺一不可，很多联名只做到了第一层。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">④ 结果与数据<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr));gap:12px;margin:20px 0"><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">即售罄</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">联名周边上线表现</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">多次</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">相关话题登上微博热搜</span></div><div style="background:var(--cream);border-radius:8px;padding:17px 13px;text-align:center;border:1px solid var(--border)"><span style="font-family:var(--display);font-size:22px;font-weight:700;color:var(--ink);display:block;margin-bottom:4px;line-height:1">显著↑</span><span style="font-size:10px;color:var(--ink3);line-height:1.4">演唱会城市门店客流提升</span></div></div></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑤ 失败与教训<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><p style="margin-bottom:14px">星巴克早年曾与多个国内艺人做过浅层联名，反响平平——只停留在logo+形象的表面组合，缺乏真正的情感联结。</p><p style="margin-bottom:14px">对大多数品牌而言，联名最大的失败是<strong>把联名当促销而非当关系建设</strong>。促销思维追求短期GMV；关系思维追求长期情感账户增值。</p></div></div><div style="margin-bottom:44px"><div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:10px;margin-bottom:14px">⑥ 可迁移原则<span style="flex:1;height:1px;background:var(--border)"></span></div><div style="font-size:15px;line-height:1.92;color:var(--ink2)"><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:10px;padding:22px 26px;margin:22px 0"><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">&#10022; Janet&#30340;&#27931;&#23519;</div><p style="font-family:var(--serif);font-size:15px;color:#5a4810;line-height:1.8">品牌联名的本质是两个情感账户之间的互相转账。前提是：双方都要有账户余额。一个情感账户透支的品牌，和另一个品牌联名只会加速自己的透支——因为用户不会因为联名就原谅一个让他们失望的品牌。</p></div></div></div><div style="background:var(--ink);border-radius:12px;padding:26px 30px;margin:28px 0"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">&#35838;&#22467;&#35752;&#35770;&#39064;</div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q1</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">用情感账户比喻评估你的品牌：过去一年，你做了哪些动作是在存入？哪些是在提取？现在账户余额是正还是负？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q2</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">如果你要为你的品牌寻找一个联名合作对象，你的三层匹配标准是什么？受众、内容、场景，你最容易忽略哪一层？</div></div><div style="display:flex;gap:12px;align-items:flex-start;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:7px"><span style="font-family:var(--mono);font-size:11px;color:var(--gold);flex-shrink:0;background:rgba(196,154,24,.12);padding:2px 7px;border-radius:3px;margin-top:1px">Q3</span><div style="font-size:13px;color:rgba(250,246,238,.7);line-height:1.7">你的大客户关系和品牌联名逻辑有没有相通之处？在B2B关系中，情感账户体现在哪里？</div></div></div></div><div style="margin-top:44px;padding-top:28px;border-top:1px solid var(--border)"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px">&#36164;&#26009;&#26469;&#28304;</div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">01</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">星巴克×五月天联名活动报道：《营销新说》，2025年5月；微博超话数据整理</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">02</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">星巴克中国2025年Q2经营数据：星巴克Q2财报，2025年7月</div></div><div style="display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border)"><span style="font-family:var(--mono);font-size:10px;color:var(--red);background:rgba(168,40,8,.06);padding:2px 7px;border-radius:3px;flex-shrink:0">03</span><div style="font-size:12px;color:var(--ink3);line-height:1.6">Covey, S., 'The 7 Habits of Highly Effective People' · Free Press（情感账户理论来源）</div></div></div></div>
+  </div>
+  <div style="background:var(--bg2);padding:40px clamp(16px,5vw,64px);border-top:1px solid var(--border)">
   <div style="max-width:1280px;margin:0 auto">
     <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">读完案例，还可以</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -678,7 +1103,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <div class="tph"><button class="tpc" onclick="closeTool()">×</button><div class="tptyp" id="tpTyp"></div><div class="tptit" id="tpTit"></div></div>
     <div class="tpb" id="tpBody"></div>
   </div>
-  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="background:var(--bg2);padding:40px clamp(16px,5vw,64px);border-top:1px solid var(--border)">
   <div style="max-width:1280px;margin:0 auto">
     <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">工具配合使用效果更好</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -725,7 +1150,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
     <div class="bph" id="bpHeader"></div>
     <div class="bpbody" id="bpBody"></div>
   </div>
-  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+  <div style="background:var(--bg2);padding:40px clamp(16px,5vw,64px);border-top:1px solid var(--border)">
   <div style="max-width:1280px;margin:0 auto">
     <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">书读完了，下一步</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -773,7 +1198,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       <p class="ar-p">搜索引擎返回的是链接列表，用户自己判断和选择。AI返回的是一个整合后的答案，AI已经帮用户做了筛选和判断。这意味着：<strong>如果AI不推荐你，用户根本不会看到你。</strong></p>
       <h2 class="ar-h2">二、GEO 是什么，不是什么</h2>
       <p class="ar-p">GEO（Generative Engine Optimization，生成式引擎优化）是近两年从学术界和营销实践中同步涌现出来的概念。普林斯顿大学和佐治亚理工的联合研究团队在2024年发表了第一篇系统性的GEO研究论文。</p>
-      <div class="ar-data"><div class="ar-dc"><span class="n">40%</span><span class="l">DeepSeek中国企业用户渗透率</span></div><div class="ar-dc"><span class="n">3–8×</span><span class="l">早期GEO布局品牌的AI推荐率优势</span></div><div class="ar-dc"><span class="n">85%</span><span class="l">广告主认为AI营销应用极其紧迫</span></div></div>
+      <div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">40%</span><span class="l">DeepSeek中国企业用户渗透率</span></div><div class="ar-dc"><span class="n">3–8×</span><span class="l">早期GEO布局品牌的AI推荐率优势</span></div><div class="ar-dc"><span class="n">85%</span><span class="l">广告主认为AI营销应用极其紧迫</span></div></div>
       <p class="ar-p"><strong>SEO的核心是"信号"：</strong>通过关键词密度、外链数量等信号告诉搜索引擎"这个页面与这个关键词高度相关"。</p>
       <p class="ar-p"><strong>GEO的核心是"权威性"：</strong>通过在AI训练数据中建立真实的领域权威形象，让AI模型在相关话题上将你的品牌作为可信来源引用。这是两种本质不同的游戏规则。</p>
       <h2 class="ar-h2">三、先行者在做什么：三种实证路径</h2>
@@ -796,7 +1221,118 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
       </div>
     </div>
   </div>
-  <div style="background:var(--bg2);padding:40px 64px;border-top:1px solid var(--border)">
+
+  <div class="areader" id="art-brand2026">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeArticle('brand2026')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        返回长文列表
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2025.12.08 · 约28分钟 · 约5,600字</div>
+    </div><div class="ar-prog" id="arp-brand2026"></div></div>
+    <div class="ar-cover" data-n="08">
+      <div class="ar-inner">
+        <div class="ar-ey">行业深度专栏 · No.08 · 品牌战略</div>
+        <div class="ar-t">2026年，哪些品牌定位逻辑已经失效了？</div>
+        <div class="ar-sub">五个已经不再适用的品牌定位假设，以及替代它们的新逻辑</div>
+        <div class="ar-meta">
+          <span class="ar-date">2025.12.08</span>
+          <span class="ar-time">⏱ 约28分钟 · 约5,600字</span>
+          <span class="ar-tg">品牌战略</span>
+        </div>
+      </div>
+    </div>
+    <div class="ar-body"><div class="ar-lead">2025年底，我同时收到了来自三家不同行业客户的同一个问题：「我们的品牌定位说了五年了，怎么感觉越来越没用？」三家公司，三个行业，同一个困惑。这不是巧合，这是一个时代信号。</div><h2 class="ar-h2">一、消费者的决策环境已经彻底变了</h2><p class="ar-p">过去十年的品牌定位逻辑，建立在一个基本假设上：消费者有时间、有耐心、有意愿主动了解一个品牌，然后做出理性选择。</p><p class="ar-p">这个假设在2025年已经彻底失效。短视频压缩了注意力窗口，AI替代了搜索决策，内容过载让品牌信息的穿透力降低了90%以上。</p><div class="ar-cq"><p>品牌定位不是「说了什么」，而是「在消费者最需要做决策的那一刻，是否出现在正确的位置上」。</p></div><h2 class="ar-h2">二、五个已经失效的品牌定位假设</h2><h3 class="ar-h3">假设一：「说得足够多，消费者就会记住」</h3><p class="ar-p">这是曝光理论的遗留产物。在注意力稀缺的时代，曝光量和记忆度早已脱钩。研究显示，用户每天接触到超过6,000条营销信息，真正能进入长期记忆的不超过5条。</p><p class="ar-p"><strong>替代逻辑：</strong>不是「多说」，而是「在对的时刻说对的一句话」。触点精准度远比触点数量更重要。</p><h3 class="ar-h3">假设二：「定位越差异化越好」</h3><p class="ar-p">差异化是上个时代的核心武器，但2025年的问题已经不是「如何与竞争对手不同」，而是「如何让消费者在AI推荐、算法筛选的世界里找到你」。</p><p class="ar-p"><strong>替代逻辑：</strong>差异化必须与「可发现性」结合——你的定位必须同时让人类用户和AI系统都能清晰理解你是谁、你解决什么问题。</p><h3 class="ar-h3">假设三：「品牌定位是CMO的工作」</h3><p class="ar-p">传统认知里，品牌定位是市场部门的战略，其他部门执行即可。但在全域营销时代，每一个客服回复、每一个产品决策、每一条社媒评论都是品牌定位的「实时测试」。</p><p class="ar-p"><strong>替代逻辑：</strong>品牌定位是全组织行为，不是部门战略。最终检验你定位是否成立的，是你企业里级别最低的员工在面对客户时的本能反应。</p><h3 class="ar-h3">假设四：「消费者认可功能就会认可品牌」</h3><p class="ar-p">「我们的产品质量最好，所以品牌会自然强大」——这个逻辑在功能差异化显著的时代有效，但在产品同质化严重的今天，功能认可和品牌认可早已分离。</p><p class="ar-p"><strong>替代逻辑：</strong>消费者认可品牌，是因为品牌代表了某种他们认同的价值观或生活方式，而不仅仅是功能参数。</p><h3 class="ar-h3">假设五：「定位一旦建立就应该保持稳定」</h3><p class="ar-p">稳定性是品牌资产积累的基础，这没有错。但「稳定」不等于「静止」。市场结构、竞争格局、消费者认知都在快速演变。</p><p class="ar-p"><strong>替代逻辑：</strong>定位的核心价值观应该稳定，但定位的表达方式、触达路径、内容形式必须持续迭代。</p><div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">6000+</span><span class="l">用户每天接触的营销信息条数</span></div><div class="ar-dc"><span class="n"><5</span><span class="l">真正进入长期记忆的品牌信息</span></div><div class="ar-dc"><span class="n">72%</span><span class="l">Z世代消费者表示品牌价值观影响购买决策</span></div></div><h2 class="ar-h2">三、新的品牌定位逻辑长什么样</h2><p class="ar-p">从以上五个失效假设出发，新的品牌定位逻辑有三个核心转变：</p><p class="ar-p"><strong>从「告知」到「触发」：</strong>不是「让消费者知道你的定位」，而是「在消费者做决策的关键时刻，触发他想到你」。</p><p class="ar-p"><strong>从「单向输出」到「双向共创」：</strong>消费者已经不再是被动接受者。最强的品牌定位，是消费者愿意参与续写和共创的。</p><p class="ar-p"><strong>从「竞争差异」到「认知锚点」：</strong>不是「我比竞争对手好在哪里」，而是「在消费者心智中，我占据了什么不可替代的认知位置」。</p><div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>品牌定位的本质从未改变：在消费者心智中占据一个有价值的位置。改变的是如何到达那个位置、如何守住那个位置。那些叫嚷「定位已死」的人，混淆了工具的失效和原理的失效。</p></div><div class="ar-srcs"><div class="ar-stitle">参考资料</div><div class="ar-si"><span class="ar-sn">01</span>《2026年中国消费者品牌认知研究报告》· 益普索 Ipsos，2025年11月</div><div class="ar-si"><span class="ar-sn">02</span>Ries, A. &amp; Trout, J., 'Positioning: The Battle for Your Mind' · McGraw-Hill（经典框架）</div><div class="ar-si"><span class="ar-sn">03</span>麦肯锡《The Consumer Sentiment Quarterly》，2025年Q3</div><div class="ar-si"><span class="ar-sn">04</span>艾瑞咨询《2025年中国品牌营销白皮书》，2025年8月</div></div></div>
+  </div>
+  <div class="areader" id="art-private">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeArticle('private')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        返回长文列表
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2025.10.22 · 约32分钟 · 约6,200字</div>
+    </div><div class="ar-prog" id="arp-private"></div></div>
+    <div class="ar-cover" data-n="06">
+      <div class="ar-inner">
+        <div class="ar-ey">行业深度专栏 · No.06 · 数字营销</div>
+        <div class="ar-t">私域运营的三个死亡模式</div>
+        <div class="ar-sub">为什么大多数企业的私域越做越难？走出困局的三条路径</div>
+        <div class="ar-meta">
+          <span class="ar-date">2025.10.22</span>
+          <span class="ar-time">⏱ 约32分钟 · 约6,200字</span>
+          <span class="ar-tg">数字营销</span>
+        </div>
+      </div>
+    </div>
+    <div class="ar-body"><div class="ar-lead">从2022年到2025年，我观察了超过60个企业的私域运营实践。其中真正实现了「私域带来持续可观营收」的，不超过15%。其余85%的企业，要么在「死群」里苦苦维持，要么在「刷屏轰炸」里加速消耗用户。</div><h2 class="ar-h2">一、先澄清一个误解：私域不等于微信群</h2><p class="ar-p">很多企业把私域运营等同于「建微信群+发优惠券」，这是导致私域失败的第一个根本性误解。</p><p class="ar-p">私域的本质是<strong>直接触达用户的能力</strong>，不依赖平台算法，不需要每次触达都付费。微信群只是一个载体，不是私域本身。</p><div class="ar-cq"><p>私域不是渠道，是一种关系。你和用户之间的关系质量，决定了私域的价值上限。</p></div><h2 class="ar-h2">二、三个最常见的死亡模式</h2><h3 class="ar-h3">死亡模式一：「流量思维」做私域</h3><p class="ar-p">最常见的私域失败路径是这样的：花大量资源把用户拉进微信群或关注公众号，然后按照「流量」逻辑运营——定期推送优惠信息，节点做活动，看GMV数字。</p><p class="ar-p">问题在于：用户加入私域的动机通常是「领优惠券」，而不是「想和这个品牌建立关系」。当优惠消失，用户也消失。这不是私域，这是披着私域外衣的促销渠道。</p><p class="ar-p"><strong>诊断信号：</strong>你的私域用户活跃度是否只在促销节点才飙升？非促销期间，用户是否几乎不产生互动？如果是，流量思维已经让你的私域空洞化了。</p><h3 class="ar-h3">死亡模式二：「广播思维」做私域</h3><p class="ar-p">另一种失败模式是把私域当成一个「免费广播站」——品牌把想说的话不断推送给用户，没有对话，没有倾听，没有个性化。</p><p class="ar-p">用户一旦发现自己只是「被推送的对象」而非「被重视的个体」，关系就会迅速降温。退群、取关、屏蔽——这是用户在无声地表达：你不是在做私域，你只是在给我发垃圾邮件。</p><p class="ar-p"><strong>诊断信号：</strong>你的私域内容，有多少比例是「我们要说的话」，有多少比例是「用户想听的话」？如果前者超过70%，你的私域正在单向消耗关系资本。</p><h3 class="ar-h3">死亡模式三：「短期主义」做私域</h3><p class="ar-p">私域是一项需要长期投入才能看到复利的资产。但很多企业在建立私域时，内心只有一个问题：这个季度能带来多少GMV？</p><p class="ar-p">短期主义导致两个恶性后果：一是不愿意做「无法直接转化」的内容（比如用户教育、情感连接、社群文化建设）；二是一旦短期ROI不达预期就放弃，导致私域永远无法积累到真正的复利阶段。</p><div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">85%</span><span class="l">企业私域未能实现持续可观营收</span></div><div class="ar-dc"><span class="n">3年+</span><span class="l">真正形成私域复利所需的时间周期</span></div><div class="ar-dc"><span class="n">6倍</span><span class="l">私域用户复购率相比公域流量用户的优势</span></div></div><h2 class="ar-h2">三、走出困局的三条路径</h2><p class="ar-p"><strong>路径一：从「用户」思维转向「会员」思维。</strong>私域里的人不是流量，是会员。会员关系的核心是「我因为你是我们的会员而给你特别的待遇」，而不是「我因为有了你的联系方式所以可以随时找你购买」。</p><p class="ar-p"><strong>路径二：从「内容推送」转向「场景服务」。</strong>最好的私域内容不是广告，是「在用户需要的时候出现的有用信息」。这需要你真正理解用户的使用场景和生命周期。</p><p class="ar-p"><strong>路径三：从「成交导向」转向「关系导向」。</strong>每次互动的目的不应该首先是「成交」，而应该是「加深关系」。关系深了，成交是自然结果，而不是需要每次都费力推动的事情。</p><div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>私域运营的本质，是把陌生人变成熟人，把熟人变成朋友，把朋友变成家人。每一个层级的跃迁，都需要时间、真诚和持续的价值交付。没有捷径。</p></div><div class="ar-srcs"><div class="ar-stitle">参考资料</div><div class="ar-si"><span class="ar-sn">01</span>艾瑞咨询《2025年中国私域流量运营白皮书》，2025年6月</div><div class="ar-si"><span class="ar-sn">02</span>《第一财经》「私域的泡沫与真相」系列报道，2025年</div><div class="ar-si"><span class="ar-sn">03</span>Reichheld, F., 'The Loyalty Effect' · Harvard Business School Press（会员关系理论）</div></div></div>
+  </div>
+  <div class="areader" id="art-cmo">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeArticle('cmo')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        返回长文列表
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2025.09.15 · 约30分钟 · 约5,800字</div>
+    </div><div class="ar-prog" id="arp-cmo"></div></div>
+    <div class="ar-cover" data-n="04">
+      <div class="ar-inner">
+        <div class="ar-ey">行业深度专栏 · No.04 · 营销领导力</div>
+        <div class="ar-t">2026年的CMO必须会什么</div>
+        <div class="ar-sub">从营销负责人到增长架构师：角色重新定义与五项核心能力</div>
+        <div class="ar-meta">
+          <span class="ar-date">2025.09.15</span>
+          <span class="ar-time">⏱ 约30分钟 · 约5,800字</span>
+          <span class="ar-tg">营销领导力</span>
+        </div>
+      </div>
+    </div>
+    <div class="ar-body"><div class="ar-lead">2025年，我做了一个不正式的调查：问了20位营销总监「你认为三年后CMO这个角色还会存在吗？」有12位停顿了超过3秒才回答。这个停顿本身，就是答案。</div><h2 class="ar-h2">一、CMO正在经历身份危机</h2><p class="ar-p">过去十年，CMO的角色已经扩展了一次——从「品牌管理者」变成了「增长驱动者」。现在，这个角色正在经历第二次、也是更剧烈的一次扩展。</p><p class="ar-p">AI正在替代CMO团队里大量执行性工作：内容创作、数据分析、广告优化、用户分层……这些曾经需要大团队才能完成的工作，现在一个人配合AI工具就能做。</p><div class="ar-cq"><p>CMO面临的最根本问题不是「AI会替代我吗」，而是「如果AI替代了我团队里80%的执行工作，我的核心价值是什么？」</p></div><h2 class="ar-h2">二、从营销负责人到增长架构师</h2><p class="ar-p">我认为，2026年最值钱的CMO，会是那些完成了从「营销负责人」到「增长架构师」转型的人。这两者的区别是什么？</p><h3 class="ar-h3">营销负责人的思维框架</h3><p class="ar-p">核心问题：如何把公司的产品或服务卖出去？工具：品牌、广告、内容、渠道。衡量标准：品牌知名度、市场份额、营销ROI。组织角色：市场部门的领导者，和其他部门的协作者。</p><h3 class="ar-h3">增长架构师的思维框架</h3><p class="ar-p">核心问题：如何系统性地建立公司获取、留存、变现用户的能力？工具：数据基础设施、增长实验、用户生命周期管理、AI营销系统。衡量标准：LTV（用户终身价值）、NRR（净收入留存率）、增长效率。组织角色：跨职能增长体系的设计者和驱动者。</p><div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">80%</span><span class="l">CMO团队执行性工作可被AI替代的比例（麦肯锡估计）</span></div><div class="ar-dc"><span class="n">3年</span><span class="l">完成CMO角色转型的预计时间窗口</span></div><div class="ar-dc"><span class="n">62%</span><span class="l">企业希望CMO具备数据与AI能力（2025调研）</span></div></div><h2 class="ar-h2">三、CMO必须亲自掌握的五项能力</h2><p class="ar-p"><strong>1. 数据读写能力（不是数据分析能力）：</strong>CMO不需要会写SQL，但必须能读懂数据仪表盘，能提出正确的数据问题，能识别数据中的假象和陷阱。</p><p class="ar-p"><strong>2. AI工具判断力：</strong>不是会用所有AI工具，而是能判断哪些AI工具值得投资、哪些只是噱头，以及如何将AI工具整合进营销体系。</p><p class="ar-p"><strong>3. 增长实验设计能力：</strong>能设计科学的A/B测试，能从实验结果中提炼可扩展的增长洞察，能建立团队的实验文化。</p><p class="ar-p"><strong>4. 跨职能整合能力：</strong>增长架构师的核心价值在于能打通市场、产品、销售、数据、技术之间的壁垒，这需要强大的组织影响力和系统思维。</p><p class="ar-p"><strong>5. 用户心理理解力：</strong>无论AI多强大，真正理解用户为什么做决策、什么触发了他们的情绪，仍然是人类CMO的核心护城河。</p><div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>CMO的竞争优势，永远不会来自比AI更快地处理数据。它来自于那些AI无法替代的能力：判断力、创造力、组织影响力，以及对人类情感的深度理解。</p></div><div class="ar-srcs"><div class="ar-stitle">参考资料</div><div class="ar-si"><span class="ar-sn">01</span>麦肯锡《The Future of the CMO》，2025年5月</div><div class="ar-si"><span class="ar-sn">02</span>《哈佛商业评论》「CMO的角色正在消亡吗？」，2025年7月</div><div class="ar-si"><span class="ar-sn">03</span>Gartner《CMO Spend Survey 2025》，2025年9月</div><div class="ar-si"><span class="ar-sn">04</span>艾瑞咨询《2025年中国营销技术市场研究报告》，2025年10月</div></div></div>
+  </div>
+  <div class="areader" id="art-china">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeArticle('china')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        返回长文列表
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2025.07.03 · 约38分钟 · 约7,500字</div>
+    </div><div class="ar-prog" id="arp-china"></div></div>
+    <div class="ar-cover" data-n="02">
+      <div class="ar-inner">
+        <div class="ar-ey">行业深度专栏 · No.02 · 行业趋势</div>
+        <div class="ar-t">中国品牌出海2025</div>
+        <div class="ar-sub">不是每个品牌都应该出海，也不是每个出海都叫全球化</div>
+        <div class="ar-meta">
+          <span class="ar-date">2025.07.03</span>
+          <span class="ar-time">⏱ 约38分钟 · 约7,500字</span>
+          <span class="ar-tg">行业趋势</span>
+        </div>
+      </div>
+    </div>
+    <div class="ar-body"><div class="ar-lead">2025年，中国品牌出海成了一个「人人都在谈」的话题。蜜雪冰城在东南亚开了4,000家店，名创优品在全球开了超过6,000家门店，泡泡玛特在海外市场的营收占比突破40%。成功案例让很多企业心动：我们是不是也该出海了？</div><div class="ar-cq"><p>在所有「出海还是不出海」的讨论里，最被忽视的一个问题是：出海不是一个营销决策，而是一个战略决策。两者所需的能力、资源和风险承受完全不同。</p></div><h2 class="ar-h2">一、什么样的品牌适合出海？</h2><p class="ar-p">我见过太多企业把「国内市场遇到增长天花板」当成出海的理由。这个逻辑有致命缺陷：如果你在熟悉的市场里都面临增长困难，在一个完全陌生的市场里，困难只会更大，而不是更小。</p><p class="ar-p">真正适合出海的品牌，通常具备以下特征：</p><p class="ar-p"><strong>特征一：产品或供应链具有结构性优势。</strong>蜜雪冰城能在东南亚定价3-5元人民币，是因为其供应链成本控制能力在全球都找不到竞争对手。这是结构性优势，而不是营销优势。</p><p class="ar-p"><strong>特征二：品牌内核具有跨文化普适性。</strong>泡泡玛特的盲盒玩法、IP收藏文化，在亚洲多个国家都有天然的文化共鸣。这不是因为泡泡玛特做了很好的本地化，而是因为它的品牌内核本身具有跨文化吸引力。</p><p class="ar-p"><strong>特征三：有足够的组织能力承接出海复杂度。</strong>出海不只是开几个海外门店，它涉及到合规、供应链、人才、本地化运营……没有强大的组织能力，出海越快，翻车越快。</p><h2 class="ar-h2">二、出海的三个真实成本，没人告诉你</h2><h3 class="ar-h3">真实成本一：学习成本</h3><p class="ar-p">在国内，你积累了多年对市场、消费者、竞争对手的深度理解。在新市场，这些积累全部归零。你需要重新理解当地消费者、当地竞争格局、当地监管环境。</p><p class="ar-p">这个学习成本通常被严重低估，而且几乎无法用钱买到——它需要时间和真实的市场摸索。</p><h3 class="ar-h3">真实成本二：品牌稀释风险</h3><p class="ar-p">出海过程中，为了适应当地市场而做出的各种妥协，有可能逐渐稀释品牌的核心资产。蜜雪冰城在印尼的供应链危机，就是一个典型的品牌稀释风险案例。</p><h3 class="ar-h3">真实成本三：机会成本</h3><p class="ar-p">出海需要占用大量的管理层注意力和资源。这些资源如果留在国内，是否能带来更大的回报？这是一个很少被认真计算的问题。</p><div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">40%</span><span class="l">泡泡玛特2025年海外营收占比</span></div><div class="ar-dc"><span class="n">4000家</span><span class="l">蜜雪冰城东南亚门店数量</span></div><div class="ar-dc"><span class="n">3-5年</span><span class="l">中国品牌出海实现盈亏平衡的平均时间</span></div></div><h2 class="ar-h2">三、不是每个出海都叫全球化</h2><p class="ar-p">我注意到一个值得警惕的认知混乱：很多企业把「在海外有销售」等同于「全球化品牌建设」。这是两件完全不同的事情。</p><p class="ar-p">真正的全球化品牌，是指在多个市场都拥有独立的品牌认知、用户基础和增长飞轮。大多数中国品牌的出海，目前还处于「在海外卖货」的阶段，距离「全球化品牌」还有相当长的路要走。</p><p class="ar-p">这不是贬义——「在海外卖货」本身是一个非常有价值的阶段。只是企业需要清醒地知道自己处于哪个阶段，设定相应的目标和期望。</p><div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>出海最危险的心态不是「我不确定能不能成功」，而是「别人都在出海，我也要出」。跟风出海的企业，往往在花了大量资源之后，才发现自己根本没有准备好面对那个市场的真实挑战。</p></div><div class="ar-srcs"><div class="ar-stitle">参考资料</div><div class="ar-si"><span class="ar-sn">01</span>《2025年中国品牌出海白皮书》· 波士顿咨询 × 腾讯营销洞察，2025年9月</div><div class="ar-si"><span class="ar-sn">02</span>泡泡玛特2025年中期报告 · 港交所披露文件，2025年8月</div><div class="ar-si"><span class="ar-sn">03</span>蜜雪冰城2025年Q1东南亚业务进展报告（路透社、界面新闻）</div><div class="ar-si"><span class="ar-sn">04</span>麦肯锡《Chinese Brands Going Global》，2025年6月</div></div></div>
+  </div>
+  <div class="areader" id="art-ip">
+    <div class="ar-nav"><div class="ar-bar">
+      <button class="ar-back" onclick="closeArticle('ip')">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        返回长文列表
+      </button>
+      <div style="font-size:11px;color:var(--ink4);font-family:var(--mono)">2025.05.20 · 约33分钟 · 约6,400字</div>
+    </div><div class="ar-prog" id="arp-ip"></div></div>
+    <div class="ar-cover" data-n="01">
+      <div class="ar-inner">
+        <div class="ar-ey">行业深度专栏 · No.01 · 品牌战略</div>
+        <div class="ar-t">为什么IP化是中国品牌接下来十年最重要的战略方向？</div>
+        <div class="ar-sub">从雪王到泡泡玛特：真正的品牌IP是什么，以及是否适合你</div>
+        <div class="ar-meta">
+          <span class="ar-date">2025.05.20</span>
+          <span class="ar-time">⏱ 约33分钟 · 约6,400字</span>
+          <span class="ar-tg">品牌战略</span>
+        </div>
+      </div>
+    </div>
+    <div class="ar-body"><div class="ar-lead">2025年，我在给一家消费品公司做品牌诊断时，CMO问了我一个问题：「我们能不能做成雪王那样的IP？」我停顿了一下，反问她：「你们的品牌，值得被人爱吗？」</div><div class="ar-cq"><p>IP化不是一种营销技巧，而是品牌建设到达某个阶段后的自然结果——当你的品牌有了足够丰富的人格、足够真实的情感连接，IP化才有意义。</p></div><h2 class="ar-h2">一、什么是真正的品牌IP</h2><p class="ar-p">「IP」这个词在中国营销圈里被严重滥用了。在大多数企业的实践里，IP化等于：设计一个卡通形象，出现在包装上和社媒上，做几次联名活动。</p><p class="ar-p">真正的品牌IP，具备以下三个特征：</p><p class="ar-p"><strong>独立人格：</strong>这个IP有自己的性格、喜好、说话方式，甚至有自己的故事和世界观。用户能感受到它是一个「活的存在」，而不是一个设计符号。</p><p class="ar-p"><strong>情感共鸣：</strong>用户对这个IP有真实的情感投入——喜欢它、担心它、为它骄傲、为它心疼。这种情感是自发的，不是被品牌教育出来的。</p><p class="ar-p"><strong>续写欲望：</strong>用户有强烈的欲望去二次创作这个IP——写同人故事、做表情包、自发联名。这是IP最高级的状态：用户把它当成了自己的一部分。</p><h2 class="ar-h2">二、成功的IP化案例：三个共同特征</h2><h3 class="ar-h3">雪王（蜜雪冰城）：笨拙是最真实的人格</h3><p class="ar-p">雪王的成功在于它的「不完美真实感」。它不是一个光鲜亮丽的品牌形象，它是一个爱玩、笨拙、执拗的雪人。用户喜欢它，是因为它身上有一种「活人感」——它会社死，会窘迫，会做一些让人哭笑不得的事情。</p><h3 class="ar-h3">泡泡玛特：收藏欲望与惊喜机制</h3><p class="ar-p">泡泡玛特的IP化建立在一个独特的心理机制上：盲盒带来的不确定性和惊喜感，让用户对每一个IP都产生了强烈的「获得欲望」。而丰富的系列设计，让收藏成为一种永远无法完成的满足。</p><h3 class="ar-h3">古茗：IP化的反面教材也是正面教材</h3><p class="ar-p">古茗在IP化上走了一条不同的路：没有设计独立的IP形象，而是把「古茗员工的真实日常」变成了内容素材。这种「人格IP化」而非「形象IP化」的路径，反而产生了极高的真实感和用户连接。</p><div class="ar-data" style="grid-template-columns:repeat(auto-fill,minmax(min(160px,100%),1fr))"><div class="ar-dc"><span class="n">10年+</span><span class="l">雪王IP从诞生到真正爆发所需时间</span></div><div class="ar-dc"><span class="n">40%</span><span class="l">具有独立IP的品牌客户粘性高于行业均值</span></div><div class="ar-dc"><span class="n">3层</span><span class="l">真正的品牌IP必须具备的特征层次</span></div></div><h2 class="ar-h2">三、IP化适合你的品牌吗</h2><p class="ar-p">这是最重要的问题，也是最常被跳过的问题。IP化对品牌有严苛的前提条件：</p><p class="ar-p"><strong>前提一：你的品牌已经有足够的用户基础。</strong>IP化是深化关系，而不是建立关系。没有用户基础的IP，只是一个孤独的卡通形象。</p><p class="ar-p"><strong>前提二：你的品牌有可以被人格化的核心特质。</strong>如果你的品牌定位是「高端大气」「专业权威」，强行IP化可能会稀释而非强化品牌资产。</p><p class="ar-p"><strong>前提三：你有持续的内容运营能力。</strong>IP需要持续的故事喂养。没有持续的内容投入，IP会迅速枯萎。</p><div class="ar-ins"><div class="ar-ilbl">Janet 的核心判断</div><p>品牌IP化的本质，是把一个品牌的核心价值观，装进一个有血有肉、有喜怒哀乐的人格壳子里，让用户能以情感的方式而非理性的方式与品牌建立连接。这比任何广告都要有力量，也比任何广告都要难做。</p></div><div class="ar-srcs"><div class="ar-stitle">参考资料</div><div class="ar-si"><span class="ar-sn">01</span>《2025年中国品牌IP化发展研究报告》· 艾瑞咨询，2025年7月</div><div class="ar-si"><span class="ar-sn">02</span>泡泡玛特2025年中期报告 · 港交所披露文件，2025年8月</div><div class="ar-si"><span class="ar-sn">03</span>《第一财经》「IP经济的泡沫与真相」，2025年6月</div><div class="ar-si"><span class="ar-sn">04</span>Aaker, J., 'Dimensions of Brand Personality' · Journal of Marketing Research, 1997</div></div></div>
+  </div>
+  <div style="background:var(--bg2);padding:40px clamp(16px,5vw,64px);border-top:1px solid var(--border)">
   <div style="max-width:1060px;margin:0 auto">
     <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px">长文读完，深入研究</div>
     <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -811,6 +1347,28 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 </div>
 
 </div><!-- /main -->
+
+<!-- Mobile bottom tab bar -->
+<div id="mobBottomNav" style="display:none;position:fixed;bottom:0;left:0;right:0;height:60px;background:rgba(24,19,14,.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);z-index:90;align-items:center;justify-content:space-around;padding:0 4px">
+  <button onclick="nav('home');closeMobNav()" id="mbn-home" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">🏠</span>首页
+  </button>
+  <button onclick="nav('about');closeMobNav()" id="mbn-about" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">👤</span>关于
+  </button>
+  <button onclick="nav('cases');closeMobNav()" id="mbn-cases" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">📚</span>案例
+  </button>
+  <button onclick="nav('tools');closeMobNav()" id="mbn-tools" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">🛠</span>工具
+  </button>
+  <button onclick="nav('books');closeMobNav()" id="mbn-books" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">📖</span>书单
+  </button>
+  <button onclick="nav('articles');closeMobNav()" id="mbn-articles" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(250,246,238,.4);font-family:var(--sans);font-size:9px;letter-spacing:.04em;transition:color .2s">
+    <span style="font-size:18px">✍️</span>长文
+  </button>
+</div>
 
 <!-- SUBSCRIBE MODAL -->
 <div class="modal-bg" id="subModal">
@@ -829,6 +1387,70 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:10
 <div class="toast" id="toast"></div>
 
 <script>
+// ══ MOBILE MENU ══
+function toggleMobNav(){
+  const nav=document.getElementById('mobNav');
+  const btn=document.getElementById('mobMenuBtn');
+  if(nav.classList.contains('open')){
+    nav.classList.remove('open');
+    btn.style.color='rgba(250,246,238,.7)';
+  } else {
+    nav.classList.add('open');
+    btn.style.color='white';
+    document.body.style.overflow='hidden';
+  }
+}
+function closeMobNav(){
+  const nav=document.getElementById('mobNav');
+  const btn=document.getElementById('mobMenuBtn');
+  nav.classList.remove('open');
+  if(btn) btn.style.color='rgba(250,246,238,.7)';
+  document.body.style.overflow='';
+}
+// Close mob nav on resize to desktop
+window.addEventListener('resize',()=>{if(window.innerWidth>640)closeMobNav()});
+
+// ══ PODCAST for static case readers ══
+const pods2={};
+const caseDurs={mx:1104,ds:1330,ipg:1600,xw:1215,ai:1190,fh:1050,sb:1460};
+function podPlay2(id){
+  if(!pods2[id])pods2[id]={on:false,pct:0,iv:null};
+  const s=pods2[id];
+  if(s.on){
+    s.on=false;clearInterval(s.iv);
+    const b=document.getElementById('pp-'+id);if(b)b.style.background='var(--red)';
+    return;
+  }
+  s.on=true;
+  const btn=document.getElementById('pp-'+id);if(btn)btn.style.background='#8a2008';
+  const dur=caseDurs[id]||1200;
+  s.iv=setInterval(()=>{
+    s.pct=Math.min(s.pct+0.08,100);
+    const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=s.pct+'%';
+    const e=Math.floor((s.pct/100)*dur);
+    const pt=document.getElementById('pt-'+id);
+    if(pt)pt.textContent=Math.floor(e/60)+':'+(e%60).toString().padStart(2,'0')+' / '+Math.floor(dur/60)+':'+(dur%60).toString().padStart(2,'0');
+    if(s.pct>=100){s.on=false;clearInterval(s.iv);}
+  },200);
+}
+function podSeek2(e,id){
+  const r=e.currentTarget.getBoundingClientRect();
+  const pct=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));
+  if(!pods2[id])pods2[id]={on:false,pct:0,iv:null};
+  pods2[id].pct=pct;
+  const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=pct+'%';
+}
+function openCase(id){
+  const el=document.getElementById('rd-'+id);
+  if(!el)return;
+  el.classList.add('open');
+  el.scrollTop=0;
+  el.addEventListener('scroll',function onScroll(){
+    const pct=el.scrollTop/(el.scrollHeight-el.clientHeight)*100;
+    const bar=document.getElementById('rp-'+id);
+    if(bar)bar.style.width=Math.min(pct,100)+'%';
+  },{passive:true});
+}
 // ══ NAVIGATION ══
 function nav(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -874,224 +1496,7 @@ function filterCases(){
 }
 
 // Case data
-const CASES={
-  mx:{color:'linear-gradient(150deg,#6e1408,#a82808,#c83810)',ep:'EP.07 · 独讲',pod:'雪王出海：当品牌基因遇上文化壁垒，那条线究竟在哪里？',dur:1104,tags:[{t:'品牌营销',s:'rgba(255,255,255,.15)',c:'#ffdcc8'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'蜜雪冰城出海东南亚<br>品牌统一性与本地化的生死抉择',meta:'案例 #07 · 品牌营销',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年初，蜜雪冰城在东南亚门店数突破4,000家，越南、印尼、泰国成为主力市场。问题随之而来：泰国加盟商坚持把招牌红白色改成金色，越南团队要求将雪王IP改造成温和本地风格，印尼市场希望增加清真认证标识。每个诉求单独看都合理，合在一起却构成结构性危机——若每个市场都能改，品牌还剩什么？</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在品牌统一性与本地化适配之间，出海品牌如何找到那条既不稀释品牌资产、又能真正融入当地的边界线？这条线一旦画错，要么失去品牌，要么失去市场。</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>总部执行<strong>"骨骼出海，皮肤本地"</strong>策略：<br><strong>零妥协项：</strong>红白配色、雪王IP形象、LOGO字体，任何市场一律不得改动。<br><strong>完全开放项：</strong>产品研发、促销活动、社媒内容完全放权。越南推出榴莲系列，泰国开发香茅口味，甚至允许各市场用本地语言改编主题曲。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">62%</span><span class="l">东南亚Q1营收同比增长</span></div><div class="dc"><span class="n">1.3×</span><span class="l">越南单店日均销量超国内均值</span></div><div class="dc"><span class="n">No.1</span><span class="l">TikTok东南亚UGC量超星巴克喜茶</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>印尼市场在2025年Q2出现严重加盟商管理危机——部分加盟商私自采购原材料，品质不一致导致口碑短暂下滑。根本原因：<strong>供应链管控体系没有同步出海</strong>。核心失误在于把品牌管理等同于视觉管理。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>品牌出海的本质不是"统一 vs 本地化"的二选一，而是识别品牌资产中哪些是不可妥协的<strong>身份锚点</strong>，哪些只是习惯性的执行惯例。真正强大的品牌，能清晰说出那条线在哪里，而且每个人都知道越过这条线的代价。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你的品牌如果要进入一个新市场，哪三个元素是绝对不可以改的？背后的理由是品牌战略，还是执行习惯？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">蜜雪冰城的失败在于供应链没有跟上。在你的业务场景里，有没有类似"视觉层到位了、底层没跟上"的情况？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">如果你是印尼加盟商，你会怎么看待总部的"零妥协项"？这种管控方式对长期信任关系有什么影响？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">蜜雪冰城2025年Q1东南亚业务进展报告（路透社、界面新闻二次报道）</div></div><div class="srci"><span class="srcn">02</span><div class="srct">TikTok for Business APAC 东南亚品牌UGC追踪报告，2025 Q1</div></div><div class="srci"><span class="srcn">03</span><div class="srct">印尼加盟商事件报道 · Tempo.co（印尼媒体）2025年5月；36氪出海版跟进报道</div></div></div>`
-  },
-  ds:{color:'linear-gradient(150deg,#042e1e,#0a5e46,#148060)',ep:'EP.12 · 对谈',pod:'GEO时代：让AI记住你的品牌，这不是玄学，是系统工程',dur:1330,tags:[{t:'数字营销',s:'rgba(255,255,255,.15)',c:'#90ffd8'},{t:'全行业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2026 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'DeepSeek爆红后<br>谁先进入AI推荐体系，谁就赢了',meta:'案例 #12 · 数字营销',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年9月，OpenAI上线"Instant Checkout"，用户可在ChatGPT对话中直接完成购买。同月，DeepSeek在中国企业用户渗透率突破40%。消费者开始"问AI推荐"而非"搜索关键词"——过去品牌花巨资优化的SEO体系，开始失效。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当用户不再去搜索引擎，而是直接问AI——品牌如何进入AI的"认知体系"？GEO（生成式引擎优化）是2026年最紧迫、最无人知道标准答案的营销命题。</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p><strong>路径A — 内容结构化：</strong>系统重构官网内容，增加Schema Markup，产出易于大模型理解的"Model-friendly Content"。<br><strong>路径B — 权威背书：</strong>在AI训练数据集中高频出现的权威媒体大量发布品牌相关内容，建立知识图谱。<br><strong>路径C — 对话优化：</strong>分析用户最常问AI的问题，定向产出能回答这些问题的内容，让AI在回答时自然引用。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">3–8×</span><span class="l">早期GEO布局品牌的AI推荐率优势</span></div><div class="dc"><span class="n">7000亿</span><span class="l">2025年中国数字广告市场规模</span></div><div class="dc"><span class="n">85%</span><span class="l">广告主认为AI应用"极其紧迫"</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>最大陷阱：<strong>用SEO逻辑做GEO</strong>。堆砌低质内容不仅没让AI更多引用，反而因信噪比下降，模型学会了"忽略"这个品牌。2026年初，部分ALL-IN内容农场打法的品牌出现推荐率不升反降。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>GEO的本质是把"让搜索引擎爬虫认可你"换成"让AI模型信任你"。信任的建立逻辑是一样的：长期、权威、深度、真实。平台变了，但品牌建设的底层逻辑从未改变。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">现在打开DeepSeek，问"你们行业最值得信赖的品牌是什么"——你的公司出现了吗？如果没有，你认为原因是什么？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">AI推荐的核心逻辑是"权威性"而非"曝光频次"——这对你目前的内容营销策略意味着什么调整？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">如果SEO团队和GEO策略之间存在资源竞争，你会如何分配预算和人力？依据是什么？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">Aggarwal et al., "GEO: Generative Engine Optimization" · Princeton/Georgia Tech · arXiv:2311.09735, 2024</div></div><div class="srci"><span class="srcn">02</span><div class="srct">艾瑞咨询《2025年中国AI应用市场研究报告》，2025年9月</div></div><div class="srci"><span class="srcn">03</span><div class="srct">《2026中国数字营销趋势报告》· 秒针营销科学院，2025年12月</div></div></div>`
-  },
-  ipg:{color:'linear-gradient(150deg,#3a2800,#c49a18,#d8b430)',ep:'EP.18 · 对谈',pod:'250亿美元的并购震荡：大客户关系的终极压力测试',dur:1600,tags:[{t:'大客户关系',s:'rgba(255,255,255,.15)',c:'#fff4a0'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q4',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'宏盟并购IPG<br>当你最大的客户，突然成了竞争对手',meta:'案例 #18 · 大客户关系',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年，宏盟集团（Omnicom）宣布并购IPG（Interpublic Group），合并后年营收接近250亿美元，成为全球最大广告传播集团。底层逻辑只有四个字：<strong>降本增效</strong>。对双方甲方客户而言，这是重新评估关系的时刻——原本分别服务两家集团的品牌，突然发现自己的营销伙伴和竞争对手的营销伙伴，变成了同一家公司。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当代理商整合压缩了市场竞争，甲方的"核心供应商"可能同时服务你和你的竞争对手。这时候，大客户关系的本质是什么？信任还能建立在哪里？</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>并购背后三条驱动力：<strong>减少内耗</strong>（将外部竞标转为内部协作）、<strong>极致降本</strong>（合并后台与数据中台）、<strong>规模换AI未来</strong>（超级集团整合全域数据的AI平台才可能成为行业基础设施）。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">250亿</span><span class="l">合并后集团年营收（美元）</span></div><div class="dc"><span class="n">双重</span><span class="l">内部化浪潮＋AI替代双重冲击</span></div><div class="dc"><span class="n">+60%</span><span class="l">主动沟通者的客户留存率优势</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>很多大客户经理的第一反应是"等并购尘埃落定再说"——这是最危险的被动策略。更深层的教训：<strong>把关系建立在"集团层面"而非"个人信任层面"的大客户经理，在这次整合中损失最惨重</strong>。当组织变了，人走了，关系就消失了。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>大客户关系的终极护城河不是合同，不是KPI，而是<strong>对方离不开你这个人的理由</strong>。组织可以被并购，品牌可以换代理商，但真正的信任关系是个人层面的，它能穿越组织变动存活下来。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你最重要的三个大客户关系，分别建立在"个人信任"还是"公司合约"上？如果你明天离职，这些关系会怎样？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">在并购整合期，你会选择主动出击（主动联系客户澄清）还是等待观望？这两种策略背后的逻辑和风险各是什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">扎克伯格说"AI可以替代广告代理商"——你认为哪些大客户服务环节是AI无法替代的？你的竞争力在哪里？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">Omnicom-IPG并购公告：Omnicom官方新闻稿，2024年12月9日；《华尔街日报》跟进报道</div></div><div class="srci"><span class="srcn">02</span><div class="srct">扎克伯格AI广告声明：Meta Q3 2025财报电话会议记录，2025年10月</div></div><div class="srci"><span class="srcn">03</span><div class="srct">麦肯锡《2025 Global Marketing Report》，2025年6月</div></div></div>`
-  },
-  xw:{color:'linear-gradient(150deg,#1e1c28,#40385a,#5a5080)',ep:'EP.09 · 独讲',pod:'抽象营销的边界：为什么雪王能"社死"，你的品牌不行？',dur:1215,tags:[{t:'品牌营销',s:'rgba(255,255,255,.15)',c:'#c8c0f0'},{t:'中小企业参考',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q2',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'雪王下江南<br>失控的内容，如何成为最强的品牌资产',meta:'案例 #09 · 品牌营销',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年3月，蜜雪冰城以"江南采风"为主题推广龙井系列，将雪王IP融入水墨、油纸伞等元素在杭州绍兴开快闪店。最火的一条视频：雪王人偶坐在溪上秋千，"硬要拗松弛感的紧绷感"让网友笑疯。该视频超过26万点赞，并引发全网"集体下江南整活"的二创浪潮。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当品牌内容"失控"——被网友接管、被二次创作、被恶搞——品牌应该焦虑还是庆幸？这种失控，是风险还是资产？</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>蜜雪冰城选择<strong>顺势而为，绝不干预</strong>——没有删帖，没有澄清，任由抽象解读自由发酵。背后的品牌逻辑：雪王IP经多年积累，已形成被高度认同的人格——"爱玩、笨拙、执拗、有活人感"。这种人格的核心价值正是<strong>不完美的真实</strong>，而干预会摧毁这种真实。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">26万+</span><span class="l">单条视频点赞量</span></div><div class="dc"><span class="n">登顶</span><span class="l">微博热搜 #雪王下江南#</span></div><div class="dc"><span class="n">自发</span><span class="l">二创UGC远超官方内容传播力</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>这套打法的可复制性极低。很多中小品牌看到雪王成功后开始模仿"抽象营销"——要么用力过猛，要么缺乏IP积累。核心教训：<strong>抽象营销不是一种技巧，而是长期IP建设的结果</strong>。没有人格积累，任何失态都只是失态。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>最强的品牌内容，是用户愿意帮你"续写"的内容。IP人格建立的终极指标不是知名度，而是用户是否有强烈的欲望去二次创作它——因为他们已经把这个角色当成自己的一部分。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用三个形容词描述你的品牌人格。这三个词是经过深思熟虑设定的，还是自然形成的？你的团队和用户的认知一致吗？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你的品牌出现了一条让人哭笑不得的"社死"视频，你的第一反应是删除还是转发？这个本能反应背后说明了什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">回想一个你真正喜欢并愿意主动转发的品牌内容——它满足了你哪种心理需求？你的品牌能提供同样的满足感吗？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">雪王下江南视频原帖 · 抖音@蜜雪冰城官方账号，2025年3月；微博热搜记录</div></div><div class="srci"><span class="srcn">02</span><div class="srct">《第一财经》"雪王为什么这么能整"，2025年4月</div></div></div>`
-  },
-  ai:{color:'linear-gradient(150deg,#0c1c34,#162d52,#203c6a)',ep:'EP.21 · 独讲',pod:'迫切但迷茫：2026年营销人的AI焦虑诊断书',dur:1190,tags:[{t:'市场战略',s:'rgba(255,255,255,.15)',c:'#b0d0ff'},{t:'全行业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2026 Q1',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'85%广告主喊AI紧迫<br>却无从下手：集体焦虑背后的战略机会',meta:'案例 #21 · 市场战略',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>《2026中国数字营销趋势报告》发布了一组刺眼的数据：<strong>85%广告主认为"营销中应用AI极其紧迫"</strong>，但同时，"不知道如何应用AI"从最末位挑战跃升为第七大挑战。两个数字同时出现，意味着整个行业陷入集体"紧迫性焦虑"——知道必须做，但不知道怎么做。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>当整个行业都在焦虑同一件事，谁能率先跨越"迫切但迷茫"的状态，谁就获得了结构性先发优势。这个跨越，靠什么完成？</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>先行者的共同特征：<strong>不试图"全面AI化"，而是先找一个高频、痛苦、可量化的场景切入</strong>——比如内容生产自动化、客户分层运营、广告素材A/B测试。小胜积累信心，信心驱动扩张。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">85%</span><span class="l">认为AI应用极其紧迫</span></div><div class="dc"><span class="n">7000亿</span><span class="l">2025年中国数字广告市场规模</span></div><div class="dc"><span class="n">+10%</span><span class="l">广告主2026年营销投资预期增长</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>最常见失败模式：<strong>把AI焦虑变成AI采购</strong>。大量企业购置各类AI营销工具，但使用率极低，工具与业务流程存在巨大断层。问题不在工具，在于组织没有为AI准备好"数据底座"和"能用AI的人"。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>AI营销的本质门槛不是技术，而是<strong>组织准备度</strong>：数据是否干净可用，团队是否具备AI思维，跨部门协作机制是否建立。工具只是最后一公里，前面的路才是真正的挑战。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">你的公司目前AI营销的最大瓶颈是什么：技术？数据？人才？预算？还是组织协作？如何验证你的判断？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你只能选择一个AI营销应用场景先试点，你会选哪个？评估标准是什么？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的竞争对手在AI营销上的进展比你快还是慢？这对你的战略窗口意味着什么？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">《2026中国数字营销趋势报告》· 秒针营销科学院 × CTR媒介智讯，2025年12月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">麦肯锡《The AI-Ready Organization》，2025年3月</div></div></div>`
-  },
-  fh:{color:'linear-gradient(150deg,#401808,#904018,#b05020)',ep:'EP.14 · 独讲',pod:'定位战略的复利：当所有品牌在追热点，飞鹤选择了反向操作',dur:1050,tags:[{t:'数字营销',s:'rgba(255,255,255,.15)',c:'#ffd0a0'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q3',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'飞鹤奶粉<br>一句定位语，撑起五年220亿的增长逻辑',meta:'案例 #14 · 数字营销',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2020年，飞鹤奶粉提出"更适合中国宝宝体质"的定位，在外资品牌长期主导的市场里打出差异化牌。五年后的2024年，飞鹤营收突破220亿元，连续五年稳居中国婴幼儿奶粉市场市占率第一，年复合增长率18.7%。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在存量竞争时代，"坚持一句话不变"到底是战略定力，还是创新惰性？飞鹤的答案是什么？</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>飞鹤的核心决策：<strong>把定位当护城河，而不是当广告语</strong>。"更适合中国宝宝体质"贯穿了研发（专门针对中国母婴营养需求的配方体系）、渠道（深度下沉三四线城市）、服务（线下母婴顾问体系）的全部策略。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">220亿</span><span class="l">2024年营收（人民币）</span></div><div class="dc"><span class="n">18.7%</span><span class="l">五年年复合增长率</span></div><div class="dc"><span class="n">5连冠</span><span class="l">中国婴幼儿奶粉市占率第一</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>2025年随出生率持续下降，整个婴幼儿奶粉市场规模收缩，飞鹤也面临增长天花板。"更适合中国宝宝体质"的定位在市场萎缩时，反而成为限制——无法向成人奶粉、老年营养品等相邻赛道自然延伸。这是品牌定位的双刃剑：<strong>越精准越有力量，但也越难跨越边界</strong>。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>定位的价值不在于那句话有多好听，而在于你愿不愿意用五年时间、在每一个产品决策、渠道决策、服务决策里都去兑现它。大多数品牌的定位失败，不是因为定位错了，而是因为坚持了三个月就动摇了。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用一句话写出你的品牌定位。然后回顾过去六个月的决策——有多少次真正兑现了这句话？有多少次背离了它？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">飞鹤的定位越精准，扩张越受限——你认为品牌应该在什么时机、以什么方式"进化"定位？如何判断是战略调整还是动摇？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的品牌最大的竞争对手，他们的定位是什么？和你相比，谁的定位更清晰、更可信、更有防御性？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">飞鹤奶粉2024年年报 · 中国飞鹤有限公司港交所披露文件，2025年3月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">欧睿国际（Euromonitor）《2025年中国婴幼儿食品市场报告》</div></div></div>`
-  },
-  sb:{color:'linear-gradient(150deg,#202020,#404040,#585858)',ep:'EP.11 · 对谈',pod:'真心换真诚：联名背后的情感账本与关系资产',dur:1460,tags:[{t:'大客户关系',s:'rgba(255,255,255,.15)',c:'#ddd'},{t:'大型企业',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'},{t:'2025 Q2',s:'rgba(255,255,255,.1)',c:'rgba(255,255,255,.6)'}],title:'星巴克 × 五月天<br>从品牌联名到大客户情感绑定的底层逻辑',meta:'案例 #11 · 大客户关系',
-  body:`<div class="ch"><div class="chn">① 情境速写</div><div class="chb"><p>2025年，星巴克中国与五月天深度联名：将经典歌词印在咖啡杯套上，邀请五月天成员拍摄广告短片，并在演唱会现场设置快闪店实现流量现场转化。联名周边上线即售罄，相关话题多次登上微博热搜，门店客流量显著提升。</p></div></div>
-  <div class="ch"><div class="chn">② 核心问题</div><div class="callout"><p>在联名合作泛滥的时代，什么样的联名能跨越"流量收割"，真正成为品牌关系资产？星巴克×五月天成功了，而大多数联名消失在48小时后——差距在哪里？</p></div></div>
-  <div class="ch"><div class="chn">③ 关键决策</div><div class="chb"><p>这次联名成功的核心在于<strong>三层情感匹配</strong>：<br><strong>受众匹配：</strong>星巴克都市白领用户与五月天核心歌迷群体高度重叠，共同情感：青春记忆与仪式感消费。<br><strong>内容匹配：</strong>歌词而非歌手形象，触发的是情感记忆而非明星效应。<br><strong>场景匹配：</strong>演唱会快闪店，在情感浓度最高的场景中完成转化。三层缺一不可。</p></div></div>
-  <div class="ch"><div class="chn">④ 结果与数据</div><div class="drow"><div class="dc"><span class="n">即售罄</span><span class="l">联名周边上线表现</span></div><div class="dc"><span class="n">多次</span><span class="l">相关话题登上微博热搜</span></div><div class="dc"><span class="n">显著↑</span><span class="l">演唱会城市门店客流提升</span></div></div></div>
-  <div class="ch"><div class="chn">⑤ 失败与教训</div><div class="chb"><p>很多品牌看到联名成功后开始模仿，却只停留在"logo＋形象"的表面组合，缺乏真正的情感联结。对大多数品牌而言，联名最大的失败是<strong>把联名当促销而非当关系建设</strong>。促销思维追求短期GMV；关系思维追求长期情感账户增值。</p></div></div>
-  <div class="ch"><div class="chn">⑥ 可迁移原则</div><div class="insight"><div class="ilbl">Janet 的洞察</div><p>品牌联名的本质是两个情感账户之间的互相转账。前提是：双方都要有账户余额。一个情感账户透支的品牌，和另一个品牌联名只会加速自己的透支——因为用户不会因为联名就原谅一个让他们失望的品牌。</p></div></div>
-  <div class="dqblock"><div class="dqhdr">课堂讨论题</div><div class="dqlist"><div class="dqi"><span class="dqn">Q1</span><div class="dqt">用"情感账户"比喻评估你的品牌：过去一年，你做了哪些动作是在"存入"？哪些是在"提取"？现在账户余额是正还是负？</div></div><div class="dqi"><span class="dqn">Q2</span><div class="dqt">如果你要为你的品牌寻找一个联名合作对象，你的三层匹配标准是什么？受众、内容、场景，你最容易忽略的是哪一层？</div></div><div class="dqi"><span class="dqn">Q3</span><div class="dqt">你的大客户关系和品牌联名逻辑有没有相通之处？在B2B关系中，"情感账户"体现在哪里？</div></div></div></div>
-  <div class="srcblock"><div class="srctitle">资料来源</div><div class="srci"><span class="srcn">01</span><div class="srct">星巴克×五月天联名活动报道：《营销新说》，2025年5月</div></div><div class="srci"><span class="srcn">02</span><div class="srct">星巴克中国2025年Q2经营数据：星巴克Q2财报，2025年7月</div></div></div>`
-  }
-};
-
-const pods={};
-function openCase(id){
-  const c=CASES[id];if(!c)return;
-  const rid='rd-'+id;
-  let rd=document.getElementById(rid);
-  if(!rd){
-    rd=document.createElement('div');
-    rd.className='reader';rd.id=rid;
-    const tagsHtml=c.tags.map(t=>`<span class="ctag" style="background:${t.s};color:${t.c}">${t.t}</span>`).join('');
-    rd.innerHTML=`
-    <div class="rd-nav">
-      <div class="rd-bar">
-        <button class="back" onclick="closeCase('${id}')"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 返回书库</button>
-        <div style="font-size:11px;color:var(--ink4);letter-spacing:.07em">${c.meta}</div>
-      </div>
-      <div class="rd-prog" id="rp-${id}"></div>
-    </div>
-    <div class="rd-cover"><div class="rd-cbg" style="background:${c.color}"></div><div class="rd-cnoise"></div><div class="rd-clines"></div>
-      <div class="rd-cc"><div class="ctags">${tagsHtml}</div><div class="rd-title">${c.title}</div></div>
-    </div>
-    <div class="pod">
-      <button class="pp" id="pp-${id}" onclick="podPlay('${id}')"><svg width="12" height="14" viewBox="0 0 12 14" fill="none"><polygon points="1,1 11,7 1,13" fill="white"/></svg></button>
-      <div class="pi"><div class="pep">营销观察室 · ${c.ep}</div><div class="pt">${c.pod}</div></div>
-      <div class="ppw"><div class="pb" onclick="podSeek(event,'${id}')"><div class="pf" id="pf-${id}"></div></div><div class="ptm" id="pt-${id}">0:00 / ${Math.floor(c.dur/60)}:${(c.dur%60).toString().padStart(2,'0')}</div></div>
-      <div class="pbdg"><span class="pbg">${c.ep.split(' · ')[1]}</span></div>
-    </div>
-    <div class="rd-body">${c.body}</div>`;
-    document.getElementById('caseReaders').appendChild(rd);
-    rd.addEventListener('scroll',()=>{
-      const pct=rd.scrollTop/(rd.scrollHeight-rd.clientHeight)*100;
-      const bar=document.getElementById('rp-'+id);
-      if(bar)bar.style.width=Math.min(pct,100)+'%';
-    },{passive:true});
-  }
-  rd.classList.add('open');
-  rd.scrollTop=0;
-}
-function closeCase(id){document.getElementById('rd-'+id)?.classList.remove('open');podStop(id)}
-function podPlay(id){
-  if(!pods[id])pods[id]={on:false,pct:0,iv:null};
-  const s=pods[id];
-  if(s.on){podStop(id);return}
-  s.on=true;
-  const btn=document.getElementById('pp-'+id);
-  if(btn)btn.style.background='#8a2008';
-  const dur=CASES[id]?.dur||1200;
-  s.iv=setInterval(()=>{
-    s.pct=Math.min(s.pct+0.08,100);
-    const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=s.pct+'%';
-    const e=Math.floor((s.pct/100)*dur);
-    const pt=document.getElementById('pt-'+id);
-    if(pt)pt.textContent=`${Math.floor(e/60)}:${(e%60).toString().padStart(2,'0')} / ${Math.floor(dur/60)}:${(dur%60).toString().padStart(2,'0')}`;
-    if(s.pct>=100)podStop(id);
-  },200);
-}
-function podStop(id){
-  if(!pods[id])return;
-  pods[id].on=false;clearInterval(pods[id].iv);
-  const b=document.getElementById('pp-'+id);if(b)b.style.background='var(--red)';
-}
-function podSeek(e,id){
-  const r=e.currentTarget.getBoundingClientRect();
-  const pct=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));
-  if(!pods[id])pods[id]={on:false,pct:0,iv:null};
-  pods[id].pct=pct;
-  const pf=document.getElementById('pf-'+id);if(pf)pf.style.width=pct+'%';
-}
-
-// ══ TOOLS ══
-const TOOLS={
-  brandhealth:{type:'📐 营销框架',title:'品牌健康度诊断矩阵',what:'四象限框架，从知名度、认知度、偏好度、忠诚度系统评估品牌在目标消费者心智中的真实状态，而不是依赖直觉判断。',when:'适合：品牌年度复盘、品牌重塑项目启动前、新任CMO上任后的现状诊断。',steps:['确定评估维度：知名度、认知度、偏好度、忠诚度，为每个维度设计3–5个可量化指标','收集用户调研数据，将数据填入矩阵','识别哪个维度最弱、差距最大','针对最弱环节制定优先改进策略'],note:'90%的品牌团队在复盘时只看销售数据，却不知道是哪个品牌健康指标出了问题。这个矩阵强迫你把问题精确化。',action:'framework'},
-  aarrr:{type:'📐 营销框架',title:'增长漏斗 AARRR 拆解框架',what:'将用户旅程拆解为获客（Acquisition）、激活（Activation）、留存（Retention）、变现（Revenue）、推荐（Referral）五个阶段，帮助团队找到增长漏斗中最大的漏洞。',when:'适合：数字营销团队、增长团队的定期复盘，以及新产品上市后的用户行为分析。',steps:['为五个阶段分别定义核心指标（如：激活=注册后7天内完成首单）','收集各阶段的真实转化率数据，画出漏斗','找出转化率最低、与行业基准差距最大的那个阶段','聚焦资源优先修复那个最大的漏洞'],note:'大多数团队在AARRR上最常犯的错误是：明明留存率极低，却还在不断加大获客投入。修复漏洞之前加水，只是在加快漏水的速度。',action:'framework'},
-  keyaccount:{type:'📐 营销框架',title:'大客户关系健康度评估框架',what:'从四个维度客观评估大客户关系的真实健康状况，帮助大客户经理识别关系风险，而不是等到客户流失后才知道出了问题。',when:'适合：大客户经理的季度关系复盘，以及客户续约前的关系风险评估。',steps:['关系广度：你在客户组织内有几个真正的联系人？覆盖了哪些决策层级？','关系深度：你最核心的联系人，对你的评价是"供应商"还是"伙伴"？','决策影响力：在客户的关键决策中，你能被咨询到吗？','替代风险：如果竞争对手以更低价格进入，你有几成把握客户不会转换？'],note:'我见过太多大客户经理"感觉关系很好"，结果客户突然不续约。感觉不是数据。这个框架让你每季度用同一把尺子量一次。',action:'framework'},
-  'case-tpl':{type:'📄 可下载模板',title:'案例分析八字段模板',what:'Janet案例库的底层分析结构，可用于整理行业观察案例或自己公司的内部复盘案例。八个字段环环相扣，确保分析不浮于表面。',when:'适合：培训师整理教学案例、企业营销团队的内部复盘、个人知识库建设。',steps:['① 案例标题：一句话点出核心冲突或决策','② 情境速写：行业背景、企业规模、竞争阶段（100字内）','③ 核心问题：企业面临的真实营销挑战','④ 关键决策：做了什么，有哪些选项被放弃了','⑤ 结果与数据：可量化的结果、转折或意外','⑥ 失败与教训：哪里出错了（最有价值的字段）','⑦ 可迁移原则：这个案例的底层洞察是什么','⑧ 课堂用法：适合哪类课程的哪个模块'],note:'大多数人整理案例只到第⑤步就停了。⑥和⑦才是真正的价值所在。没有教训和可迁移原则的案例，只是新闻报道，不是学习材料。',action:'template'},
-  brief:{type:'📄 可下载模板',title:'营销战役 Brief 标准模板',what:'一份标准化的营销Brief模板，帮助营销总监与执行团队对齐目标、减少反复修改。填完这份Brief，你和团队对这次战役的分歧会减少70%。',when:'适合：每次重要营销战役启动前，以及向代理商、创意团队传达需求时使用。',steps:['战役目标：具体、可量化，区分"品牌目标"和"业务目标"','目标受众：精确到"谁，在什么场景下，有什么心理状态"','核心信息：一句话——这次战役最想让消费者记住的是什么','渠道与节奏：主渠道、辅助渠道、时间节点','效果衡量：上线后用什么数据判断成功还是失败'],note:'我见过无数次战役做完了，团队却不知道算不算成功——因为启动时没有对齐"成功的定义"。这份Brief最重要的字段是"效果衡量标准"，不是"创意方向"。',action:'template'},
-  annual:{type:'📄 可下载模板',title:'年度营销规划表',what:'从战略目标到季度执行计划的完整年度营销规划框架，Excel格式，包含预算分配矩阵、渠道节奏规划与关键里程碑设置。',when:'适合：每年Q4的来年营销规划、新任营销负责人接手时的现状梳理，以及向管理层汇报营销策略时使用。',steps:['第一步：明确年度北极星指标（1–2个，不超过3个）','第二步：将北极星指标拆解到四个季度，设定季度目标','第三步：为每个季度选定核心战役，不超过2个','第四步：填写预算分配矩阵，按渠道和战役分配资源','第五步：设定每月检查点指标，用于过程管理'],note:'年度计划最大的问题不是做不好，而是做了不看。这个模板设计了月度检查点，强迫你每月对照一次，把"计划"变成真正的"管理工具"。',action:'template'},
-  'brand-diag':{type:'🔍 诊断工具',title:'品牌定位清晰度自诊断',what:'12道判断题，覆盖你的品牌定位在内部（团队层面）和外部（用户层面）的清晰度，生成0–100分的诊断报告与改进建议。',when:'适合：品牌负责人的自我检查、团队对齐讨论前的现状基线、培训课堂的开场诊断环节。',steps:['回答12道判断题（是/否/不确定），约5分钟','系统自动计算内部清晰度分、外部清晰度分和综合分','查看每道题的分析解读，找到得分最低的维度','按优先级排序的改进建议，直接对应具体行动'],note:'这个诊断最有意思的不是最终分数，而是当你把同一份问卷发给团队里5个人各自填写，答案往往大相径庭——这本身就说明了品牌定位的问题。',action:'diagnostic'},
-  'ai-ready':{type:'📊 自测评估',title:'AI 营销准备度自测',what:'从数据基础、人才能力、流程配套、管理支持四个维度，20道题评估你的团队在AI营销转型上的真实准备状态，并生成针对性优先行动清单。',when:'适合：营销总监在决定AI工具投入前的自评、企业AI营销培训前的现状摸底、战略规划时的差距分析。',steps:['四个维度各5道题，约8分钟完成','每个维度独立评分，识别最弱的"短板维度"','生成"短板优先"的行动建议，而非泛泛的AI战略建议','可打印报告，用于团队讨论或向管理层汇报'],note:'85%的广告主说AI很紧迫，但大多数人不知道自己的准备度到底在哪里。做这个测评之前，你的AI焦虑是情绪；做完之后，你知道先做哪一步了。',action:'diagnostic'},
-  'ka-assess':{type:'📊 自测评估',title:'大客户关系成熟度测评',what:'专为B2B销售和大客户经理设计，针对某一具体客户的关系质量进行深度评估，识别关系风险与增长机会。',when:'适合：季度大客户关系复盘、续约前的关系风险评估、新晋大客户经理的能力基线摸底。',steps:['选择一个你负责的重要客户，针对该客户回答所有问题','从关系广度、深度、影响力、抗风险性四个维度各5题','生成该客户的"关系成熟度雷达图"','找出最弱的一个象限，制定专项关系提升计划'],note:'大客户关系最大的风险是"自我感觉良好"。这个测评是让你用一把外部视角的尺子量一次自己。在一次测评里发现问题，比在客户流失后再复盘要好得多。',action:'assessment'}
-};
-function openTool(id){
-  const t=TOOLS[id];if(!t)return;
-  document.getElementById('tpTyp').textContent=t.type;
-  document.getElementById('tpTit').textContent=t.title;
-  const steps=t.steps.map((s,i)=>`<div class="tpstep"><div class="stn">${i+1}</div><div class="stx">${s}</div></div>`).join('');
-  const act=t.action==='template'
-    ?`<button class="tpdl" onclick="showToast('📥 模板下载准备中，订阅后即可获取')">📥 下载模板（订阅后获取）</button>`
-    :`<button class="tpdg" onclick="showToast('🚀 诊断工具即将上线，订阅后第一时间通知您')">🚀 ${t.action==='framework'?'使用框架':'开始测评'}（即将上线）</button>`;
-  document.getElementById('tpBody').innerHTML=`
-    <div class="tpsec"><div class="tpst">这个工具是什么</div><div class="tptx"><p>${t.what}</p><p style="color:var(--ink3);margin-top:8px">${t.when}</p></div></div>
-    <div class="tpsec"><div class="tpst">如何使用</div><div class="tpsteps">${steps}</div></div>
-    <div class="tpsec"><div class="tpst">Janet 的使用提示</div><div style="background:linear-gradient(135deg,#fdf8e8,#f5edd0);border:1px solid rgba(196,154,24,.2);border-radius:8px;padding:17px 20px"><div style="font-size:10px;letter-spacing:.12em;color:var(--gold);margin-bottom:7px;font-weight:700">✦ JANET'S NOTE</div><div style="font-family:var(--serif);font-size:14px;color:#5a4810;line-height:1.8;font-style:italic">${t.note}</div></div></div>
-    ${act}
-    <button style="margin-top:7px;width:100%;padding:11px;border-radius:5px;background:rgba(24,19,14,.07);border:1px solid var(--border);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--ink2);transition:all .2s" onclick="closeTool();nav('cases')">📚 去案例书库看工具应用场景</button>
-    <button class="tpdl" style="margin-top:7px;background:var(--red)" onclick="openSub()">订阅后解锁全部工具</button>`;
-  document.getElementById('toolPanel').classList.add('open');
-  document.getElementById('toolOverlay').classList.add('show');
-}
-function closeTool(){document.getElementById('toolPanel')?.classList.remove('open');document.getElementById('toolOverlay')?.classList.remove('show')}
-function filterTools(type,btn){
-  document.querySelectorAll('#v-tools .pill').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  let n=0;
-  document.querySelectorAll('.tcard').forEach(c=>{const s=type==='all'||c.dataset.type===type;c.style.display=s?'':'none';if(s)n++});
-  document.getElementById('toolCount').textContent=`共 ${n} 个工具`;
-}
-
-// ══ BOOKS ══
-const BOOKS={
-  positioning:{cat:'品牌战略',color:'#a82808',title:'Positioning: The Battle for Your Mind',author:'Al Ries & Jack Trout · 1981',rating:5,summary:'定位理论认为，营销的战场不在市场，而在消费者的心智。这本书提出的核心观点至今未被超越：你不需要成为最好的，你只需要在某个特定的心智位置上成为第一。',why:'定位理论是品牌战略的底层逻辑。在讲品牌定位课之前，我会要求所有学员必读这本书。读完之后，你再也无法接受一句模糊的品牌定位语——"我们做高质量的产品"不是定位，"更适合中国宝宝体质"才是。',use:'品牌定位模块的必读前置材料。课堂中用"你的品牌在消费者心智中占据了什么位置"作为开场讨论，往往会让所有人沉默。',note:'这本书很薄，可以在一个下午读完。但真正理解它需要反复在实际案例中印证。建议读完后立刻对自己的品牌做一次定位梳理练习。'},
-  aaker:{cat:'品牌战略',color:'#8040a0',title:'Building Strong Brands',author:'David A. Aaker · 1996',rating:5,summary:'Aaker品牌资产模型的系统性阐述，从品牌知名度、品质感知、品牌联想到品牌忠诚度，提供了一套完整的品牌资产评估与建设框架。',why:'Aaker模型是品牌规划最广泛使用的工具之一，理解这个框架让你在做品牌决策时有了一把量尺。',use:'品牌战略课程的核心框架读物，配合学员对自己品牌进行Aaker模型评估练习。',note:'建议把第2章和第3章当成重点精读，其余章节可以根据需要选择性阅读。'},
-  obvious:{cat:'品牌战略',color:'#0a5e46',title:'Obviously Awesome',author:'April Dunford · 2019',rating:5,summary:'一本专门讲产品定位的实操手册。Dunford提出了一套10步定位方法论，从竞争替代分析到关键价值主张，每一步都有具体操作指引和案例示范。',why:'市面上讲定位的书很多，但能给出可操作步骤的极少。这本书特别适合B2B品牌和科技产品，帮你把抽象的"定位"变成一个可以执行的工作流程。',use:'产品上市前的定位研讨工作坊，以及品牌重新定位项目的操作指南。',note:'这本书比Ries & Trout的"定位"更现代、更具操作性，两本配合阅读效果最佳。'},
-  brandsense:{cat:'品牌战略',color:'#c04820',title:'Brand Sense',author:'Martin Lindstrom · 2005',rating:4,summary:'基于全球最大规模的品牌感官研究，揭示了人类的五感如何影响品牌认知和购买决策，以及如何有意识地设计多感官品牌体验。',why:'在一个视觉营销泛滥的时代，这本书提醒你还有四种感官被大多数品牌忽视了。读完这本书，你进超市的方式会永远改变。',use:'品牌体验和感官营销模块，或作为品牌差异化讨论的引发材料。',note:'书里有大量有趣的感官营销案例，可以直接用来作为课堂开场的讨论素材。'},
-  traction:{cat:'增长',color:'#162d52',title:'Traction',author:'Gabriel Weinberg & Justin Mares · 2015',rating:4,summary:'梳理了19个获客渠道，并提出了"牵引力测试"方法：如何系统性找到最适合你当前阶段的核心增长渠道，而不是跟风追热点。',why:'很多营销团队的问题不是不努力，而是在错误的渠道上努力。这本书帮你建立渠道选择的系统思维。',use:'数字营销和增长战略模块，配合"你现在的核心获客渠道是哪个？你测试过其他渠道吗？"讨论。',note:'书里的19个渠道有些已经有点过时（书写于2015年），但系统性测试渠道的方法论依然有效。'},
-  hooked:{cat:'用户行为',color:'#206060',title:'Hooked',author:'Nir Eyal · 2014',rating:5,summary:'通过"触发—行动—奖励—投入"四步钩子模型，解释了为什么某些产品和内容会让用户形成使用习惯，以及如何在产品和营销中应用这个机制。',why:'做用户运营和私域的人必读。理解了钩子模型，你才会明白为什么有些活动能带来复购，有些只能带来一次性参与。',use:'用户运营和私域营销模块的前置阅读，配合"你的产品里有没有完整的钩子循环"讨论。',note:'这本书在帮你理解用户行为的同时，也在提醒你设计中的伦理边界。建议搭配作者后来写的《Indistractable》一起读。'},
-  contagious:{cat:'内容传播',color:'#a84000',title:'Contagious',author:'Jonah Berger · 2013',rating:5,summary:'基于大量研究提炼出的STEPPS框架：社交货币、触发器、情绪、公共性、实用价值、故事。这六个因素决定了一个内容是否会被传播。',why:'内容营销时代，"做出好内容"不够，还需要理解传播的底层机制。这本书用科学研究替代了玄学直觉，告诉你疯传内容背后的可复制规律。',use:'内容营销和品牌传播模块，配合让学员分析一个最近的爆款内容，找出其中有哪几个STEPPS元素。',note:'读完这本书，你会开始分析自己朋友圈里每一条被分享的内容背后的传播机制。这是一种停不下来的职业病。'},
-  challenger:{cat:'大客户销售',color:'#c49a18',title:'The Challenger Sale',author:'Dixon & Adamson · 2011',rating:5,summary:'基于对6000名销售人员的研究，发现业绩最好的销售不是"关系型"的，而是"挑战型"的——他们敢于挑战客户的认知，教给客户新的视角。',why:'这本书颠覆了很多企业的销售培训体系。很多大客户经理努力"维系关系"，却没有意识到关系的本质不是熟悉，而是价值。',use:'大客户关系管理与销售能力提升模块的核心读物。配合课堂讨论："你上次'挑战'客户的认知是什么时候？"',note:'重点不是记住"Challenger"这个概念，而是反思自己在客户面前扮演的是哪种角色——问题解决者、关系维护者，还是挑战者。'},
-  spin:{cat:'大客户销售',color:'#184080',title:'SPIN Selling',author:'Neil Rackham · 1988',rating:5,summary:'基于35,000个销售拜访的研究，发现大客户销售成功的关键不是"产品展示"，而是通过SPIN提问深入挖掘客户真实需求。',why:'这是我在大客户销售培训中最常引用的书。SPIN提问框架帮助销售人员从"推销产品"转变为"帮助客户发现需求"。',use:'大客户销售技能模块的核心框架，配合SPIN提问角色扮演练习。',note:'这本书1988年出版，但里面的研究方法论和核心洞察至今有效。有些东西不会因为时间而过时。'},
-  neverspilt:{cat:'谈判',color:'#3a3030',title:'Never Split the Difference',author:'Chris Voss · 2016',rating:5,summary:'前FBI人质谈判专家分享的谈判技巧，核心观点是：谈判不是理性的讨价还价，而是情绪管理和共情的艺术。',why:'大客户谈判和内部沟通都需要这本书里的技巧。"战术性同理心"和"校准式提问"是我在培训中经常用到的两个工具。',use:'大客户关系管理和沟通力模块，配合角色扮演练习：用"校准式提问"处理一个模拟的客户拒绝场景。',note:'读完这本书你会意识到日常对话里有很多谈判机会被你白白浪费了。从下次开始，试着在任何"对话"里都用一下书中的"镜像技巧"。'},
-  goodstrategy:{cat:'战略思维',color:'#304830',title:'Good Strategy Bad Strategy',author:'Richard Rumelt · 2011',rating:5,summary:'这本书的核心主张是：大多数"战略"其实不是战略，而是愿景、口号和目标的混合体。好战略有三个内核：诊断、指导方针、协调一致的行动。',why:'每次我讲市场战略课，都会以这本书开头。因为学员需要先明白什么不是战略，才能开始讨论什么是好战略。',use:'市场战略模块必读前置书目，开场讨论："你们公司的营销战略是什么？"——绝大多数人的回答其实只是目标，不是战略。',note:'这本书读起来不快，但值得慢慢读。Rumelt用了大量真实案例来区分好战略和坏战略，每一个案例都很有嚼劲。'},
-  hbr:{cat:'营销战略',color:'#a82808',title:"HBR's 10 Must Reads on Marketing",author:'Harvard Business Review · 2011',rating:4,summary:'精选10篇HBR经典营销文章，覆盖品牌管理、客户价值、细分市场、营销测量等核心议题，每篇都有清晰的框架和案例。',why:'这是一本可以反复使用的参考书。每篇文章都可以独立作为一堂课的阅读材料，文章本身就是很好的案例素材。',use:'多个营销模块的阅读材料，特别适合需要学员提前阅读的培训项目。',note:'如果只能向营销总监推荐一本书，我会推荐这本——因为10篇文章覆盖面广，每篇都直接可用于实际决策。'}
-};
-function openBook(id){
-  const b=BOOKS[id];if(!b)return;
-  const stars='⭐'.repeat(b.rating)+(b.rating<5?'☆'.repeat(5-b.rating):'');
-  document.getElementById('bpHeader').innerHTML=`
-    <div style="height:5px;background:${b.color};position:absolute;top:0;left:0;right:0"></div>
-    <button class="bpc" onclick="closeBook()">×</button>
-    <div style="padding-top:8px"><div class="bpcat">${b.cat}</div><div class="bptit">${b.title}</div><div class="bpau">${b.author}</div><div class="bprat">${stars}</div></div>`;
-  document.getElementById('bpBody').innerHTML=`
-    <div class="bpsec"><div class="bpst">这本书讲什么</div><div class="bptx"><p>${b.summary}</p></div></div>
-    <div class="bpsec"><div class="bpst">Janet 为什么推荐</div><div class="bptx"><p>${b.why}</p></div></div>
-    <div class="bpsec"><div class="bpst">课堂使用场景</div><div class="bptx"><p>${b.use}</p></div></div>
-    <div class="bpsec"><div class="bpst">Janet 的阅读批注</div><div class="jnote"><div class="jnlbl">✦ JANET'S NOTE</div><p>${b.note}</p></div></div>
-    <button class="buybtn" onclick="showToast('📚 订阅后获取推荐购买渠道')">获取这本书的购买渠道 →</button>
-    <button style="margin-top:8px;width:100%;padding:11px;border-radius:5px;background:rgba(24,19,14,.07);border:1px solid var(--border);font-family:var(--sans);font-size:13px;cursor:pointer;color:var(--ink2);transition:all .2s" onclick="closeBook();nav('cases')">📚 去案例书库看相关真实案例</button>`;
-  document.getElementById('bookPanel').classList.add('open');
-  document.getElementById('bookOverlay').classList.add('show');
-}
-function closeBook(){document.getElementById('bookPanel')?.classList.remove('open');document.getElementById('bookOverlay')?.classList.remove('show')}
-
-// ══ ARTICLES ══
-function filterArt(cat,btn){
-  document.querySelectorAll('#v-articles .pill').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
-  document.querySelectorAll('.acard,.featured').forEach(c=>{c.style.display=cat==='all'||c.dataset.cat===cat?'':'none'});
-}
+// (Case data now in static HTML)
 function openArticle(id){
   const el=document.getElementById('art-'+id);if(!el)return;
   el.classList.add('open');el.scrollTop=0;
